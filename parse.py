@@ -39,9 +39,9 @@ import pandas as pd
 
 # with open('./data/en_ult/18-JOB.usfm') as ipf: 
 # with open('./data/en_ult/01-GEN.usfm') as ipf: 
-# with open('./data/en_ult/29-JOL.usfm') as ipf: 
+with open('./data/en_ult/29-JOL.usfm') as ipf: 
 # with open('./data/alignment-example.usfm') as ipf: 
-with open('./data/en_ult/41-MAT.usfm') as ipf: 
+# with open('./data/en_ult/41-MAT.usfm') as ipf: 
 # with open('./data/el-x-koine_ugnt/41-MAT.usfm') as ipf: 
     contents = ipf.read()
 
@@ -93,7 +93,6 @@ Put these in a pandas dataframe and extract the data at token level.
 
 I here opt for model 2. 
 '''
-
 
 chapters = contents.split('\c ')
 header = chapters[0]
@@ -161,7 +160,6 @@ source_blocks_dict = source_blocks.groupby('alg_id').apply(lambda x: ' '.join(x.
 df_full = df_full.assign(source_blocks=df_full.alg_id.map(source_blocks_dict))
 
 # NB: discard the rows *without* alignment
-print('¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼¼')
 df_full = df_full.loc[df_full.token != '',:]
 print(df_full)
 
@@ -260,6 +258,8 @@ allinone.to_excel('./data/alignment/dictionary.xlsx')
 
 # get the counts for each sense
 counts = allinone.groupby(['strongs', 'target_blocks']).size()
+counts.to_csv('./data/alignment/counts.csv')
+counts.to_excel('./data/alignment/counts.xlsx')
 counts.head(50)
 
 # query a strongs number
