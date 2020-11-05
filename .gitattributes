@@ -1,0 +1,8 @@
+project_lexicon/alignment.db !text !filter !merge !diff
+data/alignment/counts.csv !text !filter !merge !diff
+data/alignment/dictionary.csv !text !filter !merge !diff
+data/alignment/source.csv !text !filter !merge !diff
+data/alignment/target.csv !text !filter !merge !diff
+data/alignment/alignment.csv !text !filter !merge !diff
+data/alignment/tw.csv !text !filter !merge !diff
+data/alignment/ult.csv !text !filter !merge !diff
