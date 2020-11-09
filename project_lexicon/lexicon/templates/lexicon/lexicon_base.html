@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block 'title' %}
+            ufw Lexicon
+        {% endblock 'title' %}
+    </title>
+
+    <!-- <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'she_got_style.css' %}">
+
+    <!-- sidenav https://materializecss.com/sidenav.html -->
+    <!-- carousel with cards? https://materializecss.com/carousel.html -->
+    <!-- feature discovery https://materializecss.com/feature-discovery.html -->
+    <!-- toc https://materializecss.com/scrollspy.html for toc -->
+    <!-- tooltips https://materializecss.com/tooltips.html -->
+    <!-- waves https://materializecss.com/waves.html#! -->
+    <!-- checkboxes to select good examples: https://materializecss.com/checkboxes.html -->
+    <!-- tags (can be used with autocomplete) https://materializecss.com/chips.html -->
+    <!-- quick form for a noun: is it: animate, aninal, larger than a horse, larger than your hand -->
+    <!-- Color palette https://materializecss.com/color.html -->
+</head>
+
+{% block 'body' %}
+<body>
+    
+{% block 'header' %}
+{% endblock 'header' %}
+
+{% block 'main' %}
+{% endblock 'main' %}
+
+{% block 'footer' %}
+    <footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+    </footer>
+
+{% endblock 'footer' %}
+
+{% block 'scripts' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, {
+                direction: 'left'
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems);
+        });
+    </script>
+{% endblock 'scripts' %}
+
+</body>
+{% endblock 'body' %}
+
+</html>
