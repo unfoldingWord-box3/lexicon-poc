@@ -6,3 +6,5 @@ node_modules
 ufw.wspace.code-workspace
 .vscode
 .env
+*.pyc
+*__pycache__*
