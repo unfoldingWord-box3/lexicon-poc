@@ -18,9 +18,12 @@ def view_entry(request, entry_id):
     lexicon = pd.read_csv('../data/alignment/dictionary.csv')
     entry = lexicon.loc[lexicon.strongs==entry_id]
     lemma = entry.loc[:,'lemma'].iloc[0]
+    font = entry_id[0]
+    if font=='A': font='H'
     return render(request, 'lexicon/view_entry.html', 
         {'entry':entry_id,
          'lemma': lemma,
+         'font': font
           })
 
 

@@ -11,7 +11,7 @@
         </div> -->
         <div class="row">
             <div class="col s8">
-                <h3 class="hb">{{ lemma }}</h3>
+                <h3 class="{% if font == 'H' %}hb{%else %}gk{%endif%}">{{ lemma }}</h3>
                 <div class="divider"></div>
                 <p>land, earth</p>
                 <p><a href="{% url 'view_entry_alignment' entry %}">Alignment</a></p>

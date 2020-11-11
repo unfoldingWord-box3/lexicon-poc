@@ -3,6 +3,11 @@
     /* font not included, presumed already installed for PoC */
 }
 
+.gk {
+    font-family: 'SBL Greek';
+    /* font not included, presumed already installed for PoC */
+}
+
 .hl {
     font-weight: bold;
 }
