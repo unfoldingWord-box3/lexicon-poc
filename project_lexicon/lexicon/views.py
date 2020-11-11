@@ -3,7 +3,6 @@ import pandas as pd
 from django.shortcuts import render
 
 
-
 def demo_entry(request):
     return render(request, 'lexicon/demo_entry.html')
 
@@ -18,7 +17,11 @@ def list_entries(request):
 def view_entry(request, entry_id):
     lexicon = pd.read_csv('../data/alignment/dictionary.csv')
     entry = lexicon.loc[lexicon.strongs==entry_id]
-    return render(request, 'lexicon/view_entry.html', {'entry':entry_id })
+    lemma = entry.loc[:,'lemma'].iloc[0]
+    return render(request, 'lexicon/view_entry.html', 
+        {'entry':entry_id,
+         'lemma': lemma,
+          })
 
 
 def view_entry_alignment(request, entry_id):

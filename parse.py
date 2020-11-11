@@ -216,6 +216,7 @@ need_gap_highlighting = [i for itm in have_gaps.tolist() for i in itm]
 df.loc[:,'alg_has_gap'] = False
 df.loc[need_gap_highlighting, 'alg_has_gap'] = True
 df.to_excel('./data/alignment/target.xlsx')  # CAREFUL: this only exports THOSE TOKENS WITH AN ALIGNMENT
+df.to_csv('./data/alignment/target.csv')  # CAREFUL: this only exports THOSE TOKENS WITH AN ALIGNMENT
 
 # do this after so the export above is still clear
 df.loc[df.alg_has_gap, 'target_token'] = df.loc[df.alg_has_gap, 'target_token'] + ' … '
@@ -236,7 +237,10 @@ df.loc[df.strongs.str.contains(r'd:|c:|l:|i:|k:|b:|m:').fillna(False), 'hasPrefi
 df.loc[:, 'strongsNoPrefix'] = df.strongs.str.strip('d:|c:|l:|i:|k:|b:|m:')
 
 df.to_excel('./data/alignment/alignment.xlsx')
+df.to_csv('./data/alignment/alignment.csv')
+
 # Do some analysis
+
 
 # phrase alignments
 target_tokens = df.groupby('strongs alg_id'.split()).apply(lambda x: x.target_token.fillna('').sum())
@@ -258,8 +262,8 @@ allinone.to_excel('./data/alignment/dictionary.xlsx')
 
 # get the counts for each sense
 counts = allinone.groupby(['strongs', 'target_blocks']).size()
-counts.to_csv('./data/alignment/counts.csv')
 counts.to_excel('./data/alignment/counts.xlsx')
+counts.to_csv('./data/alignment/counts.csv')
 counts.head(50)
 
 # query a strongs number
