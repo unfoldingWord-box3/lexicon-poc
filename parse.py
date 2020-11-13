@@ -57,7 +57,7 @@ df.loc[df.nrOfAlg > 1]
 
 # Extract the target data
 df = df.assign(target_token=df.token.str.extract(r'\w( .*?)\|'))
-df = df.assign(target_token_prefix=df.token.str.strip().str.extract(r'(.*?)(\\w)m( .*?)\|')[0])  # this selects the first group, viz. whatever occurs *before* \w
+df = df.assign(target_token_prefix=df.token.str.strip().str.extract(r'(.*?)(\\w)( .*?)\|')[0])  # this selects the first group, viz. whatever occurs *before* \w
 df = df.assign(target_occ=df.token.str.extract(r'x-occurrence=\"(.*?)\"'))
 df = df.assign(target_occs=df.token.str.extract(r'x-occurrences=\"(.*?)\"'))
 
