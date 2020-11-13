@@ -9,10 +9,10 @@ import pandas as pd
 
 ult_files = glob.glob('./data/en_ult/*.usfm')
 
-# for ipf in ult_files:
-#     print(f'Processing {ipf}')
-#     basename = os.path.basename(ipf).replace('usfm', 'csv')
-#     subprocess.call(['python', 'ult2csv.py', ipf, f'data/alignment/en_ult_csv/{basename}'])
+for ipf in ult_files:
+    print(f'Processing {ipf}')
+    basename = os.path.basename(ipf).replace('usfm', 'csv')
+    subprocess.call(['python', 'ult2csv.py', ipf, f'data/alignment/en_ult_csv/{basename}'])
 
 
 # MERGE MULTIPLE CSV FILES INTO A SINGLE ONE
