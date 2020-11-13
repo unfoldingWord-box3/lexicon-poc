@@ -8,8 +8,11 @@ import spacy
 
 df_full = pd.read_csv('data/alignment/ult.csv')
 
-# fields to extract: occ, occs, nrOfTargetWords, nrOfSourceWords
+# NOTE: how do you keep track of gaps in aligments, when you remove and/or update an aligment (will it not have a new id?)
+# NOTE: how do you calculate gaps when aligments are in a separate table?
+# NOTE: how do you store the alignment: link every word, or simply link all items to the first? 
 
+# fields to extract: occ, occs, nrOfTargetWords, nrOfSourceWords
 
 ## get source text phrases
 source_blocks = df_full.groupby('alg_id').first()
@@ -18,11 +21,15 @@ source_blocks = source_blocks.assign(source_token=source_blocks.alg.str.extract(
 source_blocks_dict = source_blocks.groupby('alg_id').apply(lambda x: ' '.join(x.source_token.fillna(''))).to_dict()
 df_full = df_full.assign(source_blocks=df_full.alg_id.map(source_blocks_dict))
 
-# NB: discard the rows *without* alignment
+# discard empty tokens
 df_full = df_full.loc[df_full.token != '',:]
-print(df_full)
+df_full = df_full.loc[-df_full.token.isnull(),:]
+# discard the rows *without* alignment
+df_full = df_full.loc[-df_full.alg.isnull(),:]
 
-df = df_full.loc[df_full.alg.isnull()==False,:]
+df = df_full
+print(df)
+
 # df = df.loc[df.token != '',:]
 
 # Change float to int 
@@ -38,21 +45,23 @@ df = df_full.loc[df_full.alg.isnull()==False,:]
 # To retrieve it, use `df.loc[(df.chapter == '9') & (df.verse == '10')]`
 
 df['sample_alg_str'] = df.alg.astype(str)
-need_to_be_merged = df.groupby('chapter verse sample_alg_str'.split()).alg_id.unique()
+need_to_be_merged = df.groupby('book chapter verse sample_alg_str'.split()).alg_id.unique()
 need_to_be_merged = need_to_be_merged[need_to_be_merged.apply(len) > 1].tolist()
+print(need_to_be_merged)
 
 merging = {}
 for itm in need_to_be_merged:
     for element in itm[1:]:
         # for each element refer to the first occurrence of the alignment
         merging[element] = itm[0]
+
 # store the original alignment id
 df['alg_id_old'] = df['alg_id']
 # merge these alg_id to make them a single one
 df.loc[df['alg_id'].isin(merging.keys()), 'alg_id'] = df['alg_id'].map(merging)
 
 ## There are cases with embedded alignment
-df.loc[:, 'nrOfAlg'] = df.alg.fillna('').apply(len)
+df.loc[:, 'nrOfAlg'] = df.alg.apply(len)
 df.loc[df.nrOfAlg > 1]
 
 # Extract the target data
@@ -74,7 +83,8 @@ have_gaps = df.loc[df.alg_id.isin(merging.values())].groupby('alg_id').apply(lam
 need_gap_highlighting = [i for itm in have_gaps.tolist() for i in itm]
 df.loc[:,'alg_has_gap'] = False
 df.loc[need_gap_highlighting, 'alg_has_gap'] = True
-# df.to_excel('./data/alignment/target.xlsx')  # CAREFUL: this only exports THOSE TOKENS WITH AN ALIGNMENT
+
+
 df.to_csv('./data/alignment/target.csv')  # CAREFUL: this only exports THOSE TOKENS WITH AN ALIGNMENT
 
 # do this after so the export above is still clear
@@ -145,10 +155,16 @@ counts = allinone.groupby(['strongs', 'target_blocks']).size()
 counts.to_csv('./data/alignment/counts.csv')
 counts.head(50)
 
+# EXPORT
+# the target/gateway language
 
-
-
-
+#FIXME prefix to suffix
+df.loc[-df.token.isnull(), ['Unnamed: 0', 'orig_id', 'token', 'chapter', 'verse',
+       'book', 'alg_id', 'target_token', 'target_token_prefix',
+       'target_occ', 'target_occs']].reset_index(drop=True)
+#FIXME wrong alignment id's
+df.loc[df.alg_id=='06-JOS200']
+df.alg_id.value_counts()
 
 
 # query a strongs number
