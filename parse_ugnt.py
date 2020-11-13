@@ -6,7 +6,7 @@ with open('./data/el-x-koine_ugnt/41-MAT.usfm') as ipf:
 
 print('There are {} tokens in the sample.'.format(len(contents.split())))
 
-set(re.findall(r'\\.*?\s', contents, re.DOTALL)) 
+set(re.findall(r'\\.*?\s', contents, re.DOTALL))
 
 # These can be bound be a space or a newline, so really by the next tag
 KEY_VALUE = [
@@ -112,7 +112,7 @@ df_full = pd.DataFrame(words)
 df_full.rename(columns={'token': 'source_token'}, inplace=True)
 
 df = df_full.loc[df_full.source_token != '',:]
-print(df)
+print(df.head(20))
 
 # Extract the target data
 df = df.assign(token=df.source_token.str.extract(r'\w( .*?)\|'))
@@ -120,9 +120,37 @@ df = df.assign(token_prefix=df.source_token.str.strip().str.extract(r'(.*?)(\\w)
 df = df.assign(morph=df.source_token.str.extract(r'x-morph=\"(.*?)\"'))
 df = df.assign(lemma=df.source_token.str.extract(r'lemma=\"(.*?)\"'))
 df = df.assign(strongs=df.source_token.str.extract(r'strong=\"(.*?)\"'))
+df.loc[:, 'has_prefix'] = False
+df.loc[df.strongs.str.contains(r'd:|c:|l:|i:|k:|b:|m:').fillna(False), 'has_prefix'] = True
+df.loc[:, 'strongs_no_prefix'] = df.strongs.str.strip('d:|c:|l:|i:|k:|b:|m:')
 df = df.assign(translation_word=df.source_token.str.extract(r'x-tw=\"(.*?)\"'))
 
-print(df)
-# df = df.assign(target_occ=df.token.str.extract(r'x-occurrence=\"(.*?)\"'))
-# df = df.assign(target_occs=df.token.str.extract(r'x-occurrences=\"(.*?)\"'))
-df.to_excel('./data/alignment/source.xlsx')
+# store the id
+df = df.assign(id=df.index.tolist())
+
+# get the total number of occurrences
+nr_occ_per_verse = df.groupby('chapter verse'.split()).token.value_counts()
+nr_occ_per_verse.name = 'occs'
+df = df.merge(nr_occ_per_verse, on='chapter verse token'.split())
+
+# get the occurrence
+exact_occ_per_verse = df.groupby('chapter verse token'.split()).cumcount() + 1
+df = df.assign(occ=exact_occ_per_verse)
+
+df = df.rename(columns={'Unnamed: 0':'id'})
+df.index = df.id
+df.index.name = 'index'
+df = df.sort_values(by='index')
+
+print(df.head(20))
+
+df.to_csv('./data/alignment/source.csv')
+
+# example queries
+df.loc[(df.chapter==1)&(df.verse==1)]
+df.loc[(df.chapter==1)&(df.verse==2)]
+df.loc[(df.chapter==1)&(df.verse==3)]
+
+# example text retrieval
+(df.head(8).token_prefix + df.head(8).token ).sum()
+(df.head(8).token_prefix.fillna('') + df.head(8).token ).sum()
