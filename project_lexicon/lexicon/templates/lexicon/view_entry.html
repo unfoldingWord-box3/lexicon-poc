@@ -13,44 +13,35 @@
             <div class="col s8">
                 <h3 class="{% if font == 'H' %}hb{%else %}gk{%endif%}">{{ lemma }}</h3>
                 <div class="divider"></div>
-                <p>land, earth</p>
-                <p><a href="{% url 'view_entry_alignment' entry %}">Alignment</a></p>
+                <p>{% for sense in senses_text %}{{ sense}}{% if not forloop.last %},{%endif%} {% endfor %}</p>
+                <p><a class="waves-effect waves-light btn" href="{% url 'view_entry_alignment' entry %}">
+                    <i class="material-icons right">line_style</i>Alignment</a></p>
 
                 <div class="card horizontal z-depth-2">
                     <div class="card-stacked">
                         <div class="card-content">
                             <h5>Senses</h5>
                             <ul class="collection">
+
+                                {% for sense in senses %}
                                 <li class="collection-item avatar">
+
                                     <a href="#" class="secondary-content">
-                                        <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
-                                        <span class="badge teal-text text-lighten-1">315x</span>
+                                        <span class="badge teal-text text-lighten-1 activator">{{sense.freq}}x</span>
                                     </a>
-                                    <i class="material-icons circle">looks_one</i>
+                                    <i class="material-icons circle teal {{sense.color}}">{{sense.icon}}</i>
 
-                                    <span class="title">Land</span>
-                                    <p>Then he went to the <span class="hl">land</span> of Israel</p>
-                                    <p>The <span class="hl">land</span> was rich with honey</p>
+                                    <span class="title">{{ sense.sense }}</span>
+                                    {% for s in sense.samples %}
+                                    <p>{{s|safe}}</p>
+                                    {% endfor %}
                                 </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle">looks_two</i>
-                                    <a href="#!" class="secondary-content">
-                                        <i class="material-icons">grade</i>
-                                        <span class="badge">285x</span>
-                                    </a>
 
-                                    <span class="title">Earth</span>
-                                    <p>The <span class="hl">earth</span> was void</p>
-                                    <p>the <span class="hl">earth</span> brought forth grass</p>
+                                {% endfor %}
 
-                                </li>
-                                <li class="collection-item avatar">
-                                    <span class="badge">10x</span>
-                                    <i class="material-icons circle">looks_3</i>
-                                    <span class="title">Ground</span>
-                                    <p>The <span class="hl">ground</span> is wet.</p>
-                                </li>
                             </ul>
+                            <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
+
                         </div>
                     </div>
                     <div class="card-reveal">
