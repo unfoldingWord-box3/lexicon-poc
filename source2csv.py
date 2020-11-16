@@ -66,6 +66,9 @@ df.index = df.id
 df.index.name = 'index'
 df = df.sort_values(by='index')
 
+bookname = os.path.basename(input_file).replace('.usfm', '')
+df = df.assign(book=[bookname]*df.shape[0])
+
 print(df.head(20))
 
 try:

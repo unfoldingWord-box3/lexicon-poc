@@ -31,7 +31,7 @@ df_full = pd.DataFrame(words)
 bookname = os.path.basename(input_file).replace('.usfm', '')
 df_full = df_full.assign(book=[bookname]*df_full.shape[0])
 try:
-    df_full = df_full.assign(alg_id=df_full.book + df_full.alg_id.fillna('').astype(str))
+    df_full = df_full.assign(alg_id=df_full.book + "-" + df_full.alg_id.fillna('').astype(str))
 except AttributeError:
     print('No alignment here')
 
