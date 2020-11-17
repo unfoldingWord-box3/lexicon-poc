@@ -8,25 +8,9 @@
 from django.db import models
 
 
-class Alignment(models.Model):
-    index = models.BigIntegerField(blank=True, null=True)
-    id = models.BigIntegerField(blank=True, null=True)
-    target_id = models.BigIntegerField(blank=True, null=True)
-    source_id = models.BigIntegerField(blank=True, null=True)
-    alg_id = models.TextField(blank=True, null=True)
-    alg = models.TextField(blank=True, null=True)
-    alg_has_gap = models.BooleanField(blank=True, null=True)
-    source_blocks = models.TextField(blank=True, null=True)
-    target_blocks = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'alignment'
-
-
 class Source(models.Model):
+    id = models.BigIntegerField(blank=True, primary_key=True)
     level_0 = models.BigIntegerField(blank=True, null=True)
-    id = models.BigIntegerField(blank=True, null=True)
     index = models.BigIntegerField(blank=True, null=True)
     source_token = models.TextField(blank=True, null=True)
     book = models.TextField(blank=True, null=True)
@@ -45,26 +29,21 @@ class Source(models.Model):
     occ = models.BigIntegerField(blank=True, null=True)
     category = models.TextField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
-    tw_id = models.TextField(blank=True, null=True)  # This field type is a guess.
+    # tw_id = models.TextField(blank=True, null=True)  # This field type is a guess.
+    tw = models.ForeignKey('Tw', blank=True, null=True, on_delete=models.SET_NULL)  
 
     class Meta:
         managed = False
         db_table = 'source'
-
-
-class StrongsM2M(models.Model):
-    index = models.BigIntegerField(blank=True, null=True)
-    number = models.TextField(blank=True, null=True)
-    related_number = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'strongs_m2m'
+        # indexes = [
+        #     models.Index(fields=['last_name', 'first_name']),
+        #     models.Index(fields=['first_name'], name='first_name_idx'),
+        # ]
 
 
 class Target(models.Model):
+    id = models.BigIntegerField(blank=True, primary_key=True)
     index = models.BigIntegerField(blank=True, null=True)
-    id = models.BigIntegerField(blank=True, null=True)
     orig_id = models.BigIntegerField(blank=True, null=True)
     token = models.TextField(blank=True, null=True)
     chapter = models.BigIntegerField(blank=True, null=True)
@@ -82,7 +61,25 @@ class Target(models.Model):
         db_table = 'target'
 
 
+class Alignment(models.Model):
+    #TODO convert this into a through model
+    id = models.BigIntegerField(blank=True, primary_key=True)
+    index = models.BigIntegerField(blank=True, null=True)
+    target = models.ForeignKey(Target, blank=True, null=True, on_delete=models.SET_NULL)
+    source = models.ForeignKey(Source, blank=True, null=True, on_delete=models.SET_NULL)
+    alg_id = models.TextField(blank=True, null=True)
+    alg = models.TextField(blank=True, null=True)
+    alg_has_gap = models.BooleanField(blank=True, null=True)
+    source_blocks = models.TextField(blank=True, null=True)
+    target_blocks = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'alignment'
+
+
 class Tw(models.Model):
+    id = models.BigIntegerField(blank=True,primary_key=True)
     index = models.BigIntegerField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
     category = models.TextField(blank=True, null=True)
@@ -91,8 +88,17 @@ class Tw(models.Model):
     suggestions = models.TextField(blank=True, null=True)
     refs = models.TextField(blank=True, null=True)
     strongs = models.TextField(blank=True, null=True)
-    id = models.BigIntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'tw'
+
+
+class StrongsM2M(models.Model):
+    index = models.BigIntegerField(blank=True, primary_key=True)
+    number = models.TextField(blank=True, null=True)
+    related_number = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'strongs_m2m'
