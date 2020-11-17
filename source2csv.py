@@ -46,7 +46,7 @@ df = df.assign(lemma=df.source_token.str.extract(r'lemma=\"(.*?)\"'))
 df = df.assign(strongs=df.source_token.str.extract(r'strong=\"(.*?)\"'))
 df.loc[:, 'has_prefix'] = False
 df.loc[df.strongs.str.contains(r'd:|c:|l:|i:|k:|b:|m:').fillna(False), 'has_prefix'] = True
-df.loc[:, 'strongs_no_prefix'] = df.strongs.str.strip('d:|c:|l:|i:|k:|b:|m:')
+df.loc[:, 'strongs_no_prefix'] = df.strongs.str.strip('d:|c:|l:|i:|k:|b:|m:|s:|s:l:|s:b:|s:d:')
 df = df.assign(translation_word=df.source_token.str.extract(r'x-tw=\"(.*?)\"'))
 
 # store the id
