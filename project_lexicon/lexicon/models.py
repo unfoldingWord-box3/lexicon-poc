@@ -36,9 +36,15 @@ class Source(models.Model):
         managed = False
         db_table = 'source'
         # indexes = [
-        #     models.Index(fields=['last_name', 'first_name']),
-        #     models.Index(fields=['first_name'], name='first_name_idx'),
+        #     models.Index(fields=['id',]),
+        #     models.Index(fields=['strongs',]),
+        #     models.Index(fields=['strongs_no_prefix',]),
+        #     models.Index(fields=['token',]),
+        #     models.Index(fields=['book','chapter','verse']),
         # ]
+
+    def __repr__(self):
+        return f'{self.id}: {self.token}'
 
 
 class Target(models.Model):
@@ -55,11 +61,16 @@ class Target(models.Model):
     target_blocks = models.TextField(blank=True, null=True)
     target_occ = models.TextField(blank=True, null=True)
     target_occs = models.TextField(blank=True, null=True)
+
     source = models.ManyToManyField(Source, through='Alignment')
 
     class Meta:
         managed = False
         db_table = 'target'
+
+    def __repr__(self):
+        return f'{self.id}: {self.target_token}'
+
 
 
 class Alignment(models.Model):
@@ -77,6 +88,9 @@ class Alignment(models.Model):
     class Meta:
         managed = False
         db_table = 'alignment'
+
+    def __repr__(self):
+        return f'{self.id}: {self.source} -> {self.target}'
 
 
 class Tw(models.Model):
