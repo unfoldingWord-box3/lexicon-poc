@@ -41,12 +41,25 @@ class Source(models.Model):
     has_prefix = models.BooleanField(blank=True, null=True)
     translation_word = models.TextField(blank=True, null=True)
     orig_id = models.BigIntegerField(blank=True, null=True)
-    occs = models.TextField(blank=True, null=True)
-    occ = models.TextField(blank=True, null=True)
+    occs = models.BigIntegerField(blank=True, null=True)
+    occ = models.BigIntegerField(blank=True, null=True)
+    category = models.TextField(blank=True, null=True)
+    name = models.TextField(blank=True, null=True)
+    tw_id = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = False
         db_table = 'source'
+
+
+class StrongsM2M(models.Model):
+    index = models.BigIntegerField(blank=True, null=True)
+    number = models.TextField(blank=True, null=True)
+    related_number = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'strongs_m2m'
 
 
 class Target(models.Model):
@@ -67,3 +80,19 @@ class Target(models.Model):
     class Meta:
         managed = False
         db_table = 'target'
+
+
+class Tw(models.Model):
+    index = models.BigIntegerField(blank=True, null=True)
+    name = models.TextField(blank=True, null=True)
+    category = models.TextField(blank=True, null=True)
+    header = models.TextField(blank=True, null=True)
+    definition = models.TextField(blank=True, null=True)
+    suggestions = models.TextField(blank=True, null=True)
+    refs = models.TextField(blank=True, null=True)
+    strongs = models.TextField(blank=True, null=True)
+    id = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tw'
