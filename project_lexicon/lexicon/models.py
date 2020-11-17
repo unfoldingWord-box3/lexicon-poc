@@ -55,6 +55,7 @@ class Target(models.Model):
     target_blocks = models.TextField(blank=True, null=True)
     target_occ = models.TextField(blank=True, null=True)
     target_occs = models.TextField(blank=True, null=True)
+    source = models.ManyToManyField(Source, through='Alignment')
 
     class Meta:
         managed = False
