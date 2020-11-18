@@ -11,7 +11,7 @@
         </div> -->
         <div class="row">
             <div class="col s8">
-                <h3 class="{% if font == 'H' %}hb{%else %}gk{%endif%}">{{ lemma }}</h3>
+                <h3 class="{{ font }}">{{ lemma }}</h3>
                 <div class="divider"></div>
                 <p>{% for sense in senses_text %}{{ sense}}{% if not forloop.last %},{%endif%} {% endfor %}</p>
                 <p><a class="waves-effect waves-light btn" href="{% url 'view_entry_alignment' entry %}">
@@ -32,11 +32,10 @@
                                     <i class="material-icons circle teal {{sense.color}}">{{sense.icon}}</i>
 
                                     <span class="title">{{ sense.sense }}</span>
-                                    {% for s in sense.samples %}
+                                    {% for s in sense.target_samples %}
                                     <p>{{s|safe}}</p>
                                     {% endfor %}
                                 </li>
-
                                 {% endfor %}
 
                             </ul>
@@ -45,8 +44,30 @@
                         </div>
                     </div>
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            <span class="card-title"><h5>Senses<i class="material-icons right">close</i></h5></span>
+                            
+                            <ul class="collection">
+
+                                {% for sense in senses %}
+                                <li class="collection-item avatar">
+
+                                    <a href="#" class="secondary-content">
+                                        <span class="badge teal-text text-lighten-1 activator">{{sense.freq}}x</span>
+                                    </a>
+                                    <i class="material-icons circle teal {{sense.color}}">{{sense.icon}}</i>
+
+                                    <span class="title">{{ sense.sense }}</span>
+                                    {% for s in sense.source_samples %}
+                                    <p class="{{font}}">{{s|safe}}</p>
+                                    {% endfor %}
+                                </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                        {% comment %} <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p> {% endcomment %}
                     </div>
                 </div>
 
@@ -88,11 +109,13 @@
                         <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                     </li>
                 </ul>
-
             </div>
 
             <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">
                 <p>Find related terms</p>
+                {% for number,lemma in related_items.items %}
+                   <a href="{% url 'view_entry' number %}" class="{{font}} larger">{{ lemma }}</a>
+                {% endfor %}
 
 
             </div>

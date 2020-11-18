@@ -29,7 +29,7 @@
                                 {% for entry, count in entries.items %}
                                 <li class="collection-item">
                                     <a href="{% url 'view_entry' entry %}">                                    
-                                        {{ entry }} ({{ count }}x)
+                                        {{ entry }} {{ count }}
                                     </a>
                                 </li>
                                 {% endfor %}
