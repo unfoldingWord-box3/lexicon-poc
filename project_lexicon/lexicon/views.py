@@ -106,25 +106,6 @@ def view_entry(request, entry_id):
         target_samples = get_concordance(alg_ids, idx, alignments, Target, 'target_id', 'target_token', 'target_token_prefix', window=8)
         source_samples = get_concordance(alg_ids, idx, alignments, Source, 'source_id', 'token')
 
-        # target_samples_ids = {}
-        # target_sample_hls = []
-        # for id in alg_ids:
-        #     selection = alignments.loc[alignments.id==id, 'target_id'].tolist()
-        #     # source_selection = selection.source_id.tolist()
-        #     start = min(selection) - 8
-        #     end = max(selection) + 8
-        #     target_samples_ids[idx] = list(range(start,end))
-        #     target_sample_hls.extend(selection)
-              
-        #     ids = [i for itm in target_samples_ids.values() for i in itm]
-        #     s = Target.objects.values('target_token', 'target_token_prefix', 'id', 'alg_id').filter(id__in=ids)
-        #     s = pd.DataFrame(s)
-        #     s['target_token'] = s['target_token_prefix'] + s['target_token']
-        #     s.loc[s.id.isin(target_sample_hls), 'target_token'] = '<span class="hl">'+s.target_token+'</span>'
-            
-        #     for key,val in target_samples_ids.items():
-        #         target_samples.append(''.join(s.loc[s.id.isin(val)].target_token.fillna('').tolist()))
-                
         senses.append({'freq':frequency,
                        'sense':sense,
                        'color':COLOR_SCALE[idx],
@@ -138,13 +119,17 @@ def view_entry(request, entry_id):
     # - show page when no alignment data
     # - fix partial strongs numbers in Greek (G...)
     # - use proper fonts
-    related_items = StrongsM2M.objects.filter(number=entry_id).values_list('related_number')
-    strongs = Source.objects.filter(strongs_no_prefix__in=related_items).values_list('strongs_no_prefix', 'lemma')
-    print(strongs)
-    related_items = dict(strongs)
-
-   
-    #TODO merge senses
+    tw_related_items = StrongsM2M.objects.filter(number=entry_id).values_list('related_number')
+    strongs = Source.objects.filter(strongs_no_prefix__in=tw_related_items).values_list('strongs_no_prefix', 'lemma').distinct()
+    tw_related_items = dict(strongs)
+    
+    target_blocks = frequencies.index.tolist()
+    # print(target_blocks)
+    # .values('lemma', 'strongs')
+    sense_related_items = Alignment.objects.filter(target_blocks__in=target_blocks).select_related('source').distinct()
+    sense_dict = {}
+    for itm in sense_related_items:
+        sense_dict[itm.source.strongs_no_prefix] = itm.source.lemma
 
     return render(request, 'lexicon/view_entry.html', 
         {'entry':entry_id,
@@ -152,7 +137,8 @@ def view_entry(request, entry_id):
          'font': font,
          'senses_text': senses_text,
          'senses': senses,
-         'related_items': related_items,
+         'tw_related_items': tw_related_items,
+         'sense_related_items': sense_dict,
           })
 
 
