@@ -15,7 +15,11 @@
                 <div class="divider"></div>
                 <p>{% for sense in senses_text %}{{ sense}}{% if not forloop.last %},{%endif%} {% endfor %}</p>
                 <p><a class="waves-effect waves-light btn" href="{% url 'view_entry_alignment' entry %}">
-                    <i class="material-icons right">line_style</i>Alignment</a></p>
+                    <i class="material-icons right">line_style</i>Alignment</a>
+                    
+                    <a class="waves-effect waves-light btn teal lighten-3" href="?roots=1">
+                    <i class="material-icons right">engineering</i>Parse</a>
+                </p>
 
                 <div class="card horizontal z-depth-2">
                     <div class="card-stacked">
@@ -95,7 +99,7 @@
                     </div>
                 </div>
 
-                <ul class="collapsible">
+                {% comment %} <ul class="collapsible">
                     <li>
                         <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
                         <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
@@ -108,7 +112,7 @@
                         <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
                         <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                     </li>
-                </ul>
+                </ul> {% endcomment %}
             </div>
 
             <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">
@@ -116,7 +120,7 @@
                 {% comment %} {{ sense_related_items }} {% endcomment %}
                 {% for number,lemma in sense_related_items.items %}
                     {% if lemma %}
-                    <a href="{% url 'view_entry' number %}" class="{% if number|first in 'AH' %}hb{%else%}gk{%endif%} larger">{{ lemma }}</a>
+                    <a href="{% url 'view_entry' number %}" class="{% if number|first in 'AH' %}hb larger{%else%}gk{%endif%}">{{ lemma }}</a>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -163,11 +167,11 @@
             <i class="large material-icons">mode_edit</i>
         </a>
         <ul>
-            <li><a class="btn-floating red"><i class="material-icons">shuffle</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">done_all</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">list_alt</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">subtitles</i></a></li>
             <li><a class="btn-floating blue"><i class="material-icons">report</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">subtitles</i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="material-icons">list_alt</i></a></li>
+            <li><a class="btn-floating red"><i class="material-icons">shuffle</i></a></li>
+            {% comment %} <li><a class="btn-floating yellow darken-1"><i class="material-icons">done_all</i></a></li> {% endcomment %}
         </ul>
     </div>
     <!-- <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script> -->
