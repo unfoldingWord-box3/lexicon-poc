@@ -84,7 +84,8 @@ class Alignment(models.Model):
     alg_has_gap = models.BooleanField(blank=True, null=True)
     source_blocks = models.TextField(blank=True, null=True)
     target_blocks = models.TextField(blank=True, null=True)
-    # roots = models.TextField(blank=True, null=True)
+    # to add a column: ALTER TABLE alignment ADD "roots" TEXT;
+    roots = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
