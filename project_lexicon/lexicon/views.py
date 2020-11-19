@@ -87,18 +87,22 @@ def view_entry(request, entry_id):
     lemma = Source.objects.filter(strongs_no_prefix=entry_id).first().lemma
     font = get_font(entry_id)
 
+    COLUMN = 'target_blocks'
+    if request.GET.get('roots'):
+        COLUMN = 'roots'
+    
     alignments = pd.DataFrame(aligs.values())
-    frequencies = alignments.drop_duplicates('alg_id').groupby('target_blocks').size().sort_values(ascending=False)
+    frequencies = alignments.drop_duplicates('alg_id').groupby(COLUMN).size().sort_values(ascending=False)
     
     # senses_text = alignments.groupby('roots').size().sort_values(ascending=False).index.tolist()
-    senses_text = alignments.groupby('target_blocks').size().sort_values(ascending=False).index.tolist()
+    senses_text = alignments.groupby(COLUMN).size().sort_values(ascending=False).index.tolist()
 
     senses = []
     for idx,freq in enumerate(frequencies.items(), start=1):
         # order, color, icon, frequency, 5 samples      
         sense, frequency = freq[0].strip(), freq[1]
 
-        alg = alignments.loc[alignments.target_blocks==freq[0]]
+        alg = alignments.loc[alignments[COLUMN]==freq[0]]
         alg_ids = alg.id.unique().tolist()
         if len(alg_ids) > 5:
             alg_ids = random.sample(alg_ids, k=5)
@@ -115,10 +119,6 @@ def view_entry(request, entry_id):
                        'source_samples':source_samples,
         })
     
-    #TODO related items
-    # - show page when no alignment data
-    # - fix partial strongs numbers in Greek (G...)
-    # - use proper fonts
     tw_related_items = StrongsM2M.objects.filter(number=entry_id).values_list('related_number')
     strongs = Source.objects.filter(strongs_no_prefix__in=tw_related_items).values_list('strongs_no_prefix', 'lemma').distinct()
     tw_related_items = dict(strongs)
@@ -126,7 +126,10 @@ def view_entry(request, entry_id):
     target_blocks = frequencies.index.tolist()
     # print(target_blocks)
     # .values('lemma', 'strongs')
-    sense_related_items = Alignment.objects.filter(target_blocks__in=target_blocks).select_related('source').distinct()
+    if COLUMN == 'roots':
+        sense_related_items = Alignment.objects.filter(roots__in=target_blocks).select_related('source').distinct()
+    else:
+        sense_related_items = Alignment.objects.filter(target_blocks__in=target_blocks).select_related('source').distinct()
     sense_dict = {}
     for itm in sense_related_items:
         sense_dict[itm.source.strongs_no_prefix] = itm.source.lemma
