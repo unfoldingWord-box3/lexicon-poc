@@ -1,0 +1,10 @@
+data/el-x-koine_ugnt
+data/en*
+data/hbo_uhb
+examples
+node_modules
+ufw.wspace.code-workspace
+.vscode
+.env
+*.pyc
+*__pycache__*

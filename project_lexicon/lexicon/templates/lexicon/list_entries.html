@@ -1,0 +1,81 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+
+{% block 'main' %}
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s8">
+                <h3 class="hb">Lexicon entries</h3>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                        <i class="material-icons prefix">text_snippet</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <label for="autocomplete-input">Search for a strongs number</label>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+            <h4>Recently viewed</h4>
+                <div class="card horizontal z-depth-2">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <a href="/H0894">H0894 (בָּבֶל)</a>
+                                </li>
+                                <li class="collection-item">
+                                    <a href="/H3205">H3205 (יָלַד)</a>
+                                </li>
+                                <li class="collection-item">
+                                    <a href="/G00110">G00110 (Ἀβραάμ)</a>
+                                </li>                                    
+                                <li class="collection-item">
+                                    <a href="/H7223">H7223 (רִאשׁוֹן)</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Sample</h4>
+                <div class="card horizontal z-depth-2">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <ul class="collection">
+                                {% for entry, count in entries.items %}
+                                <li class="collection-item">
+                                    <a href="{% url 'view_entry' entry %}">                                    
+                                        {{ entry }} {{ count }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock 'main' %}
+
+{% block 'scripts' %}
+{{ block.super }}
+
+  <script>  
+  {% comment %} FIXME {% endcomment %}
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.autocomplete');
+    var data = {{ all_numbers|safe }};
+    var instances = M.Autocomplete.init(elems, data = data);
+  });
+  </script>
+{% endblock 'scripts' %}

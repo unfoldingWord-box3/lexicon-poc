@@ -1,0 +1,17 @@
+.hb {
+    font-family: 'SBL Hebrew';
+    /* font not included, presumed already installed for PoC */
+}
+
+.gk {
+    font-family: 'SBL Greek';
+    /* font not included, presumed already installed for PoC */
+}
+
+.hl {
+    font-weight: bold;
+}
+
+.larger {
+    font-size: 1.4em;
+}
