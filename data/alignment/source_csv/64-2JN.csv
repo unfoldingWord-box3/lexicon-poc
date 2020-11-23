@@ -1,0 +1,246 @@
+index,source_token,chapter,verse,token,token_prefix,morph,lemma,strongs,has_prefix,strongs_no_prefix,translation_word,id,occs,occ,book
+0,"\w ὁ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,NMS,""",1,1, ὁ,,"Gr,EA,,,,NMS,",ὁ,G35880,False,G35880,,0,1,1,64-2JN
+1," \w πρεσβύτερος|lemma=""πρεσβύτερος"" strong=""G42450"" x-morph=""Gr,NS,,,,NMSC"" x-tw=""rc://*/tw/dict/bible/other/elder""",1,1, πρεσβύτερος,,"Gr,NS,,,,NMSC",πρεσβύτερος,G42450,False,G42450,rc://*/tw/dict/bible/other/elder,1,1,1,64-2JN
+2,"; \w ἐκλεκτῇ|lemma=""ἐκλεκτός"" strong=""G15880"" x-morph=""Gr,AA,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/kt/elect""",1,1, ἐκλεκτῇ,; ,"Gr,AA,,,,DFS,",ἐκλεκτός,G15880,False,G15880,rc://*/tw/dict/bible/kt/elect,2,1,1,64-2JN
+3," \w κυρίᾳ|lemma=""κυρία"" strong=""G29590"" x-morph=""Gr,N,,,,,DFS,""",1,1, κυρίᾳ,,"Gr,N,,,,,DFS,",κυρία,G29590,False,G29590,,3,1,1,64-2JN
+4," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,1, καὶ,,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,4,3,1,64-2JN
+5," \w τοῖς|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,DNP,""",1,1, τοῖς,,"Gr,EA,,,,DNP,",ὁ,G35880,False,G35880,,5,1,1,64-2JN
+6," \w τέκνοις|lemma=""τέκνον"" strong=""G50430"" x-morph=""Gr,N,,,,,DNP,"" x-tw=""rc://*/tw/dict/bible/kt/children""",1,1, τέκνοις,,"Gr,N,,,,,DNP,",τέκνον,G50430,False,G50430,rc://*/tw/dict/bible/kt/children,6,1,1,64-2JN
+7," \w αὐτῆς|lemma=""αὐτός"" strong=""G08460"" x-morph=""Gr,RP,,,3GFS,""",1,1, αὐτῆς,,"Gr,RP,,,3GFS,",αὐτός,G08460,False,G08460,,7,1,1,64-2JN
+8,", \w οὓς|lemma=""ὅς"" strong=""G37390"" x-morph=""Gr,RR,,,,AMP,""",1,1, οὓς,", ","Gr,RR,,,,AMP,",ὅς,G37390,False,G37390,,8,1,1,64-2JN
+9," \w ἐγὼ|lemma=""ἐγώ"" strong=""G14730"" x-morph=""Gr,RP,,,1N,S,""",1,1, ἐγὼ,,"Gr,RP,,,1N,S,",ἐγώ,G14730,False,G14730,,9,2,1,64-2JN
+10," \w ἀγαπῶ|lemma=""ἀγαπάω"" strong=""G00250"" x-morph=""Gr,V,IPA1,,S,"" x-tw=""rc://*/tw/dict/bible/kt/love""",1,1, ἀγαπῶ,,"Gr,V,IPA1,,S,",ἀγαπάω,G00250,False,G00250,rc://*/tw/dict/bible/kt/love,10,1,1,64-2JN
+11," \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,1, ἐν,,"Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,11,1,1,64-2JN
+12," \w ἀληθείᾳ|lemma=""ἀλήθεια"" strong=""G02250"" x-morph=""Gr,N,,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/kt/true""",1,1, ἀληθείᾳ,,"Gr,N,,,,,DFS,",ἀλήθεια,G02250,False,G02250,rc://*/tw/dict/bible/kt/true,12,1,1,64-2JN
+13," (\w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,1, καὶ,(,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,13,3,2,64-2JN
+14," \w οὐκ|lemma=""οὐ"" strong=""G37560"" x-morph=""Gr,DO,,,,,,,,""",1,1, οὐκ,,"Gr,DO,,,,,,,,",οὐ,G37560,False,G37560,,14,1,1,64-2JN
+15," \w ἐγὼ|lemma=""ἐγώ"" strong=""G14730"" x-morph=""Gr,RP,,,1N,S,""",1,1, ἐγὼ,,"Gr,RP,,,1N,S,",ἐγώ,G14730,False,G14730,,15,2,2,64-2JN
+16," \w μόνος|lemma=""μόνος"" strong=""G34410"" x-morph=""Gr,EF,,,,NMS,""",1,1, μόνος,,"Gr,EF,,,,NMS,",μόνος,G34410,False,G34410,,16,1,1,64-2JN
+17,", \w ἀλλὰ|lemma=""ἀλλά"" strong=""G02350"" x-morph=""Gr,CO,,,,,,,,""",1,1, ἀλλὰ,", ","Gr,CO,,,,,,,,",ἀλλά,G02350,False,G02350,,17,1,1,64-2JN
+18," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,D,,,,,,,,,""",1,1, καὶ,,"Gr,D,,,,,,,,,",καί,G25320,False,G25320,,18,3,3,64-2JN
+19," \w πάντες|lemma=""πᾶς"" strong=""G39560"" x-morph=""Gr,RI,,,,NMP,""",1,1, πάντες,,"Gr,RI,,,,NMP,",πᾶς,G39560,False,G39560,,19,1,1,64-2JN
+20," \w οἱ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,RD,,,,NMP,""",1,1, οἱ,,"Gr,RD,,,,NMP,",ὁ,G35880,False,G35880,,20,1,1,64-2JN
+21," \w ἐγνωκότες|lemma=""γινώσκω"" strong=""G10970"" x-morph=""Gr,V,PEA,NMP,"" x-tw=""rc://*/tw/dict/bible/other/know""",1,1, ἐγνωκότες,,"Gr,V,PEA,NMP,",γινώσκω,G10970,False,G10970,rc://*/tw/dict/bible/other/know,21,1,1,64-2JN
+22," \w τὴν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AFS,""",1,1, τὴν,,"Gr,EA,,,,AFS,",ὁ,G35880,False,G35880,,22,1,1,64-2JN
+23," \w ἀλήθειαν|lemma=""ἀλήθεια"" strong=""G02250"" x-morph=""Gr,N,,,,,AFS,"" x-tw=""rc://*/tw/dict/bible/kt/true""",1,1, ἀλήθειαν,,"Gr,N,,,,,AFS,",ἀλήθεια,G02250,False,G02250,rc://*/tw/dict/bible/kt/true,23,1,1,64-2JN
+25,"\w διὰ|lemma=""διά"" strong=""G12230"" x-morph=""Gr,P,,,,,A,,,""",1,2, διὰ,,"Gr,P,,,,,A,,,",διά,G12230,False,G12230,,25,1,1,64-2JN
+26," \w τὴν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AFS,""",1,2, τὴν,,"Gr,EA,,,,AFS,",ὁ,G35880,False,G35880,,26,2,1,64-2JN
+27," \w ἀλήθειαν|lemma=""ἀλήθεια"" strong=""G02250"" x-morph=""Gr,N,,,,,AFS,"" x-tw=""rc://*/tw/dict/bible/kt/true""",1,2, ἀλήθειαν,,"Gr,N,,,,,AFS,",ἀλήθεια,G02250,False,G02250,rc://*/tw/dict/bible/kt/true,27,1,1,64-2JN
+28," \w τὴν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,RD,,,,AFS,""",1,2, τὴν,,"Gr,RD,,,,AFS,",ὁ,G35880,False,G35880,,28,2,2,64-2JN
+29," \w μένουσαν|lemma=""μένω"" strong=""G33060"" x-morph=""Gr,V,PPA,AFS,""",1,2, μένουσαν,,"Gr,V,PPA,AFS,",μένω,G33060,False,G33060,,29,1,1,64-2JN
+30," \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,2, ἐν,,"Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,30,1,1,64-2JN
+31," \w ἡμῖν|lemma=""ἐγώ"" strong=""G14730"" x-morph=""Gr,RP,,,1D,P,""",1,2, ἡμῖν,,"Gr,RP,,,1D,P,",ἐγώ,G14730,False,G14730,,31,1,1,64-2JN
+32,", \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,2, καὶ,", ","Gr,CC,,,,,,,,",καί,G25320,False,G25320,,32,1,1,64-2JN
+33," \w μεθ’|lemma=""μετά"" strong=""G33260"" x-morph=""Gr,P,,,,,G,,,""",1,2, μεθ’,,"Gr,P,,,,,G,,,",μετά,G33260,False,G33260,,33,1,1,64-2JN
+34," \w ἡμῶν|lemma=""ἐγώ"" strong=""G14730"" x-morph=""Gr,RP,,,1G,P,""",1,2, ἡμῶν,,"Gr,RP,,,1G,P,",ἐγώ,G14730,False,G14730,,34,1,1,64-2JN
+35," \w ἔσται|lemma=""εἰμί"" strong=""G15100"" x-morph=""Gr,V,IFM3,,S,""",1,2, ἔσται,,"Gr,V,IFM3,,S,",εἰμί,G15100,False,G15100,,35,1,1,64-2JN
+36," \w εἰς|lemma=""εἰς"" strong=""G15190"" x-morph=""Gr,P,,,,,A,,,""",1,2, εἰς,,"Gr,P,,,,,A,,,",εἰς,G15190,False,G15190,,36,1,1,64-2JN
+37," \w τὸν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AMS,""",1,2, τὸν,,"Gr,EA,,,,AMS,",ὁ,G35880,False,G35880,,37,1,1,64-2JN
+38," \w αἰῶνα|lemma=""αἰών"" strong=""G01650"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/other/age""",1,2, αἰῶνα,,"Gr,N,,,,,AMS,",αἰών,G01650,False,G01650,rc://*/tw/dict/bible/other/age,38,1,1,64-2JN
+40,"\w ἔσται|lemma=""εἰμί"" strong=""G15100"" x-morph=""Gr,V,IFM3,,S,""",1,3, ἔσται,,"Gr,V,IFM3,,S,",εἰμί,G15100,False,G15100,,40,1,1,64-2JN
+41," \w μεθ’|lemma=""μετά"" strong=""G33260"" x-morph=""Gr,P,,,,,G,,,""",1,3, μεθ’,,"Gr,P,,,,,G,,,",μετά,G33260,False,G33260,,41,1,1,64-2JN
+42," \w ἡμῶν|lemma=""ἐγώ"" strong=""G14730"" x-morph=""Gr,RP,,,1G,P,""",1,3, ἡμῶν,,"Gr,RP,,,1G,P,",ἐγώ,G14730,False,G14730,,42,1,1,64-2JN
+43," \w χάρις|lemma=""χάρις"" strong=""G54850"" x-morph=""Gr,N,,,,,NFS,"" x-tw=""rc://*/tw/dict/bible/kt/grace""",1,3, χάρις,,"Gr,N,,,,,NFS,",χάρις,G54850,False,G54850,rc://*/tw/dict/bible/kt/grace,43,1,1,64-2JN
+44,", \w ἔλεος|lemma=""ἔλεος"" strong=""G16560"" x-morph=""Gr,N,,,,,NNS,"" x-tw=""rc://*/tw/dict/bible/kt/mercy""",1,3, ἔλεος,", ","Gr,N,,,,,NNS,",ἔλεος,G16560,False,G16560,rc://*/tw/dict/bible/kt/mercy,44,1,1,64-2JN
+45,", \w εἰρήνη|lemma=""εἰρήνη"" strong=""G15150"" x-morph=""Gr,N,,,,,NFS,"" x-tw=""rc://*/tw/dict/bible/other/peace""",1,3, εἰρήνη,", ","Gr,N,,,,,NFS,",εἰρήνη,G15150,False,G15150,rc://*/tw/dict/bible/other/peace,45,1,1,64-2JN
+46,", \w παρὰ|lemma=""παρά"" strong=""G38440"" x-morph=""Gr,P,,,,,G,,,""",1,3, παρὰ,", ","Gr,P,,,,,G,,,",παρά,G38440,False,G38440,,46,2,1,64-2JN
+47," \k-s |x-tw=""rc://*/tw/dict/bible/kt/godthefather""\*\w Θεοῦ|lemma=""θεός"" strong=""G23160"" x-morph=""Gr,N,,,,,GMS,""",1,3, ,"\k-s |x-tw=""rc://*/tw/dict/bible/kt/godthefather""\*","Gr,N,,,,,GMS,",θεός,G23160,False,G23160,rc://*/tw/dict/bible/kt/godthefather,47,1,1,64-2JN
+48," \w Πατρός|lemma=""πατήρ"" strong=""G39620"" x-morph=""Gr,N,,,,,GMS,""",1,3, Πατρός,,"Gr,N,,,,,GMS,",πατήρ,G39620,False,G39620,,48,2,1,64-2JN
+49," \k-e\* \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,3, καὶ,\k-e\* ,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,49,2,1,64-2JN
+50," \w παρὰ|lemma=""παρά"" strong=""G38440"" x-morph=""Gr,P,,,,,G,,,""",1,3, παρὰ,,"Gr,P,,,,,G,,,",παρά,G38440,False,G38440,,50,2,2,64-2JN
+51," \w Ἰησοῦ|lemma=""Ἰησοῦς"" strong=""G24240"" x-morph=""Gr,N,,,,,GMS,"" x-tw=""rc://*/tw/dict/bible/kt/jesus""",1,3, Ἰησοῦ,,"Gr,N,,,,,GMS,",Ἰησοῦς,G24240,False,G24240,rc://*/tw/dict/bible/kt/jesus,51,1,1,64-2JN
+52," \w Χριστοῦ|lemma=""χριστός"" strong=""G55470"" x-morph=""Gr,N,,,,,GMS,"" x-tw=""rc://*/tw/dict/bible/kt/christ""",1,3, Χριστοῦ,,"Gr,N,,,,,GMS,",χριστός,G55470,False,G55470,rc://*/tw/dict/bible/kt/christ,52,1,1,64-2JN
+53,", \w τοῦ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,GMS,""",1,3, τοῦ,", ","Gr,EA,,,,GMS,",ὁ,G35880,False,G35880,,53,2,1,64-2JN
+54," \w Υἱοῦ|lemma=""υἱός"" strong=""G52070"" x-morph=""Gr,N,,,,,GMS,"" x-tw=""rc://*/tw/dict/bible/kt/sonofgod""",1,3, Υἱοῦ,,"Gr,N,,,,,GMS,",υἱός,G52070,False,G52070,rc://*/tw/dict/bible/kt/sonofgod,54,1,1,64-2JN
+55," \w τοῦ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,GMS,""",1,3, τοῦ,,"Gr,EA,,,,GMS,",ὁ,G35880,False,G35880,,55,2,2,64-2JN
+56," \w Πατρός|lemma=""πατήρ"" strong=""G39620"" x-morph=""Gr,N,,,,,GMS,"" x-tw=""rc://*/tw/dict/bible/kt/godthefather""",1,3, Πατρός,,"Gr,N,,,,,GMS,",πατήρ,G39620,False,G39620,rc://*/tw/dict/bible/kt/godthefather,56,2,2,64-2JN
+57,", \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,3, ἐν,", ","Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,57,1,1,64-2JN
+58," \w ἀληθείᾳ|lemma=""ἀλήθεια"" strong=""G02250"" x-morph=""Gr,N,,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/kt/true""",1,3, ἀληθείᾳ,,"Gr,N,,,,,DFS,",ἀλήθεια,G02250,False,G02250,rc://*/tw/dict/bible/kt/true,58,1,1,64-2JN
+59," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,3, καὶ,,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,59,2,2,64-2JN
+60," \w ἀγάπῃ|lemma=""ἀγάπη"" strong=""G00260"" x-morph=""Gr,N,,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/kt/love""",1,3, ἀγάπῃ,,"Gr,N,,,,,DFS,",ἀγάπη,G00260,False,G00260,rc://*/tw/dict/bible/kt/love,60,1,1,64-2JN
+62,"\w ἐχάρην|lemma=""χαίρω"" strong=""G54630"" x-morph=""Gr,V,IAP1,,S,"" x-tw=""rc://*/tw/dict/bible/other/joy""",1,4, ἐχάρην,,"Gr,V,IAP1,,S,",χαίρω,G54630,False,G54630,rc://*/tw/dict/bible/other/joy,62,1,1,64-2JN
+63," \w λείαν|lemma=""λείαν"" strong=""G30290"" x-morph=""Gr,D,,,,,,,,,""",1,4, λείαν,,"Gr,D,,,,,,,,,",λείαν,G30290,False,G30290,,63,1,1,64-2JN
+64," \w ὅτι|lemma=""ὅτι"" strong=""G37540"" x-morph=""Gr,CS,,,,,,,,""",1,4, ὅτι,,"Gr,CS,,,,,,,,",ὅτι,G37540,False,G37540,,64,1,1,64-2JN
+65," \w εὕρηκα|lemma=""εὑρίσκω"" strong=""G21470"" x-morph=""Gr,V,IEA1,,S,""",1,4, εὕρηκα,,"Gr,V,IEA1,,S,",εὑρίσκω,G21470,False,G21470,,65,1,1,64-2JN
+66," \w ἐκ|lemma=""ἐκ"" strong=""G15370"" x-morph=""Gr,P,,,,,G,,,""",1,4, ἐκ,,"Gr,P,,,,,G,,,",ἐκ,G15370,False,G15370,,66,1,1,64-2JN
+67," \w τῶν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,GNP,""",1,4, τῶν,,"Gr,EA,,,,GNP,",ὁ,G35880,False,G35880,,67,1,1,64-2JN
+68," \w τέκνων|lemma=""τέκνον"" strong=""G50430"" x-morph=""Gr,N,,,,,GNP,"" x-tw=""rc://*/tw/dict/bible/kt/children""",1,4, τέκνων,,"Gr,N,,,,,GNP,",τέκνον,G50430,False,G50430,rc://*/tw/dict/bible/kt/children,68,1,1,64-2JN
+69," \w σου|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2G,S,""",1,4, σου,,"Gr,RP,,,2G,S,",σύ,G47710,False,G47710,,69,1,1,64-2JN
+70," \w περιπατοῦντας|lemma=""περιπατέω"" strong=""G40430"" x-morph=""Gr,V,PPA,AMP,"" x-tw=""rc://*/tw/dict/bible/other/walk""",1,4, περιπατοῦντας,,"Gr,V,PPA,AMP,",περιπατέω,G40430,False,G40430,rc://*/tw/dict/bible/other/walk,70,1,1,64-2JN
+71," \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,4, ἐν,,"Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,71,1,1,64-2JN
+72," \w ἀληθείᾳ|lemma=""ἀλήθεια"" strong=""G02250"" x-morph=""Gr,N,,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/kt/true""",1,4, ἀληθείᾳ,,"Gr,N,,,,,DFS,",ἀλήθεια,G02250,False,G02250,rc://*/tw/dict/bible/kt/true,72,1,1,64-2JN
+73,", \w καθὼς|lemma=""καθώς"" strong=""G25310"" x-morph=""Gr,D,,,,,,,,,"" x-tw=""rc://*/tw/dict/bible/other/like""",1,4, καθὼς,", ","Gr,D,,,,,,,,,",καθώς,G25310,False,G25310,rc://*/tw/dict/bible/other/like,73,1,1,64-2JN
+74," \w ἐντολὴν|lemma=""ἐντολή"" strong=""G17850"" x-morph=""Gr,N,,,,,AFS,"" x-tw=""rc://*/tw/dict/bible/kt/command""",1,4, ἐντολὴν,,"Gr,N,,,,,AFS,",ἐντολή,G17850,False,G17850,rc://*/tw/dict/bible/kt/command,74,1,1,64-2JN
+75," \w ἐλάβομεν|lemma=""λαμβάνω"" strong=""G29830"" x-morph=""Gr,V,IAA1,,P,"" x-tw=""rc://*/tw/dict/bible/other/receive""",1,4, ἐλάβομεν,,"Gr,V,IAA1,,P,",λαμβάνω,G29830,False,G29830,rc://*/tw/dict/bible/other/receive,75,1,1,64-2JN
+76," \w παρὰ|lemma=""παρά"" strong=""G38440"" x-morph=""Gr,P,,,,,G,,,""",1,4, παρὰ,,"Gr,P,,,,,G,,,",παρά,G38440,False,G38440,,76,1,1,64-2JN
+77," \w τοῦ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,GMS,""",1,4, τοῦ,,"Gr,EA,,,,GMS,",ὁ,G35880,False,G35880,,77,1,1,64-2JN
+78," \w Πατρός|lemma=""πατήρ"" strong=""G39620"" x-morph=""Gr,N,,,,,GMS,"" x-tw=""rc://*/tw/dict/bible/kt/godthefather""",1,4, Πατρός,,"Gr,N,,,,,GMS,",πατήρ,G39620,False,G39620,rc://*/tw/dict/bible/kt/godthefather,78,1,1,64-2JN
+80,"\w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,5, καὶ,,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,80,1,1,64-2JN
+81," \w νῦν|lemma=""νῦν"" strong=""G35680"" x-morph=""Gr,D,,,,,,,,,""",1,5, νῦν,,"Gr,D,,,,,,,,,",νῦν,G35680,False,G35680,,81,1,1,64-2JN
+82," \w ἐρωτῶ|lemma=""ἐρωτάω"" strong=""G20650"" x-morph=""Gr,V,IPA1,,S,"" x-tw=""rc://*/tw/dict/bible/other/plead""",1,5, ἐρωτῶ,,"Gr,V,IPA1,,S,",ἐρωτάω,G20650,False,G20650,rc://*/tw/dict/bible/other/plead,82,1,1,64-2JN
+83," \w σε|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2A,S,""",1,5, σε,,"Gr,RP,,,2A,S,",σύ,G47710,False,G47710,,83,1,1,64-2JN
+84,", \w κυρία|lemma=""κυρία"" strong=""G29590"" x-morph=""Gr,N,,,,,VFS,""",1,5, κυρία,", ","Gr,N,,,,,VFS,",κυρία,G29590,False,G29590,,84,1,1,64-2JN
+85,", \w οὐχ|lemma=""οὐ"" strong=""G37560"" x-morph=""Gr,DO,,,,,,,,""",1,5, οὐχ,", ","Gr,DO,,,,,,,,",οὐ,G37560,False,G37560,,85,1,1,64-2JN
+86," \w ὡς|lemma=""ὡς"" strong=""G56130"" x-morph=""Gr,CS,,,,,,,,""",1,5, ὡς,,"Gr,CS,,,,,,,,",ὡς,G56130,False,G56130,,86,1,1,64-2JN
+87," \w ἐντολὴν|lemma=""ἐντολή"" strong=""G17850"" x-morph=""Gr,N,,,,,AFS,"" x-tw=""rc://*/tw/dict/bible/kt/command""",1,5, ἐντολὴν,,"Gr,N,,,,,AFS,",ἐντολή,G17850,False,G17850,rc://*/tw/dict/bible/kt/command,87,1,1,64-2JN
+88," \w καινὴν|lemma=""καινός"" strong=""G25370"" x-morph=""Gr,AA,,,,AFS,""",1,5, καινὴν,,"Gr,AA,,,,AFS,",καινός,G25370,False,G25370,,88,1,1,64-2JN
+89," \w γράφων|lemma=""γράφω"" strong=""G11250"" x-morph=""Gr,V,PPA,NMS,""",1,5, γράφων,,"Gr,V,PPA,NMS,",γράφω,G11250,False,G11250,,89,1,1,64-2JN
+90," \w σοι|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2D,S,""",1,5, σοι,,"Gr,RP,,,2D,S,",σύ,G47710,False,G47710,,90,1,1,64-2JN
+91,", \w ἀλλὰ|lemma=""ἀλλά"" strong=""G02350"" x-morph=""Gr,CO,,,,,,,,""",1,5, ἀλλὰ,", ","Gr,CO,,,,,,,,",ἀλλά,G02350,False,G02350,,91,1,1,64-2JN
+92," \w ἣν|lemma=""ὅς"" strong=""G37390"" x-morph=""Gr,RR,,,,AFS,""",1,5, ἣν,,"Gr,RR,,,,AFS,",ὅς,G37390,False,G37390,,92,1,1,64-2JN
+93," \w εἴχαμεν|lemma=""ἔχω"" strong=""G21920"" x-morph=""Gr,V,IIA1,,P,""",1,5, εἴχαμεν,,"Gr,V,IIA1,,P,",ἔχω,G21920,False,G21920,,93,1,1,64-2JN
+94," \w ἀπ’|lemma=""ἀπό"" strong=""G05750"" x-morph=""Gr,P,,,,,G,,,""",1,5, ἀπ’,,"Gr,P,,,,,G,,,",ἀπό,G05750,False,G05750,,94,1,1,64-2JN
+95," \w ἀρχῆς|lemma=""ἀρχή"" strong=""G07460"" x-morph=""Gr,N,,,,,GFS,""",1,5, ἀρχῆς,,"Gr,N,,,,,GFS,",ἀρχή,G07460,False,G07460,,95,1,1,64-2JN
+96,", \w ἵνα|lemma=""ἵνα"" strong=""G24430"" x-morph=""Gr,CS,,,,,,,,""",1,5, ἵνα,", ","Gr,CS,,,,,,,,",ἵνα,G24430,False,G24430,,96,1,1,64-2JN
+97," \w ἀγαπῶμεν|lemma=""ἀγαπάω"" strong=""G00250"" x-morph=""Gr,V,SPA1,,P,"" x-tw=""rc://*/tw/dict/bible/kt/love""",1,5, ἀγαπῶμεν,,"Gr,V,SPA1,,P,",ἀγαπάω,G00250,False,G00250,rc://*/tw/dict/bible/kt/love,97,1,1,64-2JN
+98," \w ἀλλήλους|lemma=""ἀλλήλων"" strong=""G02400"" x-morph=""Gr,RC,,,,AMP,""",1,5, ἀλλήλους,,"Gr,RC,,,,AMP,",ἀλλήλων,G02400,False,G02400,,98,1,1,64-2JN
+100,"\w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,6, καὶ,,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,100,1,1,64-2JN
+101," \w αὕτη|lemma=""οὗτος"" strong=""G37780"" x-morph=""Gr,RD,,,,NFS,""",1,6, αὕτη,,"Gr,RD,,,,NFS,",οὗτος,G37780,False,G37780,,101,2,1,64-2JN
+102," \w ἐστὶν|lemma=""εἰμί"" strong=""G15100"" x-morph=""Gr,V,IPA3,,S,""",1,6, ἐστὶν,,"Gr,V,IPA3,,S,",εἰμί,G15100,False,G15100,,102,1,1,64-2JN
+103," \w ἡ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,NFS,""",1,6, ἡ,,"Gr,EA,,,,NFS,",ὁ,G35880,False,G35880,,103,2,1,64-2JN
+104," \w ἀγάπη|lemma=""ἀγάπη"" strong=""G00260"" x-morph=""Gr,N,,,,,NFS,"" x-tw=""rc://*/tw/dict/bible/kt/love""",1,6, ἀγάπη,,"Gr,N,,,,,NFS,",ἀγάπη,G00260,False,G00260,rc://*/tw/dict/bible/kt/love,104,1,1,64-2JN
+105,": \w ἵνα|lemma=""ἵνα"" strong=""G24430"" x-morph=""Gr,D,,,,,,,,,""",1,6, ἵνα,: ,"Gr,D,,,,,,,,,",ἵνα,G24430,False,G24430,,105,2,1,64-2JN
+106," \w περιπατῶμεν|lemma=""περιπατέω"" strong=""G40430"" x-morph=""Gr,V,SPA1,,P,"" x-tw=""rc://*/tw/dict/bible/other/walk""",1,6, περιπατῶμεν,,"Gr,V,SPA1,,P,",περιπατέω,G40430,False,G40430,rc://*/tw/dict/bible/other/walk,106,1,1,64-2JN
+107," \w κατὰ|lemma=""κατά"" strong=""G25960"" x-morph=""Gr,P,,,,,A,,,""",1,6, κατὰ,,"Gr,P,,,,,A,,,",κατά,G25960,False,G25960,,107,1,1,64-2JN
+108," \w τὰς|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AFP,""",1,6, τὰς,,"Gr,EA,,,,AFP,",ὁ,G35880,False,G35880,,108,1,1,64-2JN
+109," \w ἐντολὰς|lemma=""ἐντολή"" strong=""G17850"" x-morph=""Gr,N,,,,,AFP,"" x-tw=""rc://*/tw/dict/bible/kt/command""",1,6, ἐντολὰς,,"Gr,N,,,,,AFP,",ἐντολή,G17850,False,G17850,rc://*/tw/dict/bible/kt/command,109,1,1,64-2JN
+110," \w αὐτοῦ|lemma=""αὐτός"" strong=""G08460"" x-morph=""Gr,RP,,,3GMS,""",1,6, αὐτοῦ,,"Gr,RP,,,3GMS,",αὐτός,G08460,False,G08460,,110,1,1,64-2JN
+111,". \w αὕτη|lemma=""οὗτος"" strong=""G37780"" x-morph=""Gr,ED,,,,NFS,""",1,6, αὕτη,. ,"Gr,ED,,,,NFS,",οὗτος,G37780,False,G37780,,111,2,2,64-2JN
+112," \w ἡ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,NFS,""",1,6, ἡ,,"Gr,EA,,,,NFS,",ὁ,G35880,False,G35880,,112,2,2,64-2JN
+113," \w ἐντολή|lemma=""ἐντολή"" strong=""G17850"" x-morph=""Gr,N,,,,,NFS,"" x-tw=""rc://*/tw/dict/bible/kt/command""",1,6, ἐντολή,,"Gr,N,,,,,NFS,",ἐντολή,G17850,False,G17850,rc://*/tw/dict/bible/kt/command,113,1,1,64-2JN
+114," \w ἐστιν|lemma=""εἰμί"" strong=""G15100"" x-morph=""Gr,V,IPA3,,S,""",1,6, ἐστιν,,"Gr,V,IPA3,,S,",εἰμί,G15100,False,G15100,,114,1,1,64-2JN
+115,", \w καθὼς|lemma=""καθώς"" strong=""G25310"" x-morph=""Gr,D,,,,,,,,,"" x-tw=""rc://*/tw/dict/bible/other/like""",1,6, καθὼς,", ","Gr,D,,,,,,,,,",καθώς,G25310,False,G25310,rc://*/tw/dict/bible/other/like,115,1,1,64-2JN
+116," \w ἠκούσατε|lemma=""ἀκούω"" strong=""G01910"" x-morph=""Gr,V,IAA2,,P,""",1,6, ἠκούσατε,,"Gr,V,IAA2,,P,",ἀκούω,G01910,False,G01910,,116,1,1,64-2JN
+117," \w ἀπ’|lemma=""ἀπό"" strong=""G05750"" x-morph=""Gr,P,,,,,G,,,""",1,6, ἀπ’,,"Gr,P,,,,,G,,,",ἀπό,G05750,False,G05750,,117,1,1,64-2JN
+118," \w ἀρχῆς|lemma=""ἀρχή"" strong=""G07460"" x-morph=""Gr,N,,,,,GFS,""",1,6, ἀρχῆς,,"Gr,N,,,,,GFS,",ἀρχή,G07460,False,G07460,,118,1,1,64-2JN
+119,", \w ἵνα|lemma=""ἵνα"" strong=""G24430"" x-morph=""Gr,D,,,,,,,,,""",1,6, ἵνα,", ","Gr,D,,,,,,,,,",ἵνα,G24430,False,G24430,,119,2,2,64-2JN
+120," \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,6, ἐν,,"Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,120,1,1,64-2JN
+121," \w αὐτῇ|lemma=""αὐτός"" strong=""G08460"" x-morph=""Gr,RD,,,,DFS,""",1,6, αὐτῇ,,"Gr,RD,,,,DFS,",αὐτός,G08460,False,G08460,,121,1,1,64-2JN
+122," \w περιπατῆτε|lemma=""περιπατέω"" strong=""G40430"" x-morph=""Gr,V,SPA2,,P,"" x-tw=""rc://*/tw/dict/bible/other/walk""",1,6, περιπατῆτε,,"Gr,V,SPA2,,P,",περιπατέω,G40430,False,G40430,rc://*/tw/dict/bible/other/walk,122,1,1,64-2JN
+124,"\w ὅτι|lemma=""ὅτι"" strong=""G37540"" x-morph=""Gr,CS,,,,,,,,""",1,7, ὅτι,,"Gr,CS,,,,,,,,",ὅτι,G37540,False,G37540,,124,1,1,64-2JN
+125," \w πολλοὶ|lemma=""πολλός"" strong=""G41830"" x-morph=""Gr,EQ,,,,NMP,""",1,7, πολλοὶ,,"Gr,EQ,,,,NMP,",πολλός,G41830,False,G41830,,125,1,1,64-2JN
+126," \w πλάνοι|lemma=""πλάνος"" strong=""G41080"" x-morph=""Gr,NS,,,,NMP,"" x-tw=""rc://*/tw/dict/bible/other/deceive""",1,7, πλάνοι,,"Gr,NS,,,,NMP,",πλάνος,G41080,False,G41080,rc://*/tw/dict/bible/other/deceive,126,1,1,64-2JN
+127," \w ἐξῆλθαν|lemma=""ἐξέρχομαι"" strong=""G18310"" x-morph=""Gr,V,IAA3,,P,""",1,7, ἐξῆλθαν,,"Gr,V,IAA3,,P,",ἐξέρχομαι,G18310,False,G18310,,127,1,1,64-2JN
+128," \w εἰς|lemma=""εἰς"" strong=""G15190"" x-morph=""Gr,P,,,,,A,,,""",1,7, εἰς,,"Gr,P,,,,,A,,,",εἰς,G15190,False,G15190,,128,1,1,64-2JN
+129," \w τὸν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AMS,""",1,7, τὸν,,"Gr,EA,,,,AMS,",ὁ,G35880,False,G35880,,129,1,1,64-2JN
+130," \w κόσμον|lemma=""κόσμος"" strong=""G28890"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/kt/world""",1,7, κόσμον,,"Gr,N,,,,,AMS,",κόσμος,G28890,False,G28890,rc://*/tw/dict/bible/kt/world,130,1,1,64-2JN
+131,", \w οἱ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,RD,,,,NMP,""",1,7, οἱ,", ","Gr,RD,,,,NMP,",ὁ,G35880,False,G35880,,131,1,1,64-2JN
+132," \w μὴ|lemma=""μή"" strong=""G33610"" x-morph=""Gr,D,,,,,,,,,""",1,7, μὴ,,"Gr,D,,,,,,,,,",μή,G33610,False,G33610,,132,1,1,64-2JN
+133," \w ὁμολογοῦντες|lemma=""ὁμολογέω"" strong=""G36700"" x-morph=""Gr,V,PPA,NMP,"" x-tw=""rc://*/tw/dict/bible/kt/confess""",1,7, ὁμολογοῦντες,,"Gr,V,PPA,NMP,",ὁμολογέω,G36700,False,G36700,rc://*/tw/dict/bible/kt/confess,133,1,1,64-2JN
+134," \w Ἰησοῦν|lemma=""Ἰησοῦς"" strong=""G24240"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/kt/jesus""",1,7, Ἰησοῦν,,"Gr,N,,,,,AMS,",Ἰησοῦς,G24240,False,G24240,rc://*/tw/dict/bible/kt/jesus,134,1,1,64-2JN
+135," \w Χριστὸν|lemma=""χριστός"" strong=""G55470"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/kt/christ""",1,7, Χριστὸν,,"Gr,N,,,,,AMS,",χριστός,G55470,False,G55470,rc://*/tw/dict/bible/kt/christ,135,1,1,64-2JN
+136," \w ἐρχόμενον|lemma=""ἔρχομαι"" strong=""G20640"" x-morph=""Gr,V,PPM,AMS,""",1,7, ἐρχόμενον,,"Gr,V,PPM,AMS,",ἔρχομαι,G20640,False,G20640,,136,1,1,64-2JN
+137," \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,7, ἐν,,"Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,137,1,1,64-2JN
+138," \w σαρκί|lemma=""σάρξ"" strong=""G45610"" x-morph=""Gr,N,,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/kt/flesh""",1,7, σαρκί,,"Gr,N,,,,,DFS,",σάρξ,G45610,False,G45610,rc://*/tw/dict/bible/kt/flesh,138,1,1,64-2JN
+139,". \w οὗτός|lemma=""οὗτος"" strong=""G37780"" x-morph=""Gr,RD,,,,NMS,""",1,7, οὗτός,. ,"Gr,RD,,,,NMS,",οὗτος,G37780,False,G37780,,139,1,1,64-2JN
+140," \w ἐστιν|lemma=""εἰμί"" strong=""G15100"" x-morph=""Gr,V,IPA3,,S,""",1,7, ἐστιν,,"Gr,V,IPA3,,S,",εἰμί,G15100,False,G15100,,140,1,1,64-2JN
+141," \w ὁ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,NMS,""",1,7, ὁ,,"Gr,EA,,,,NMS,",ὁ,G35880,False,G35880,,141,2,1,64-2JN
+142," \w πλάνος|lemma=""πλάνος"" strong=""G41080"" x-morph=""Gr,NS,,,,NMS,"" x-tw=""rc://*/tw/dict/bible/other/deceive""",1,7, πλάνος,,"Gr,NS,,,,NMS,",πλάνος,G41080,False,G41080,rc://*/tw/dict/bible/other/deceive,142,1,1,64-2JN
+143," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,7, καὶ,,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,143,1,1,64-2JN
+144," \w ὁ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,NMS,""",1,7, ὁ,,"Gr,EA,,,,NMS,",ὁ,G35880,False,G35880,,144,2,2,64-2JN
+145," \w ἀντίχριστος|lemma=""ἀντίχριστος"" strong=""G05000"" x-morph=""Gr,N,,,,,NMS,"" x-tw=""rc://*/tw/dict/bible/kt/antichrist""",1,7, ἀντίχριστος,,"Gr,N,,,,,NMS,",ἀντίχριστος,G05000,False,G05000,rc://*/tw/dict/bible/kt/antichrist,145,1,1,64-2JN
+147,"\w βλέπετε|lemma=""βλέπω"" strong=""G09910"" x-morph=""Gr,V,MPA2,,P,"" x-tw=""rc://*/tw/dict/bible/other/watch""",1,8, βλέπετε,,"Gr,V,MPA2,,P,",βλέπω,G09910,False,G09910,rc://*/tw/dict/bible/other/watch,147,1,1,64-2JN
+148," \w ἑαυτούς|lemma=""ἑαυτοῦ"" strong=""G14380"" x-morph=""Gr,RE,,,2AMP,""",1,8, ἑαυτούς,,"Gr,RE,,,2AMP,",ἑαυτοῦ,G14380,False,G14380,,148,1,1,64-2JN
+149,", \w ἵνα|lemma=""ἵνα"" strong=""G24430"" x-morph=""Gr,CS,,,,,,,,""",1,8, ἵνα,", ","Gr,CS,,,,,,,,",ἵνα,G24430,False,G24430,,149,1,1,64-2JN
+150," \w μὴ|lemma=""μή"" strong=""G33610"" x-morph=""Gr,DO,,,,,,,,""",1,8, μὴ,,"Gr,DO,,,,,,,,",μή,G33610,False,G33610,,150,1,1,64-2JN
+151," \w ἀπολέσητε|lemma=""ἀπόλλυμι"" strong=""G06220"" x-morph=""Gr,V,SAA2,,P,"" x-tw=""rc://*/tw/dict/bible/kt/perish""",1,8, ἀπολέσητε,,"Gr,V,SAA2,,P,",ἀπόλλυμι,G06220,False,G06220,rc://*/tw/dict/bible/kt/perish,151,1,1,64-2JN
+152," \w ἃ|lemma=""ὅς"" strong=""G37390"" x-morph=""Gr,RR,,,,ANP,""",1,8, ἃ,,"Gr,RR,,,,ANP,",ὅς,G37390,False,G37390,,152,1,1,64-2JN
+153," \w εἰργασάμεθα|lemma=""ἐργάζομαι"" strong=""G20380"" x-morph=""Gr,V,IAM1,,P,"" x-tw=""rc://*/tw/dict/bible/other/labor""",1,8, εἰργασάμεθα,,"Gr,V,IAM1,,P,",ἐργάζομαι,G20380,False,G20380,rc://*/tw/dict/bible/other/labor,153,1,1,64-2JN
+154,", \w ἀλλὰ|lemma=""ἀλλά"" strong=""G02350"" x-morph=""Gr,CO,,,,,,,,""",1,8, ἀλλὰ,", ","Gr,CO,,,,,,,,",ἀλλά,G02350,False,G02350,,154,1,1,64-2JN
+155," \w μισθὸν|lemma=""μισθός"" strong=""G34080"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/other/reward""",1,8, μισθὸν,,"Gr,N,,,,,AMS,",μισθός,G34080,False,G34080,rc://*/tw/dict/bible/other/reward,155,1,1,64-2JN
+156," \w πλήρη|lemma=""πλήρης"" strong=""G41340"" x-morph=""Gr,AA,,,,AMS,""",1,8, πλήρη,,"Gr,AA,,,,AMS,",πλήρης,G41340,False,G41340,,156,1,1,64-2JN
+157," \w ἀπολάβητε|lemma=""ἀπολαμβάνω"" strong=""G06180"" x-morph=""Gr,V,SAA2,,P,"" x-tw=""rc://*/tw/dict/bible/other/receive""",1,8, ἀπολάβητε,,"Gr,V,SAA2,,P,",ἀπολαμβάνω,G06180,False,G06180,rc://*/tw/dict/bible/other/receive,157,1,1,64-2JN
+159,"\w πᾶς|lemma=""πᾶς"" strong=""G39560"" x-morph=""Gr,RI,,,,NMS,""",1,9, πᾶς,,"Gr,RI,,,,NMS,",πᾶς,G39560,False,G39560,,159,1,1,64-2JN
+160," \w ὁ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,RD,,,,NMS,""",1,9, ὁ,,"Gr,RD,,,,NMS,",ὁ,G35880,False,G35880,,160,2,1,64-2JN
+161," \w προάγων|lemma=""προάγω"" strong=""G42540"" x-morph=""Gr,V,PPA,NMS,"" x-tw=""rc://*/tw/dict/bible/kt/transgression""",1,9, προάγων,,"Gr,V,PPA,NMS,",προάγω,G42540,False,G42540,rc://*/tw/dict/bible/kt/transgression,161,1,1,64-2JN
+162," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,9, καὶ,,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,162,3,1,64-2JN
+163," \w μὴ|lemma=""μή"" strong=""G33610"" x-morph=""Gr,D,,,,,,,,,""",1,9, μὴ,,"Gr,D,,,,,,,,,",μή,G33610,False,G33610,,163,1,1,64-2JN
+164," \w μένων|lemma=""μένω"" strong=""G33060"" x-morph=""Gr,V,PPA,NMS,""",1,9, μένων,,"Gr,V,PPA,NMS,",μένω,G33060,False,G33060,,164,2,1,64-2JN
+165," \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,9, ἐν,,"Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,165,2,1,64-2JN
+166," \w τῇ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,DFS,""",1,9, τῇ,,"Gr,EA,,,,DFS,",ὁ,G35880,False,G35880,,166,2,1,64-2JN
+167," \w διδαχῇ|lemma=""διδαχή"" strong=""G13220"" x-morph=""Gr,N,,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/other/teach""",1,9, διδαχῇ,,"Gr,N,,,,,DFS,",διδαχή,G13220,False,G13220,rc://*/tw/dict/bible/other/teach,167,2,1,64-2JN
+168," \w τοῦ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,GMS,""",1,9, τοῦ,,"Gr,EA,,,,GMS,",ὁ,G35880,False,G35880,,168,1,1,64-2JN
+169," \w Χριστοῦ|lemma=""χριστός"" strong=""G55470"" x-morph=""Gr,N,,,,,GMS,"" x-tw=""rc://*/tw/dict/bible/kt/christ""",1,9, Χριστοῦ,,"Gr,N,,,,,GMS,",χριστός,G55470,False,G55470,rc://*/tw/dict/bible/kt/christ,169,1,1,64-2JN
+170,", \w Θεὸν|lemma=""θεός"" strong=""G23160"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/kt/god""",1,9, Θεὸν,", ","Gr,N,,,,,AMS,",θεός,G23160,False,G23160,rc://*/tw/dict/bible/kt/god,170,1,1,64-2JN
+171," \w οὐκ|lemma=""οὐ"" strong=""G37560"" x-morph=""Gr,D,,,,,,,,,""",1,9, οὐκ,,"Gr,D,,,,,,,,,",οὐ,G37560,False,G37560,,171,1,1,64-2JN
+172," \w ἔχει|lemma=""ἔχω"" strong=""G21920"" x-morph=""Gr,V,IPA3,,S,""",1,9, ἔχει,,"Gr,V,IPA3,,S,",ἔχω,G21920,False,G21920,,172,2,1,64-2JN
+173,"; \w ὁ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,RD,,,,NMS,""",1,9, ὁ,; ,"Gr,RD,,,,NMS,",ὁ,G35880,False,G35880,,173,2,2,64-2JN
+174," \w μένων|lemma=""μένω"" strong=""G33060"" x-morph=""Gr,V,PPA,NMS,""",1,9, μένων,,"Gr,V,PPA,NMS,",μένω,G33060,False,G33060,,174,2,2,64-2JN
+175," \w ἐν|lemma=""ἐν"" strong=""G17220"" x-morph=""Gr,P,,,,,D,,,""",1,9, ἐν,,"Gr,P,,,,,D,,,",ἐν,G17220,False,G17220,,175,2,2,64-2JN
+176," \w τῇ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,DFS,""",1,9, τῇ,,"Gr,EA,,,,DFS,",ὁ,G35880,False,G35880,,176,2,2,64-2JN
+177," \w διδαχῇ|lemma=""διδαχή"" strong=""G13220"" x-morph=""Gr,N,,,,,DFS,"" x-tw=""rc://*/tw/dict/bible/other/teach""",1,9, διδαχῇ,,"Gr,N,,,,,DFS,",διδαχή,G13220,False,G13220,rc://*/tw/dict/bible/other/teach,177,2,2,64-2JN
+178,", \w οὗτος|lemma=""οὗτος"" strong=""G37780"" x-morph=""Gr,RD,,,,NMS,""",1,9, οὗτος,", ","Gr,RD,,,,NMS,",οὗτος,G37780,False,G37780,,178,1,1,64-2JN
+179," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,DO,,,,,,,,""",1,9, καὶ,,"Gr,DO,,,,,,,,",καί,G25320,False,G25320,,179,3,2,64-2JN
+180," \w τὸν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AMS,""",1,9, τὸν,,"Gr,EA,,,,AMS,",ὁ,G35880,False,G35880,,180,2,1,64-2JN
+181," \w Πατέρα|lemma=""πατήρ"" strong=""G39620"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/kt/godthefather""",1,9, Πατέρα,,"Gr,N,,,,,AMS,",πατήρ,G39620,False,G39620,rc://*/tw/dict/bible/kt/godthefather,181,1,1,64-2JN
+182," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CO,,,,,,,,""",1,9, καὶ,,"Gr,CO,,,,,,,,",καί,G25320,False,G25320,,182,3,3,64-2JN
+183," \w τὸν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AMS,""",1,9, τὸν,,"Gr,EA,,,,AMS,",ὁ,G35880,False,G35880,,183,2,2,64-2JN
+184," \w Υἱὸν|lemma=""υἱός"" strong=""G52070"" x-morph=""Gr,N,,,,,AMS,"" x-tw=""rc://*/tw/dict/bible/kt/sonofgod""",1,9, Υἱὸν,,"Gr,N,,,,,AMS,",υἱός,G52070,False,G52070,rc://*/tw/dict/bible/kt/sonofgod,184,1,1,64-2JN
+185," \w ἔχει|lemma=""ἔχω"" strong=""G21920"" x-morph=""Gr,V,IPA3,,S,""",1,9, ἔχει,,"Gr,V,IPA3,,S,",ἔχω,G21920,False,G21920,,185,2,2,64-2JN
+187,"\w εἴ|lemma=""εἰ"" strong=""G14870"" x-morph=""Gr,CS,,,,,,,,""",1,10, εἴ,,"Gr,CS,,,,,,,,",εἰ,G14870,False,G14870,,187,1,1,64-2JN
+188," \w τις|lemma=""τις"" strong=""G51000"" x-morph=""Gr,RI,,,,NMS,""",1,10, τις,,"Gr,RI,,,,NMS,",τις,G51000,False,G51000,,188,1,1,64-2JN
+189," \w ἔρχεται|lemma=""ἔρχομαι"" strong=""G20640"" x-morph=""Gr,V,IPM3,,S,""",1,10, ἔρχεται,,"Gr,V,IPM3,,S,",ἔρχομαι,G20640,False,G20640,,189,1,1,64-2JN
+190," \w πρὸς|lemma=""πρός"" strong=""G43140"" x-morph=""Gr,P,,,,,A,,,""",1,10, πρὸς,,"Gr,P,,,,,A,,,",πρός,G43140,False,G43140,,190,1,1,64-2JN
+191," \w ὑμᾶς|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2A,P,""",1,10, ὑμᾶς,,"Gr,RP,,,2A,P,",σύ,G47710,False,G47710,,191,1,1,64-2JN
+192,", \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,10, καὶ,", ","Gr,CC,,,,,,,,",καί,G25320,False,G25320,,192,2,1,64-2JN
+193," \w ταύτην|lemma=""οὗτος"" strong=""G37780"" x-morph=""Gr,ED,,,,AFS,""",1,10, ταύτην,,"Gr,ED,,,,AFS,",οὗτος,G37780,False,G37780,,193,1,1,64-2JN
+194," \w τὴν|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,AFS,""",1,10, τὴν,,"Gr,EA,,,,AFS,",ὁ,G35880,False,G35880,,194,1,1,64-2JN
+195," \w διδαχὴν|lemma=""διδαχή"" strong=""G13220"" x-morph=""Gr,N,,,,,AFS,"" x-tw=""rc://*/tw/dict/bible/other/teach""",1,10, διδαχὴν,,"Gr,N,,,,,AFS,",διδαχή,G13220,False,G13220,rc://*/tw/dict/bible/other/teach,195,1,1,64-2JN
+196," \w οὐ|lemma=""οὐ"" strong=""G37560"" x-morph=""Gr,D,,,,,,,,,""",1,10, οὐ,,"Gr,D,,,,,,,,,",οὐ,G37560,False,G37560,,196,1,1,64-2JN
+197," \w φέρει|lemma=""φέρω"" strong=""G53420"" x-morph=""Gr,V,IPA3,,S,""",1,10, φέρει,,"Gr,V,IPA3,,S,",φέρω,G53420,False,G53420,,197,1,1,64-2JN
+198,", \w μὴ|lemma=""μή"" strong=""G33610"" x-morph=""Gr,D,,,,,,,,,""",1,10, μὴ,", ","Gr,D,,,,,,,,,",μή,G33610,False,G33610,,198,2,1,64-2JN
+199," \w λαμβάνετε|lemma=""λαμβάνω"" strong=""G29830"" x-morph=""Gr,V,MPA2,,P,"" x-tw=""rc://*/tw/dict/bible/other/receive""",1,10, λαμβάνετε,,"Gr,V,MPA2,,P,",λαμβάνω,G29830,False,G29830,rc://*/tw/dict/bible/other/receive,199,1,1,64-2JN
+200," \w αὐτὸν|lemma=""αὐτός"" strong=""G08460"" x-morph=""Gr,RP,,,3AMS,""",1,10, αὐτὸν,,"Gr,RP,,,3AMS,",αὐτός,G08460,False,G08460,,200,1,1,64-2JN
+201," \w εἰς|lemma=""εἰς"" strong=""G15190"" x-morph=""Gr,P,,,,,A,,,""",1,10, εἰς,,"Gr,P,,,,,A,,,",εἰς,G15190,False,G15190,,201,1,1,64-2JN
+202," \w οἰκίαν|lemma=""οἰκία"" strong=""G36140"" x-morph=""Gr,N,,,,,AFS,"" x-tw=""rc://*/tw/dict/bible/other/house""",1,10, οἰκίαν,,"Gr,N,,,,,AFS,",οἰκία,G36140,False,G36140,rc://*/tw/dict/bible/other/house,202,1,1,64-2JN
+203,", \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,10, καὶ,", ","Gr,CC,,,,,,,,",καί,G25320,False,G25320,,203,2,2,64-2JN
+204," \w χαίρειν|lemma=""χαίρω"" strong=""G54630"" x-morph=""Gr,V,NPA,,,,,"" x-tw=""rc://*/tw/dict/bible/other/joy""",1,10, χαίρειν,,"Gr,V,NPA,,,,,",χαίρω,G54630,False,G54630,rc://*/tw/dict/bible/other/joy,204,1,1,64-2JN
+205," \w αὐτῷ|lemma=""αὐτός"" strong=""G08460"" x-morph=""Gr,RP,,,3DMS,""",1,10, αὐτῷ,,"Gr,RP,,,3DMS,",αὐτός,G08460,False,G08460,,205,1,1,64-2JN
+206," \w μὴ|lemma=""μή"" strong=""G33610"" x-morph=""Gr,D,,,,,,,,,""",1,10, μὴ,,"Gr,D,,,,,,,,,",μή,G33610,False,G33610,,206,2,2,64-2JN
+207," \w λέγετε|lemma=""λέγω"" strong=""G30040"" x-morph=""Gr,V,MPA2,,P,""",1,10, λέγετε,,"Gr,V,MPA2,,P,",λέγω,G30040,False,G30040,,207,1,1,64-2JN
+209,"\w ὁ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,RD,,,,NMS,""",1,11, ὁ,,"Gr,RD,,,,NMS,",ὁ,G35880,False,G35880,,209,1,1,64-2JN
+210," \w λέγων|lemma=""λέγω"" strong=""G30040"" x-morph=""Gr,V,PPA,NMS,""",1,11, λέγων,,"Gr,V,PPA,NMS,",λέγω,G30040,False,G30040,,210,1,1,64-2JN
+211," \w γὰρ|lemma=""γάρ"" strong=""G10630"" x-morph=""Gr,CC,,,,,,,,""",1,11, γὰρ,,"Gr,CC,,,,,,,,",γάρ,G10630,False,G10630,,211,1,1,64-2JN
+212," \w αὐτῷ|lemma=""αὐτός"" strong=""G08460"" x-morph=""Gr,RP,,,3DMS,""",1,11, αὐτῷ,,"Gr,RP,,,3DMS,",αὐτός,G08460,False,G08460,,212,1,1,64-2JN
+213," \w χαίρειν|lemma=""χαίρω"" strong=""G54630"" x-morph=""Gr,V,NPA,,,,,"" x-tw=""rc://*/tw/dict/bible/other/joy""",1,11, χαίρειν,,"Gr,V,NPA,,,,,",χαίρω,G54630,False,G54630,rc://*/tw/dict/bible/other/joy,213,1,1,64-2JN
+214," \w κοινωνεῖ|lemma=""κοινωνέω"" strong=""G28410"" x-morph=""Gr,V,IPA3,,S,""",1,11, κοινωνεῖ,,"Gr,V,IPA3,,S,",κοινωνέω,G28410,False,G28410,,214,1,1,64-2JN
+215," \w τοῖς|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,DNP,""",1,11, τοῖς,,"Gr,EA,,,,DNP,",ὁ,G35880,False,G35880,,215,2,1,64-2JN
+216," \w ἔργοις|lemma=""ἔργον"" strong=""G20410"" x-morph=""Gr,N,,,,,DNP,"" x-tw=""rc://*/tw/dict/bible/kt/works""",1,11, ἔργοις,,"Gr,N,,,,,DNP,",ἔργον,G20410,False,G20410,rc://*/tw/dict/bible/kt/works,216,1,1,64-2JN
+217," \w αὐτοῦ|lemma=""αὐτός"" strong=""G08460"" x-morph=""Gr,RP,,,3GMS,""",1,11, αὐτοῦ,,"Gr,RP,,,3GMS,",αὐτός,G08460,False,G08460,,217,1,1,64-2JN
+218," \w τοῖς|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,DNP,""",1,11, τοῖς,,"Gr,EA,,,,DNP,",ὁ,G35880,False,G35880,,218,2,2,64-2JN
+219," \w πονηροῖς|lemma=""πονηρός"" strong=""G41900"" x-morph=""Gr,AR,,,,DNP,"" x-tw=""rc://*/tw/dict/bible/kt/evil""",1,11, πονηροῖς,,"Gr,AR,,,,DNP,",πονηρός,G41900,False,G41900,rc://*/tw/dict/bible/kt/evil,219,1,1,64-2JN
+221,"\w πολλὰ|lemma=""πολλός"" strong=""G41830"" x-morph=""Gr,RI,,,,ANP,""",1,12, πολλὰ,,"Gr,RI,,,,ANP,",πολλός,G41830,False,G41830,,221,1,1,64-2JN
+222," \w ἔχων|lemma=""ἔχω"" strong=""G21920"" x-morph=""Gr,V,PPA,NMS,""",1,12, ἔχων,,"Gr,V,PPA,NMS,",ἔχω,G21920,False,G21920,,222,1,1,64-2JN
+223," \w ὑμῖν|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2D,P,""",1,12, ὑμῖν,,"Gr,RP,,,2D,P,",σύ,G47710,False,G47710,,223,1,1,64-2JN
+224," \w γράφειν|lemma=""γράφω"" strong=""G11250"" x-morph=""Gr,V,NPA,,,,,""",1,12, γράφειν,,"Gr,V,NPA,,,,,",γράφω,G11250,False,G11250,,224,1,1,64-2JN
+225,", \w οὐκ|lemma=""οὐ"" strong=""G37560"" x-morph=""Gr,CO,,,,,,,,""",1,12, οὐκ,", ","Gr,CO,,,,,,,,",οὐ,G37560,False,G37560,,225,1,1,64-2JN
+226," \w ἐβουλήθην|lemma=""βούλομαι"" strong=""G10140"" x-morph=""Gr,V,IAP1,,S,""",1,12, ἐβουλήθην,,"Gr,V,IAP1,,S,",βούλομαι,G10140,False,G10140,,226,1,1,64-2JN
+227," \w διὰ|lemma=""διά"" strong=""G12230"" x-morph=""Gr,P,,,,,G,,,""",1,12, διὰ,,"Gr,P,,,,,G,,,",διά,G12230,False,G12230,,227,1,1,64-2JN
+228," \w χάρτου|lemma=""χάρτης"" strong=""G54890"" x-morph=""Gr,N,,,,,GMS,""",1,12, χάρτου,,"Gr,N,,,,,GMS,",χάρτης,G54890,False,G54890,,228,1,1,64-2JN
+229," \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,12, καὶ,,"Gr,CC,,,,,,,,",καί,G25320,False,G25320,,229,2,1,64-2JN
+230," \w μέλανος|lemma=""μέλας"" strong=""G31890"" x-morph=""Gr,NS,,,,GNS,""",1,12, μέλανος,,"Gr,NS,,,,GNS,",μέλας,G31890,False,G31890,,230,1,1,64-2JN
+231,", \w ἀλλὰ|lemma=""ἀλλά"" strong=""G02350"" x-morph=""Gr,CO,,,,,,,,""",1,12, ἀλλὰ,", ","Gr,CO,,,,,,,,",ἀλλά,G02350,False,G02350,,231,1,1,64-2JN
+232," \w ἐλπίζω|lemma=""ἐλπίζω"" strong=""G16790"" x-morph=""Gr,V,IPA1,,S,"" x-tw=""rc://*/tw/dict/bible/kt/hope""",1,12, ἐλπίζω,,"Gr,V,IPA1,,S,",ἐλπίζω,G16790,False,G16790,rc://*/tw/dict/bible/kt/hope,232,1,1,64-2JN
+233," \w γενέσθαι|lemma=""γίνομαι"" strong=""G10960"" x-morph=""Gr,V,NAM,,,,,""",1,12, γενέσθαι,,"Gr,V,NAM,,,,,",γίνομαι,G10960,False,G10960,,233,1,1,64-2JN
+234," \w πρὸς|lemma=""πρός"" strong=""G43140"" x-morph=""Gr,P,,,,,A,,,""",1,12, πρὸς,,"Gr,P,,,,,A,,,",πρός,G43140,False,G43140,,234,2,1,64-2JN
+235," \w ὑμᾶς|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2A,P,""",1,12, ὑμᾶς,,"Gr,RP,,,2A,P,",σύ,G47710,False,G47710,,235,1,1,64-2JN
+236,", \w καὶ|lemma=""καί"" strong=""G25320"" x-morph=""Gr,CC,,,,,,,,""",1,12, καὶ,", ","Gr,CC,,,,,,,,",καί,G25320,False,G25320,,236,2,2,64-2JN
+237," \w στόμα|lemma=""στόμα"" strong=""G47500"" x-morph=""Gr,N,,,,,ANS,""",1,12, στόμα,,"Gr,N,,,,,ANS,",στόμα,G47500,False,G47500,,237,2,1,64-2JN
+238," \w πρὸς|lemma=""πρός"" strong=""G43140"" x-morph=""Gr,P,,,,,A,,,""",1,12, πρὸς,,"Gr,P,,,,,A,,,",πρός,G43140,False,G43140,,238,2,2,64-2JN
+239," \w στόμα|lemma=""στόμα"" strong=""G47500"" x-morph=""Gr,N,,,,,ANS,""",1,12, στόμα,,"Gr,N,,,,,ANS,",στόμα,G47500,False,G47500,,239,2,2,64-2JN
+240," \w λαλῆσαι|lemma=""λαλέω"" strong=""G29800"" x-morph=""Gr,V,NAA,,,,,""",1,12, λαλῆσαι,,"Gr,V,NAA,,,,,",λαλέω,G29800,False,G29800,,240,1,1,64-2JN
+241,", \w ἵνα|lemma=""ἵνα"" strong=""G24430"" x-morph=""Gr,CS,,,,,,,,""",1,12, ἵνα,", ","Gr,CS,,,,,,,,",ἵνα,G24430,False,G24430,,241,1,1,64-2JN
+242," \w ἡ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,NFS,""",1,12, ἡ,,"Gr,EA,,,,NFS,",ὁ,G35880,False,G35880,,242,1,1,64-2JN
+243," \w χαρὰ|lemma=""χαρά"" strong=""G54790"" x-morph=""Gr,N,,,,,NFS,"" x-tw=""rc://*/tw/dict/bible/other/joy""",1,12, χαρὰ,,"Gr,N,,,,,NFS,",χαρά,G54790,False,G54790,rc://*/tw/dict/bible/other/joy,243,1,1,64-2JN
+244," \w ὑμῶν|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2G,P,""",1,12, ὑμῶν,,"Gr,RP,,,2G,P,",σύ,G47710,False,G47710,,244,1,1,64-2JN
+245," \w πεπληρωμένη|lemma=""πληρόω"" strong=""G41370"" x-morph=""Gr,V,PEP,NFS,""",1,12, πεπληρωμένη,,"Gr,V,PEP,NFS,",πληρόω,G41370,False,G41370,,245,1,1,64-2JN
+246," \w ᾖ|lemma=""εἰμί"" strong=""G15100"" x-morph=""Gr,V,SPA3,,S,""",1,12, ᾖ,,"Gr,V,SPA3,,S,",εἰμί,G15100,False,G15100,,246,1,1,64-2JN
+248,"\w ἀσπάζεταί|lemma=""ἀσπάζομαι"" strong=""G07820"" x-morph=""Gr,V,IPM3,,S,""",1,13, ἀσπάζεταί,,"Gr,V,IPM3,,S,",ἀσπάζομαι,G07820,False,G07820,,248,1,1,64-2JN
+249," \w σε|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2A,S,""",1,13, σε,,"Gr,RP,,,2A,S,",σύ,G47710,False,G47710,,249,1,1,64-2JN
+250," \w τὰ|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,NNP,""",1,13, τὰ,,"Gr,EA,,,,NNP,",ὁ,G35880,False,G35880,,250,1,1,64-2JN
+251," \w τέκνα|lemma=""τέκνον"" strong=""G50430"" x-morph=""Gr,N,,,,,NNP,"" x-tw=""rc://*/tw/dict/bible/kt/children""",1,13, τέκνα,,"Gr,N,,,,,NNP,",τέκνον,G50430,False,G50430,rc://*/tw/dict/bible/kt/children,251,1,1,64-2JN
+252," \w τῆς|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,GFS,""",1,13, τῆς,,"Gr,EA,,,,GFS,",ὁ,G35880,False,G35880,,252,2,1,64-2JN
+253," \w ἀδελφῆς|lemma=""ἀδελφή"" strong=""G00790"" x-morph=""Gr,N,,,,,GFS,"" x-tw=""rc://*/tw/dict/bible/other/sister""",1,13, ἀδελφῆς,,"Gr,N,,,,,GFS,",ἀδελφή,G00790,False,G00790,rc://*/tw/dict/bible/other/sister,253,1,1,64-2JN
+254," \w σου|lemma=""σύ"" strong=""G47710"" x-morph=""Gr,RP,,,2G,S,""",1,13, σου,,"Gr,RP,,,2G,S,",σύ,G47710,False,G47710,,254,1,1,64-2JN
+255," \w τῆς|lemma=""ὁ"" strong=""G35880"" x-morph=""Gr,EA,,,,GFS,""",1,13, τῆς,,"Gr,EA,,,,GFS,",ὁ,G35880,False,G35880,,255,2,2,64-2JN
+256," \w ἐκλεκτῆς|lemma=""ἐκλεκτός"" strong=""G15880"" x-morph=""Gr,AR,,,,GFS,"" x-tw=""rc://*/tw/dict/bible/kt/elect""",1,13, ἐκλεκτῆς,,"Gr,AR,,,,GFS,",ἐκλεκτός,G15880,False,G15880,rc://*/tw/dict/bible/kt/elect,256,1,1,64-2JN
