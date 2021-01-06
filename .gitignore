@@ -8,4 +8,4 @@ ufw.wspace.code-workspace
 .env
 *.pyc
 *__pycache__*
-uw-proskomma/node_modules
+proskomma/node_modules
