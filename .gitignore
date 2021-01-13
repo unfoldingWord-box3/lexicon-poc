@@ -9,3 +9,4 @@ ufw.wspace.code-workspace
 *.pyc
 *__pycache__*
 proskomma/node_modules
+data/old_tN
