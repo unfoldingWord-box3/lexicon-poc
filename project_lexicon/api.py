@@ -19,9 +19,13 @@ class SourceViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows verses to be viewed.
     """
-    queryset = Source.objects.filter(book='01-GEN', chapter=1, verse=1)
+    queryset = Source.objects.all() # filter(book='01-GEN', chapter=1, verse=1)
     serializer_class = SourceSerializer
+    filterset_fields = ['book', 'chapter', 'verse']
+    # search_fields = ['token',]
+
 
 class TargetViewSet(viewsets.ModelViewSet):
-    queryset = Target.objects.all()[:50]
+    queryset = Target.objects.all()
     serializer_class = TargetSerializer
+    filterset_fields = ['book', 'chapter', 'verse']
