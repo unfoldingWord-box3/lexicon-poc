@@ -1,19 +1,7 @@
-from rest_framework import serializers, views, viewsets
+from rest_framework import views, viewsets
 
-from lexicon.models import Source, Target
-
-
-class SourceSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Source
-        fields = ['token', 'book', 'chapter', 'verse']
-
-
-class TargetSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Target
-        fields = ['token', 'book', 'chapter', 'verse']
-
+from serializers import SourceSerializer, TargetSerializer, AlignmentSerializer, TwSerializer, StrongsM2MSerializer
+from lexicon.models import Source, Target, Alignment, Tw, StrongsM2M
 
 class SourceViewSet(viewsets.ModelViewSet):
     """
@@ -29,3 +17,22 @@ class TargetViewSet(viewsets.ModelViewSet):
     queryset = Target.objects.all()
     serializer_class = TargetSerializer
     filterset_fields = ['book', 'chapter', 'verse']
+
+
+class AlignmentViewSet(viewsets.ModelViewSet):
+    queryset = Alignment.objects.all()
+    # export book, chapter, verse, source tokens, target tokens, source->target mapping
+    serializer_class = AlignmentSerializer
+
+
+class TwViewSet(viewsets.ModelViewSet):
+    queryset = Tw.objects.all()
+    # export book, chapter, verse, source tokens, target tokens, source->target mapping
+    serializer_class = TwSerializer
+
+
+class StrongsM2MViewSet(viewsets.ModelViewSet):
+    queryset = StrongsM2M.objects.all()
+    # export book, chapter, verse, source tokens, target tokens, source->target mapping
+    serializer_class = StrongsM2MSerializer    
+    filterset_fields = ['number']

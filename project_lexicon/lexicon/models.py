@@ -72,7 +72,6 @@ class Target(models.Model):
         return f'{self.id}: {self.target_token}'
 
 
-
 class Alignment(models.Model):
     #TODO convert this into a through model
     id = models.BigIntegerField(blank=True, primary_key=True)
@@ -96,7 +95,7 @@ class Alignment(models.Model):
 
 
 class Tw(models.Model):
-    id = models.BigIntegerField(blank=True,primary_key=True)
+    id = models.BigIntegerField(blank=True, primary_key=True)
     index = models.BigIntegerField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
     category = models.TextField(blank=True, null=True)
