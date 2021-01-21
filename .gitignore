@@ -10,3 +10,5 @@ ufw.wspace.code-workspace
 *__pycache__*
 proskomma/node_modules
 data/old_tN
+data/en_ugl
+data/en_uhal
