@@ -118,3 +118,38 @@ class StrongsM2M(models.Model):
     class Meta:
         managed = False
         db_table = 'strongs_m2m'
+
+
+class Notes(models.Model):  #TODO rename to singular
+    index = models.BigIntegerField(blank=True, null=True)
+    noteid = models.TextField(db_column='noteID', blank=True, primary_key=True)  # Field name made lowercase.
+    book = models.TextField(blank=True, null=True)
+    chapter = models.BigIntegerField(blank=True, null=True)
+    verse = models.BigIntegerField(blank=True, null=True)
+    supportreference = models.TextField(db_column='supportReference', blank=True, null=True)  # Field name made lowercase.
+    quote = models.TextField(blank=True, null=True)
+    annotation = models.TextField(blank=True, null=True)
+    sourceword = models.TextField(db_column='sourceWord', blank=True, null=True)  # Field name made lowercase.
+    sourcewordoccurrence = models.BigIntegerField(db_column='sourceWordOccurrence', blank=True, null=True)  # Field name made lowercase.
+    source = models.ManyToManyField(Source, through='NotesM2M')
+
+    class Meta:
+        managed = False
+        db_table = 'notes'
+
+
+class NotesM2M(models.Model):
+    index = models.BigIntegerField(blank=True, primary_key=True)
+    notes = models.ForeignKey(Notes, blank=True, null=True, on_delete=models.SET_NULL)
+    source_word = models.TextField(blank=True, null=True)
+    book = models.TextField(blank=True, null=True)
+    chapter = models.BigIntegerField(blank=True, null=True)
+    verse = models.BigIntegerField(blank=True, null=True)
+    occ = models.BigIntegerField(blank=True, null=True)
+    source = models.ForeignKey(Source, blank=True, null=True, on_delete=models.SET_NULL)
+    token = models.TextField(blank=True, null=True)
+    occ_bis = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'notesM2M'

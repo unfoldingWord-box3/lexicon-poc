@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from lexicon.urls import urlpatterns as lexicon_urlpatterns
-from api import SourceViewSet, TargetViewSet, AlignmentViewSet, TwViewSet, StrongsM2MViewSet
+from api import SourceViewSet, TargetViewSet, AlignmentViewSet, TwViewSet, StrongsM2MViewSet, NotesViewSet
 
 router = routers.DefaultRouter()
 router.register(r'source', SourceViewSet)
@@ -26,6 +26,7 @@ router.register(r'ult', TargetViewSet)
 router.register(r'alignment', AlignmentViewSet)
 router.register(r'tw', TwViewSet)
 router.register(r'strongs', StrongsM2MViewSet)
+router.register(r'notes', NotesViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

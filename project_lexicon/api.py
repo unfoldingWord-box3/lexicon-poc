@@ -1,7 +1,8 @@
 from rest_framework import views, viewsets
 
-from serializers import SourceSerializer, TargetSerializer, AlignmentSerializer, TwSerializer, StrongsM2MSerializer
-from lexicon.models import Source, Target, Alignment, Tw, StrongsM2M
+from serializers import SourceSerializer, TargetSerializer, AlignmentSerializer, TwSerializer, StrongsM2MSerializer, NotesSerializer
+from lexicon.models import Source, Target, Alignment, Tw, StrongsM2M, Notes
+
 
 class SourceViewSet(viewsets.ModelViewSet):
     """
@@ -23,6 +24,7 @@ class AlignmentViewSet(viewsets.ModelViewSet):
     queryset = Alignment.objects.all()
     # export book, chapter, verse, source tokens, target tokens, source->target mapping
     serializer_class = AlignmentSerializer
+    filterset_fields = ['alg_has_gap', 'roots']
 
 
 class TwViewSet(viewsets.ModelViewSet):
@@ -36,3 +38,9 @@ class StrongsM2MViewSet(viewsets.ModelViewSet):
     # export book, chapter, verse, source tokens, target tokens, source->target mapping
     serializer_class = StrongsM2MSerializer    
     filterset_fields = ['number']
+
+class NotesViewSet(viewsets.ModelViewSet):
+    queryset = Notes.objects.all()
+    # export book, chapter, verse, source tokens, target tokens, source->target mapping
+    serializer_class = NotesSerializer
+    filterset_fields = ['supportreference']
