@@ -18,15 +18,18 @@ from django.urls import path, include
 from rest_framework import routers
 
 from lexicon.urls import urlpatterns as lexicon_urlpatterns
-from api import SourceViewSet, TargetViewSet, AlignmentViewSet, TwViewSet, StrongsM2MViewSet, NotesViewSet
+from api import SourceViewSet, TargetViewSet, AlignmentViewSet, WordsViewSet, StrongsM2MViewSet, NotesViewSet, LexiconViewSet
+# from api import SimpleVerse
 
 router = routers.DefaultRouter()
 router.register(r'source', SourceViewSet)
+# router.register(r'simple_source', SimpleVerse, basename='verses')
 router.register(r'ult', TargetViewSet)
 router.register(r'alignment', AlignmentViewSet)
-router.register(r'tw', TwViewSet)
+router.register(r'words', WordsViewSet)
 router.register(r'strongs', StrongsM2MViewSet)
 router.register(r'notes', NotesViewSet)
+router.register(r'lexicon', LexiconViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

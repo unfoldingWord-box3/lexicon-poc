@@ -30,7 +30,7 @@ class Source(models.Model):
     category = models.TextField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
     # tw_id = models.TextField(blank=True, null=True)  # This field type is a guess.
-    tw = models.ForeignKey('Tw', blank=True, null=True, on_delete=models.SET_NULL)  
+    words = models.ForeignKey('Words', blank=True, null=True, on_delete=models.SET_NULL, db_column='tw_id')  #FIXME in data creation script
 
     class Meta:
         managed = False
@@ -94,7 +94,7 @@ class Alignment(models.Model):
         return f'{self.id}: {self.source} -> {self.target}'
 
 
-class Tw(models.Model):
+class Words(models.Model):
     id = models.BigIntegerField(blank=True, primary_key=True)
     index = models.BigIntegerField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
@@ -153,3 +153,24 @@ class NotesM2M(models.Model):
     class Meta:
         managed = False
         db_table = 'notesM2M'
+
+
+class Lexicon(models.Model):
+    index = models.TextField(blank=True, null=True)
+    lemma = models.TextField(blank=True, null=True)
+    meta = models.TextField(blank=True, null=True)
+    word_data = models.TextField(blank=True, null=True)
+    etymology = models.TextField(blank=True, null=True)
+    senses = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    lexica_used = models.TextField(blank=True, null=True)
+    parsed_strongs = models.TextField(blank=True, null=True)
+    twot = models.TextField(db_column='TWOT', blank=True, null=True)  # Field name made lowercase.
+    bdb = models.TextField(db_column='BDB', blank=True, null=True)  # Field name made lowercase.
+    lxx = models.TextField(db_column='LXX', blank=True, null=True)  # Field name made lowercase.
+    nr_of_senses = models.BigIntegerField(blank=True, null=True)
+    strongs = models.TextField(blank=True, primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'lexicon'
