@@ -73,6 +73,8 @@ ERRORS = ['G35830',  # uses wrong level for sense description
          ]
 
 lexicon = {}
+headings = ['#### Definition', '#### Glosses', '#### Explanation', '#### Citations']
+
 
 for key,val in data.items():
     if key in ERRORS:
@@ -113,7 +115,7 @@ for key,val in data.items():
     etymology = clean(etymology)
     senses = re.findall(r'Senses(.*?)$', raw_text, re.DOTALL)[0]
     senses = clean(senses)
-    split_senses = re.split('\s###\s', senses, re.DOTALL)
+    split_senses = re.split(r'\s###\s', senses, re.DOTALL)
     split_senses = [clean(itm) for itm in split_senses]
 
     headings = ['#### Definition', '#### Glosses', '#### Explanation', '#### Citations']
@@ -157,11 +159,9 @@ lexdf['LXX'] = lexdf['LXX'].str.strip('\*\n\s ')
 lexdf['nr_of_senses'] = lexdf.senses.apply(len)
 lexdf['strongs'] = lexdf.index.tolist()
 
-lexdf['senses'] = lexdf['senses'].to_json()
+lexdf['senses'] = lexdf['senses'].astype(str)
 
 lexdf.to_csv('./data/lexicon.csv')
 
 engine = create_engine('sqlite:///project_lexicon/alignment.db', echo=False)
 lexdf.to_sql('lexicon', con=engine, if_exists='replace')
-
-
