@@ -6,16 +6,6 @@ import pandas as pd
 import spacy
 from sqlalchemy import create_engine
 
-#TODO maqqef and prefixes
-#TODO k-s
-#TODO nr_of_target_words, nr_of_source_words
-#FIXME prefix to suffix/trailer
-
-#TODO remove the following NOTES
-# NOTE: how do you keep track of gaps in aligments, when you remove and/or update an aligment (will it not have a new id?)
-# NOTE: how do you calculate gaps when aligments are in a separate table?
-# NOTE: how do you store the alignment: link every word, or simply link all items to the first? 
-
 # df stands for DataFrame
 df = pd.read_csv('data/alignment/ult.csv')
 # or read the pickle
