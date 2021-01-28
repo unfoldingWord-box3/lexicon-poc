@@ -108,6 +108,10 @@ class Words(models.Model):
         verbose_name_plural = 'Words'
 
 
+    def __repr__(self) -> str:
+        return f'{self.name} ({self.category})'
+
+
 class StrongsM2M(models.Model):
     index = models.BigIntegerField(blank=True, primary_key=True)
     number = models.TextField(blank=True, null=True)

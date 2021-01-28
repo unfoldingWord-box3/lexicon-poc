@@ -15,7 +15,21 @@
                 <div class="divider"></div>
                 <p>{{ source }}</p>
                 <p>{{ target }}</p>
-                <p>{{ notes }}</p>
+                
+                {% for s in source %}
+                    {% if s.words %}<p>{{ s.words.name }} ({{ s.words.category}})</p>{% endif %}
+                {% endfor %}
+
+                {% if notes %}
+                {% for note in notes %}
+                    <div class="col s5 z-depth-2" style="margin-top: 40px; margin-right:10px">
+                        <h4>{{note.supportreference}}</h4>
+                        <p>{{ note.annotation }}</p>
+                    </div>
+                {% endfor %}
+                {% endif %}
+
+
 
             </div>
 

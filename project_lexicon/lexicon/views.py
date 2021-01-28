@@ -7,7 +7,7 @@ import pandas as pd
 from django.shortcuts import render
 from django.db.models import Count
 
-from .models import Source, Target, Alignment, StrongsM2M, Notes
+from .models import Source, Target, Alignment, StrongsM2M, Notes, Words
 
 
 COLOR_SCALE = {1:'darken-4',
