@@ -7,7 +7,7 @@ import pandas as pd
 from django.shortcuts import render
 from django.db.models import Count
 
-from .models import Source, Target, Alignment, StrongsM2M
+from .models import Source, Target, Alignment, StrongsM2M, Notes
 
 
 COLOR_SCALE = {1:'darken-4',
@@ -84,7 +84,10 @@ def get_font(entry_id):
 
 def view_entry(request, entry_id):
     aligs = Alignment.objects.filter(source__strongs_no_prefix=entry_id)
-    lemma = Source.objects.filter(strongs_no_prefix=entry_id).first().lemma
+    try:
+        lemma = Source.objects.filter(strongs_no_prefix=entry_id).first().lemma
+    except:
+        lemma = None
     font = get_font(entry_id)
 
     COLUMN = 'target_blocks'
@@ -196,3 +199,19 @@ def view_entry_alignment(request, entry_id):
     lexicon = pd.read_csv('../data/alignment/dictionary.csv')
     entry = lexicon.loc[lexicon.strongs==entry_id]
     return render(request, 'lexicon/view_entry_alignment.html', {'entry':entry.to_html(index=False) })
+
+
+def view_verse(request, book, chapter, verse):
+    source = Source.objects.filter(book=book, chapter=chapter, verse=verse)
+    target = Target.objects.filter(book=book, chapter=chapter, verse=verse)
+    notes = Notes.objects.filter(book=book, chapter=chapter, verse=verse)
+
+    context = {
+        'source':source,
+        'target':target,
+        'book':book,
+        'chapter':chapter,
+        'verse':verse,
+        'notes':notes,
+        }
+    return render(request, 'lexicon/view_verse.html', context)

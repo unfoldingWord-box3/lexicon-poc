@@ -1,0 +1,84 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+
+{% block 'main' %}
+
+<main>
+    <div class="container">
+
+        <!-- <div class="progress">
+            <div class="indeterminate"></div>
+        </div> -->
+        <div class="row">
+            <div class="col s8">
+                <h3 class="{{ font }}">{{book}} {{chapter}}:{{verse}}</h3>
+                <div class="divider"></div>
+                <p>{{ source }}</p>
+                <p>{{ target }}</p>
+                <p>{{ notes }}</p>
+
+            </div>
+
+            <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">
+                <p>Find related terms</p>
+                {% comment %} {{ sense_related_items }} {% endcomment %}
+                {% for number,lemma in sense_related_items.items %}
+                    {% if lemma %}
+                    <a href="{% url 'view_entry' number %}" class="{% if number|first in 'AH' %}hb larger{%else%}gk{%endif%}">{{ lemma }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">
+                <p>Find related translationWords</p>
+                {% for number,lemma in tw_related_items.items %}
+                   <a href="{% url 'view_entry' number %}" class="{{font}} larger">{{ lemma }}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    <!-- 
+<div class="container">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+                <div class="elevation-demo-surface mdc-elevation--z8">
+                    <p>And yet another one</p>
+
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <div class="elevation-demo-surface mdc-elevation--z8">
+                    <p>And yet another one</p>
+
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <div class="elevation-demo-surface mdc-elevation--z8">
+                    <p>And yet another one</p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating blue"><i class="material-icons">report</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">subtitles</i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="material-icons">list_alt</i></a></li>
+            <li><a class="btn-floating red"><i class="material-icons">shuffle</i></a></li>
+            {% comment %} <li><a class="btn-floating yellow darken-1"><i class="material-icons">done_all</i></a></li> {% endcomment %}
+        </ul>
+    </div>
+    <!-- <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script> -->
+</main>
+{% endblock 'main' %}
+
