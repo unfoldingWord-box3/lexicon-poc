@@ -1,11 +1,6 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+
+#TODO update the nameing scheme: singular, abstract
 
 
 class Source(models.Model):
@@ -35,6 +30,7 @@ class Source(models.Model):
     class Meta:
         managed = False
         db_table = 'source'
+        verbose_name_plural = 'Source'
         # indexes = [
         #     models.Index(fields=['id',]),
         #     models.Index(fields=['strongs',]),
@@ -67,6 +63,7 @@ class Target(models.Model):
     class Meta:
         managed = False
         db_table = 'target'
+        verbose_name_plural = 'Target'
 
     def __repr__(self):
         return f'{self.id}: {self.target_token}'
@@ -108,6 +105,7 @@ class Words(models.Model):
     class Meta:
         managed = False
         db_table = 'tw'
+        verbose_name_plural = 'Words'
 
 
 class StrongsM2M(models.Model):
@@ -136,6 +134,10 @@ class Notes(models.Model):  #TODO rename to singular
     class Meta:
         managed = False
         db_table = 'notes'
+        verbose_name_plural = 'Notes'
+
+    def __repr__(self) -> str:
+        return f'{self.noteid}: {self.supportreference}'
 
 
 class NotesM2M(models.Model):
@@ -174,3 +176,4 @@ class Lexicon(models.Model):
     class Meta:
         managed = False
         db_table = 'lexicon'
+        verbose_name_plural = 'Lexicon'
