@@ -4,7 +4,7 @@ import argparse
 import sys
 import os
 
-from parse_utils import parse_usfm
+from utils import parse_usfm
 
 # NOTE: this does not parse /k-s tags
 

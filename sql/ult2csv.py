@@ -4,7 +4,7 @@ import argparse
 import sys
 import os
 
-from parse_utils import parse_usfm
+from utils import parse_usfm
 
 parser = argparse.ArgumentParser(description='Parse a USFM text file and extract the alignment.')
 # ipf = inputfile

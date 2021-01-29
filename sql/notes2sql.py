@@ -13,7 +13,7 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine
 
-inputfiles = glob.glob('./proskomma/src/scripts/*Parsed.tsv')
+inputfiles = glob.glob('../proskomma/src/scripts/*Parsed.tsv')
 dataframes = []
 
 for inputfile in inputfiles:
@@ -47,14 +47,14 @@ df.groupby('noteID').first().reset_index()
 # sample query
 df.groupby('noteID').first().loc['scr8']
 
-engine = create_engine('sqlite:///project_lexicon/alignment.db', echo=False)
+engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 df.groupby('noteID').first().reset_index().to_sql('notes', con=engine, if_exists='replace')
 
 
 # Now link the notes and the source words
 # This needs to be a many2many relationship so that it is possible
 # to link multiple words to a note and multiple notes to a word
-source = pd.read_csv('./data/alignment/source.csv')
+source = pd.read_csv('../data/alignment/source.csv')
 print(source)
 
 short_source = source['id token book chapter verse occ'.split()]

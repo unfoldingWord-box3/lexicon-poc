@@ -7,7 +7,7 @@ import spacy
 from sqlalchemy import create_engine
 
 # df stands for DataFrame
-df = pd.read_csv('data/alignment/ult.csv')
+df = pd.read_csv('../data/alignment/ult.csv')
 # or read the pickle
 # df = pd.read_pickle('data/alignment/ult.pickle')
 
@@ -117,7 +117,7 @@ df = df.assign(source_occ=df.alg.str.extract(r'x-occurrence=\"(.*?)\"'))
 df = df.assign(source_occs=df.alg.str.extract(r'x-occurrences=\"(.*?)\"'))
 
 # read the original Source file
-source = pd.read_csv('./data/alignment/source.csv')
+source = pd.read_csv('../data/alignment/source.csv')
 
 # add an ID column to Source
 source = source.rename(columns={'id':'orig_id'})
@@ -159,11 +159,9 @@ alignment = alignment.rename(columns={'id_x':'target_id', 'id_y':'source_id'})
 # get a numerical alignment id, now that we have all alignments of all books,
 # this will make indexing easier in the database
 alignment_renumbering = dict(zip(alignment.alg_id.unique(), range(1, len(alignment.alg_id.unique())+1)))
-alignment['id'] = alignment.alg_id.map(alignment_renumbering)
+alignment['alg_id_nr'] = alignment.alg_id.map(alignment_renumbering)
+alignment['id'] = alignment.index.tolist()
 alg = alignment['id target_id source_id alg_id alg alg_has_gap source_blocks target_blocks'.split()]
-
-#TODO add link to translation words
-#TODO add link to notes
 
 # example queries
 example = alignment.loc[alignment.alg_id=='06-JOS-25']
@@ -182,14 +180,15 @@ source = source[['id', 'index', 'source_token', 'book', 'chapter', 'verse', 'tok
        'token_prefix', 'morph', 'lemma', 'strongs', 'strongs_no_prefix', 'has_prefix',
        'translation_word', 'orig_id', 'occs', 'occ']]
 
-target.to_csv('./data/alignment/target.csv') 
+
+target.to_csv('../data/alignment/target.csv') 
 # target.to_pickle('./data/alignment/target.pkl')
 
-target.to_csv('./data/alignment/target.csv') 
-alg.to_csv('./data/alignment/alignment.csv')
-source.to_csv('./data/alignment/source.csv')
+target.to_csv('../data/alignment/target.csv') 
+alg.to_csv('../data/alignment/alignment.csv')
+source.to_csv('../data/alignment/source.csv')
 
-engine = create_engine('sqlite:///alignment.db', echo=False)
+engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 
 target.to_sql('target', con=engine, if_exists='replace')
 alg.to_sql('alignment', con=engine, if_exists='replace')

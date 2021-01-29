@@ -7,8 +7,8 @@ import numpy
 import pandas as pd
 
 # Read and transform the markdown files
-hebrew_files = glob.glob('./data/en_uhal/content/*.md')
-greek_files = glob.glob('./data/en_ugl/content/**/*.md')
+hebrew_files = glob.glob('../data/en_uhal/content/*.md')
+greek_files = glob.glob('../data/en_ugl/content/**/*.md')
 files = hebrew_files + greek_files
 
 data = {}
@@ -161,7 +161,7 @@ lexdf['strongs'] = lexdf.index.tolist()
 
 lexdf['senses'] = lexdf['senses'].astype(str)
 
-lexdf.to_csv('./data/lexicon.csv')
+lexdf.to_csv('../data/lexicon.csv')
 
-engine = create_engine('sqlite:///project_lexicon/alignment.db', echo=False)
+engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 lexdf.to_sql('lexicon', con=engine, if_exists='replace')

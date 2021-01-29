@@ -6,7 +6,7 @@ from itertools import permutations
 import pandas as pd
 from sqlalchemy import create_engine
 
-files = glob.glob('./data/en_tw/bible/**/*.md', recursive=True)
+files = glob.glob('../data/en_tw/bible/**/*.md', recursive=True)
 data = {}
 for f in files: 
     with open(f) as opf:
@@ -52,7 +52,7 @@ df['id'] = df.index.tolist()
 print(df)
 
 # link these notes to the Source table
-source = pd.read_csv('./data/alignment/source.csv')
+source = pd.read_csv('../data/alignment/source.csv')
 source.drop('Unnamed: 0', axis=1, inplace=True)
 
 # extract both category and name
@@ -78,9 +78,9 @@ for row in to_add_to_m2m.reset_index().itertuples():
 #TODO in the future we can link this strongs table to the Source table and denormalize
 strongs_m2m = pd.DataFrame(m2m, columns=['number', 'related_number'])
 
-df.to_csv('./data/alignment/tw.csv')
+df.to_csv('../data/alignment/tw.csv')
 
-engine = create_engine('sqlite:///alignment.db', echo=False)
+engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 
 source.to_sql('source', con=engine, if_exists='replace')
 df.to_sql('tw', con=engine, if_exists='replace')
