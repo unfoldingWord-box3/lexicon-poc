@@ -180,6 +180,8 @@ source = source[['id', 'index', 'source_token', 'book', 'chapter', 'verse', 'tok
        'token_prefix', 'morph', 'lemma', 'strongs', 'strongs_no_prefix', 'has_prefix',
        'translation_word', 'orig_id', 'occs', 'occ']]
 
+counts = source.groupby('strongs_no_prefix').size()
+source['strongs_count'] = source.strongs_no_prefix.map(counts).fillna(0).astype(int)
 
 target.to_csv('../data/alignment/target.csv') 
 # target.to_pickle('./data/alignment/target.pkl')

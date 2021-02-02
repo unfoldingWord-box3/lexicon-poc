@@ -38,8 +38,8 @@ def demo_entry(request):
 
 
 def list_entries(request):
-    sources = Source.objects.all()[:50].values('strongs_no_prefix', 'lemma').annotate(count=Count('strongs_no_prefix'))
-    strongs = {itm['strongs_no_prefix']:str(itm['count']) + 'x ({})'.format(itm['lemma']) for itm in sources if itm['count']}
+    sources = Source.objects.all()[:50].values('strongs_no_prefix', 'strongs_count', 'lemma')
+    strongs = {itm['strongs_no_prefix']:str(itm['strongs_count']) + 'x ({})'.format(itm['lemma']) for itm in sources if itm['strongs_count']}
     all_numbers = None
     return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'all_numbers':all_numbers})
 
