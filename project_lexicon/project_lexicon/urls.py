@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 from rest_framework import routers
 
 from lexicon.urls import urlpatterns as lexicon_urlpatterns
@@ -36,3 +37,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
 ]
 urlpatterns += lexicon_urlpatterns
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]

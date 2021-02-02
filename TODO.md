@@ -2,6 +2,7 @@
 
 + fix: ult does not correctly link to source // error whereby target words are all the same
 - fix: prefix to suffix/trailer
+- improve store the root, also store parsing
 - a data creation script
 - store strongs annotation count
 ? nr_of_target_words, nr_of_source_words
@@ -15,7 +16,7 @@
 
 - insert translationNotes
 - insert current lexicon
-- insert translation questions
++ insert translation questions
 - insert BDB
 - link strongs to source text
 - link tw to strongs
@@ -23,7 +24,7 @@
 - create a Sense model?
 
 # Prototype
-
++ django debug toolbar
 ? if this were not a poc: use managed django models, rename model fields
 ? how do you keep track of gaps in aligments, when you remove and/or update an aligment (will it not have a new id?)
 ? how do you calculate gaps when aligments are in a separate table?
