@@ -49,7 +49,7 @@ def get_concordance(alg_ids, idx, alignment_df, model, id_column, token_column, 
     samples_ids = {}
     sample_highlights = []
     for id in alg_ids:
-        selection = alignment_df.loc[alignment_df.id==id, id_column].tolist()
+        selection = alignment_df.loc[alignment_df.alg_id==id, id_column].tolist()
         start = min(selection) - window
         end = max(selection) + window
         samples_ids[idx] = list(range(start,end))
@@ -106,7 +106,9 @@ def view_entry(request, entry_id):
         sense, frequency = freq[0].strip(), freq[1]
 
         alg = alignments.loc[alignments[COLUMN]==freq[0]]
-        alg_ids = alg.id.unique().tolist()
+        print(alg)
+        alg_ids = alg.alg_id.unique().tolist()
+        print(alg_ids)
         if len(alg_ids) > 5:
             alg_ids = random.sample(alg_ids, k=5)
 
@@ -149,17 +151,17 @@ def view_entry(request, entry_id):
 
 
 def list_entries_df(request):
-    lexicon = pd.read_csv('../data/alignment/dictionary.csv')
+    lexicon = pd.read_csv('../data/csv/dictionary.csv')
     # all_numbers = json.dumps({nr:nr for nr in lexicon.strongs.unique().tolist()})
-    all_numbers = json.dumps(lexicon.strongs.unique().tolist())
-    strongs = lexicon.strongs.value_counts().sort_index().sample(50)
+    all_numbers = json.dumps(lexicon.strongs_no_prefix.unique().tolist())
+    strongs = lexicon.strongs_no_prefix.value_counts().sort_index().sample(50)
     return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'all_numbers':all_numbers})
 
 
 def view_entry_df(request, entry_id):
-    lexicon = pd.read_csv('../data/alignment/dictionary.csv')
-    ALIGNMENT = pd.read_csv('../data/alignment/alignment.csv')
-    entry = lexicon.loc[lexicon.strongs==entry_id]
+    lexicon = pd.read_csv('../data/csv/dictionary.csv')
+    ALIGNMENT = pd.read_csv('../data/csv/alignment.csv')
+    entry = lexicon.loc[lexicon.strongs_no_prefix==entry_id]
     lemma = entry.loc[:,'lemma'].iloc[0]
     font = get_font(entry_id)
 
@@ -196,8 +198,8 @@ def view_entry_df(request, entry_id):
 
 
 def view_entry_alignment(request, entry_id):
-    lexicon = pd.read_csv('../data/alignment/dictionary.csv')
-    entry = lexicon.loc[lexicon.strongs==entry_id]
+    lexicon = pd.read_csv('../data/csv/dictionary.csv')
+    entry = lexicon.loc[lexicon.strongs_no_prefix==entry_id]
     return render(request, 'lexicon/view_entry_alignment.html', {'entry':entry.to_html(index=False) })
 
 

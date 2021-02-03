@@ -1,6 +1,6 @@
 # Storage
 
-- fix issue since new data format
+- fix issue since new data format when a concordance is duplicated
 - create indeces
 - fix: prefix to suffix/trailer
 - improve store the root
@@ -27,6 +27,8 @@
 + insert translation questions
 
 # Prototype
+
+- show total occurrences and show number of aligned ones
 - include data without alignment
 + Delete the data/alignment folder
 + django debug toolbar

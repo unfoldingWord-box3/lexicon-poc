@@ -197,6 +197,19 @@ target.to_csv('../data/csv/target.csv')
 alg.to_csv('../data/csv/alignment.csv')
 source.to_csv('../data/csv/source.csv')
 
+# export a quick dictionary and counts 
+# this uses the full alignment dataframe and not the shortened alg one
+target_tokens = alignment.groupby('strongs_no_prefix alg_id'.split()).target_blocks.first()
+lemmata = alignment.groupby('strongs_no_prefix alg_id'.split()).lemma.first()
+source_tokens = alignment.groupby('strongs_no_prefix alg_id'.split()).source_token_x.first()
+source_blocks = alignment.groupby('strongs_no_prefix alg_id'.split()).source_blocks.first()
+allinone = pd.concat([target_tokens, lemmata, source_tokens, source_blocks], axis=1)
+allinone.rename(columns={0:'target_blocks'}, inplace=True)
+allinone.to_csv('../data/csv/dictionary.csv')
+counts = allinone.groupby(['strongs_no_prefix', 'target_blocks']).size()
+counts.to_csv('../data/csv/counts.csv')
+
+
 engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 
 target.to_sql('target', con=engine, if_exists='replace')
