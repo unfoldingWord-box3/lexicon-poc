@@ -60,13 +60,29 @@ def get_concordance(alg_ids, idx, alignment_df, model, id_column, token_column, 
             s = model.objects.values(token_column, token_prefix_column, 'id').filter(id__in=ids)
         else:
             s = model.objects.values(token_column, 'id').filter(id__in=ids)
+        # print(s)
         s = pd.DataFrame(s)
         if token_prefix_column:
             s[token_column] = s[token_prefix_column] + s[token_column]
         s.loc[s.id.isin(sample_highlights), token_column] = '<span class="hl">'+s[token_column]+'</span>'
-        
+
         for key,val in samples_ids.items():
             samples.append(''.join(s.loc[s.id.isin(val)][token_column].fillna('').tolist()))
+
+        # output = ''
+        # for token in s:
+        #     if token_prefix_column:
+        #         pref = token[token_prefix_column]
+        #     else: 
+        #         pref = ''
+        #     try:
+        #         output += pref + token[token_column]
+        #     except:
+        #         pass
+        # samples.append(output)   
+        # print(samples)
+            
+
     return samples
                 
 
@@ -106,9 +122,9 @@ def view_entry(request, entry_id):
         sense, frequency = freq[0].strip(), freq[1]
 
         alg = alignments.loc[alignments[COLUMN]==freq[0]]
-        print(alg)
+        # print(alg)
         alg_ids = alg.alg_id.unique().tolist()
-        print(alg_ids)
+        # print(alg_ids)
         if len(alg_ids) > 5:
             alg_ids = random.sample(alg_ids, k=5)
 
