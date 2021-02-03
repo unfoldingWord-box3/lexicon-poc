@@ -1,5 +1,7 @@
 # Storage
 
+- fix issue since new data format
+- create indeces
 - fix: prefix to suffix/trailer
 - improve store the root
 - also store the parsing for ult
@@ -25,7 +27,8 @@
 + insert translation questions
 
 # Prototype
-- Delete the data/alignment folder
+- include data without alignment
++ Delete the data/alignment folder
 + django debug toolbar
 ? Handle languages other than English
 ? if this were not a poc: use managed django models, rename model fields

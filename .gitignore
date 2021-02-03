@@ -5,6 +5,7 @@ data/en_tw
 data/en_ugl
 data/en_uhal
 data/en_ult
+data/csv/*csv
 proskomma/node_modules
 project_lexicon/alignment.db
 examples

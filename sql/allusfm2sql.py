@@ -40,7 +40,7 @@ for ipf in sources_files:
 
 
 # MERGE MULTIPLE SOURCE CSV FILES INTO A SINGLE ONE
-source_csv_files = sorted(glob.glob('../data/alignment/csv/*.csv'))
+source_csv_files = sorted(glob.glob('../data/csv/source_csv/*.csv'))
 
 dataframes = []
 for ipf in source_csv_files:
