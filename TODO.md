@@ -25,7 +25,7 @@
 - create a Sense model?
 
 # Prototype
-- Delete the 
+- Delete the data/alignment folder
 + django debug toolbar
 ? Handle languages other than English
 ? if this were not a poc: use managed django models, rename model fields

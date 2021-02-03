@@ -14,3 +14,10 @@ data/en_ugl
 ./project_lexicon/alignment.db
 ./data/alignment/ult.csv
 data/csv
+data/en_tq
+data/en_tw
+data/en_ugl
+data/en_uhal
+data/en_ult
+data/old_tN
+data/alignment/ult.csv

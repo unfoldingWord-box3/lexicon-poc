@@ -1,0 +1,7 @@
+git clone --depth=1 https://git.door43.org/unfoldingWord/el-x-koine_ugnt || (cd el-x-koine_ugnt ; git pull)
+git clone --depth=1 https://git.door43.org/unfoldingWord/hbo_uhb || (cd hbo_uhb ; git pull)
+git clone --depth=1 --branch=newFormat https://git.door43.org/unfoldingWord/en_tq || (cd en_tq ; git pull)
+git clone --depth=1 https://git.door43.org/unfoldingWord/en_tw || (cd en_tw ; git pull)
+git clone --depth=1 https://git.door43.org/unfoldingWord/en_ugl || (cd en_ugl ; git pull)
+git clone --depth=1 https://git.door43.org/unfoldingWord/en_uhal || (cd en_uhal ; git pull)
+git clone --depth=1 https://git.door43.org/unfoldingWord/en_ult || (cd en_ult ; git pull)
