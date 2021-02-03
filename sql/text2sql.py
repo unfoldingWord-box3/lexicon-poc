@@ -1,10 +1,12 @@
 import re
 import sys
 import os
-
+import spacy
 import pandas as pd
 import spacy
 from sqlalchemy import create_engine
+
+COMPUTE_ROOTS = True
 
 # df stands for DataFrame
 df = pd.read_csv('../data/alignment/ult.csv')
@@ -163,19 +165,7 @@ alignment['alg_id_nr'] = alignment.alg_id.map(alignment_renumbering)
 alignment['id'] = alignment.index.tolist()
 alg = alignment['id target_id source_id alg_id alg alg_has_gap source_blocks target_blocks'.split()]
 
-# example queries
-example = alignment.loc[alignment.alg_id=='06-JOS-25']
-target.loc[target.id.isin(example.target_id.tolist())]
-source.loc[source.id.isin(example.source_id.tolist())]
-
-example = alignment.loc[alignment.alg_id=='67-REV-10589']
-target.loc[target.id.isin(example.target_id.tolist())]
-source.loc[source.id.isin(example.source_id.tolist())]
-
-example = source.loc[source.strongs=='H7225']
-example_algs = alg.loc[alg.source_id.isin(example.id.tolist())]
-target.loc[target.id.isin(example_algs.target_id.tolist())]
-
+# add counts for each strongs number without its prefixes
 source = source[['id', 'index', 'source_token', 'book', 'chapter', 'verse', 'token',
        'token_prefix', 'morph', 'lemma', 'strongs', 'strongs_no_prefix', 'has_prefix',
        'translation_word', 'orig_id', 'occs', 'occ']]
@@ -183,9 +173,30 @@ source = source[['id', 'index', 'source_token', 'book', 'chapter', 'verse', 'tok
 counts = source.groupby('strongs_no_prefix').size()
 source['strongs_count'] = source.strongs_no_prefix.map(counts).fillna(0).astype(int)
 
-target.to_csv('../data/alignment/target.csv') 
-# target.to_pickle('./data/alignment/target.pkl')
+# compute roots (experimental) for the target blocks
+if COMPUTE_ROOTS:
+    nlp = spacy.load("en_core_web_sm")
 
+    def parse(input_string):
+        output = []
+        doc = nlp(input_string)
+        for token in doc:
+            output.append([token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
+                    token.shape_, token.is_alpha, token.is_stop])
+        return pd.DataFrame(output, columns='token lemma pos tag dep shape is_alpha is_stop'.split())
+
+    target_blocks_for_roots = alg.groupby('target_blocks').size().index.tolist()
+
+    roots = {}
+
+    for itm in target_blocks_for_roots:
+        parsing = parse(itm)
+        print(itm)
+        roots[itm] = parsing.loc[parsing.dep == 'ROOT', 'lemma'].tolist()[0]
+
+    alg['roots'] = alg.target_blocks.map(roots)
+
+# store the data
 target.to_csv('../data/alignment/target.csv') 
 alg.to_csv('../data/alignment/alignment.csv')
 source.to_csv('../data/alignment/source.csv')
