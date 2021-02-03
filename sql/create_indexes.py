@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-engine = create_engine('sqlite:///alignment.db', echo=False)
+engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 
 print(engine.execute("SELECT * FROM target LIMIT 10").fetchall())
 
@@ -30,7 +30,7 @@ except:
 
 
 try:
-    engine.execute('''CREATE INDEX ix_target_id ON target ("book", "chapter", "verse")''')
+    engine.execute('''CREATE INDEX ix_target_id ON target ("id")''')
 except:
     print('This index might already exist')
 try:
