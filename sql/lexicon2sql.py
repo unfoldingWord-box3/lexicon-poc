@@ -17,7 +17,7 @@ for f in files:
         continue
     with open(f) as ipf:
         # this will not work for the three stray md files that are not nested in a directory
-        # life's a thug
+        # life's hard for them
         if 'ugl' in f:            
             filename = f.split('/')[-2:-1][0]
             identifier = filename.strip('.md')
@@ -161,7 +161,7 @@ lexdf['strongs'] = lexdf.index.tolist()
 
 lexdf['senses'] = lexdf['senses'].astype(str)
 
-lexdf.to_csv('../data/lexicon.csv')
+lexdf.to_csv('../data/csv/lexicon.csv')
 
 engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 lexdf.to_sql('lexicon', con=engine, if_exists='replace')

@@ -52,7 +52,7 @@ df['id'] = df.index.tolist()
 print(df)
 
 # link these notes to the Source table
-source = pd.read_csv('../data/alignment/source.csv')
+source = pd.read_csv('../data/csv/source.csv')
 source.drop('Unnamed: 0', axis=1, inplace=True)
 
 # extract both category and name
@@ -78,7 +78,9 @@ for row in to_add_to_m2m.reset_index().itertuples():
 #TODO in the future we can link this strongs table to the Source table and denormalize
 strongs_m2m = pd.DataFrame(m2m, columns=['number', 'related_number'])
 
-df.to_csv('../data/alignment/tw.csv')
+df.to_csv('../data/csv/words.csv')
+source.to_csv('../data/csv/source.csv')
+strongs_m2m.to_csv('../data/csv/strongs_m2m.csv')
 
 engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 

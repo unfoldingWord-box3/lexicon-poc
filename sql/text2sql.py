@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 COMPUTE_ROOTS = True
 
 # df stands for DataFrame
-df = pd.read_csv('../data/alignment/ult.csv')
+df = pd.read_csv('../data/csv/ult.csv')
 # or read the pickle
 # df = pd.read_pickle('data/alignment/ult.pickle')
 
@@ -119,7 +119,7 @@ df = df.assign(source_occ=df.alg.str.extract(r'x-occurrence=\"(.*?)\"'))
 df = df.assign(source_occs=df.alg.str.extract(r'x-occurrences=\"(.*?)\"'))
 
 # read the original Source file
-source = pd.read_csv('../data/alignment/source.csv')
+source = pd.read_csv('../data/csv/source.csv')
 
 # add an ID column to Source
 source = source.rename(columns={'id':'orig_id'})
@@ -134,10 +134,6 @@ source['token_tmp'] = source.token.str.strip()
 # nans, I am using strings here. Bwerk. This is the stuff headaches are made of. 
 source.occ = source.occ.astype(str)
 source.occs = source.occs.astype(str)
-# df.source_occ = df.source_occ.astype('Int64')
-# source.occ = source.occ.astype('Int64')
-# source.occ = source.occ.astype(object)
-# source.occs = source.occs.astype(object)
 
 # This is an INNER JOIN
 # use `how='left'` for a LEFT OUTER JOIN, which would also include
@@ -197,9 +193,9 @@ if COMPUTE_ROOTS:
     alg['roots'] = alg.target_blocks.map(roots)
 
 # store the data
-target.to_csv('../data/alignment/target.csv') 
-alg.to_csv('../data/alignment/alignment.csv')
-source.to_csv('../data/alignment/source.csv')
+target.to_csv('../data/csv/target.csv') 
+alg.to_csv('../data/csv/alignment.csv')
+source.to_csv('../data/csv/source.csv')
 
 engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 
@@ -207,7 +203,6 @@ target.to_sql('target', con=engine, if_exists='replace')
 alg.to_sql('alignment', con=engine, if_exists='replace')
 source.to_sql('source', con=engine, if_exists='replace')
 
-# engine.execute("SELECT * FROM users").fetchall()
-
+# example queries
 engine.execute("SELECT * FROM target LIMIT 10").fetchall()
 engine.execute("SELECT * FROM alignment LIMIT 10").fetchall() 

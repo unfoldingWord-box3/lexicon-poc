@@ -54,16 +54,16 @@ df.groupby('noteID').first().reset_index().to_sql('notes', con=engine, if_exists
 # Now link the notes and the source words
 # This needs to be a many2many relationship so that it is possible
 # to link multiple words to a note and multiple notes to a word
-source = pd.read_csv('../data/alignment/source.csv')
+source = pd.read_csv('../data/csv/source.csv')
 print(source)
 
 short_source = source['id token book chapter verse occ'.split()]
 short_df = df['noteID sourceWord book chapter verse sourceWordOccurrence'.split()]
+short_df.to_csv('../data/csv/notes.csv')
 
 short_source.token = short_source.token.str.strip()
 m2m = short_df.merge(short_source, left_on='book chapter verse sourceWord sourceWordOccurrence'.split(), right_on='book chapter verse token occ'.split())
 
-
-
 m2m.columns = 'notes_id source_word book chapter verse occ source_id token occ_bis'.split()
 m2m.to_sql('notesM2M', con=engine, if_exists='replace')
+m2m.to_csv('../data/csv/notes_many2many.csv')

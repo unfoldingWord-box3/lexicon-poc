@@ -14,7 +14,8 @@
 
 # Resources
 
-- insert translationNotes
++ insert translationNotes
+- pull translationNotes automatically as well
 - insert current lexicon
 + insert translation questions
 - insert BDB
@@ -24,7 +25,9 @@
 - create a Sense model?
 
 # Prototype
+- Delete the 
 + django debug toolbar
+? Handle languages other than English
 ? if this were not a poc: use managed django models, rename model fields
 ? how do you keep track of gaps in aligments, when you remove and/or update an aligment (will it not have a new id?)
 ? how do you calculate gaps when aligments are in a separate table?
