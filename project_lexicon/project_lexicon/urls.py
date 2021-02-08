@@ -34,7 +34,7 @@ router.register(r'lexicon', LexiconViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include(router.urls), name="api"),
 ]
 urlpatterns += lexicon_urlpatterns
 

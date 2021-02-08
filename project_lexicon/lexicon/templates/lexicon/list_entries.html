@@ -1,6 +1,27 @@
 {% extends 'lexicon/lexicon_base.html' %}
 {% load static %}
 
+{% block 'header' %}
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo" style="margin-left: 10px">Gateway</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+            <a href="{% url 'view_verse' '06-JOS' 1 1 %}">Verse</a>
+        </li> 
+        <li>
+            <a href="/api">API</a>
+        </li>
+        <li>
+            <a href="{% url 'admin:index' %}">Admin</a>
+        </li>        
+      </ul>
+    </div>
+  </nav>
+
+{% endblock 'header' %}
+
 {% block 'main' %}
 
 <main>

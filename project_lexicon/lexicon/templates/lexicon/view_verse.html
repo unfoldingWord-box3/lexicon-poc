@@ -10,11 +10,17 @@
             <div class="indeterminate"></div>
         </div> -->
         <div class="row">
-            <div class="col s8">
+            <div class="col s6">
                 <h3 class="{{ font }}">{{book}} {{chapter}}:{{verse}}</h3>
                 <div class="divider"></div>
-                <p>{{ source }}</p>
-                <p>{{ target }}</p>
+                <p>{% for token in source %}
+                    <span>
+                        {{token.token }}
+                    </span>
+                    {% endfor %}
+                </p>
+                <p>{% for token in target %}{{token.target_token_prefix }}<span id="{{token.id}}">{{token.target_token }}</span>{% endfor %}
+                </p>
                 
                 {% for s in source %}
                     {% if s.words %}<p>{{ s.words.name }} ({{ s.words.category}})</p>{% endif %}
@@ -22,18 +28,16 @@
 
                 {% if notes %}
                 {% for note in notes %}
-                    <div class="col s5 z-depth-2" style="margin-top: 40px; margin-right:10px">
+                    <div class="col s4 z-depth-2" style="margin-top: 40px; margin-right:10px">
                         <h4>{{note.supportreference}}</h4>
                         <p>{{ note.annotation }}</p>
                     </div>
                 {% endfor %}
                 {% endif %}
 
-
-
             </div>
 
-            <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">
+            <div class="col s5 z-depth-2 offset-s1" style="margin-top: 40px">
                 <p>Find related terms</p>
                 {% comment %} {{ sense_related_items }} {% endcomment %}
                 {% for number,lemma in sense_related_items.items %}
@@ -43,7 +47,7 @@
                 {% endfor %}
             </div>
 
-            <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">
+            <div class="col s5 z-depth-2 offset-s1" style="margin-top: 40px">
                 <p>Find related translationWords</p>
                 {% for number,lemma in tw_related_items.items %}
                    <a href="{% url 'view_entry' number %}" class="{{font}} larger">{{ lemma }}</a>
