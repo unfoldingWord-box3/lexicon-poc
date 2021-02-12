@@ -62,7 +62,7 @@ MIDDLEWARE = [
 
 if DEBUG:
     MIDDLEWARE += [
-        # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
         'django_cprofile_middleware.middleware.ProfilerMiddleware',
     ]
     # https://pypi.org/project/django-cprofile-middleware/

@@ -99,9 +99,9 @@ def get_font(entry_id):
 
 
 def view_entry(request, entry_id):
-    aligs = Alignment.objects.filter(source__strongs_no_prefix=entry_id)
+    aligs = Alignment.objects.filter(source__strongs_no_prefix=entry_id).values()
     try:
-        lemma = Source.objects.filter(strongs_no_prefix=entry_id).first().lemma
+        lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
     except:
         lemma = None
     font = get_font(entry_id)
@@ -110,7 +110,7 @@ def view_entry(request, entry_id):
     if request.GET.get('roots'):
         COLUMN = 'roots'
     
-    alignments = pd.DataFrame(aligs.values())
+    alignments = pd.DataFrame(aligs)
     frequencies = alignments.drop_duplicates('alg_id').groupby(COLUMN).size().sort_values(ascending=False)
     
     # senses_text = alignments.groupby('roots').size().sort_values(ascending=False).index.tolist()
@@ -149,11 +149,13 @@ def view_entry(request, entry_id):
     # .values('lemma', 'strongs')
     if COLUMN == 'roots':
         sense_related_items = Alignment.objects.filter(roots__in=target_blocks).select_related('source').distinct()
+        sense_related_items = None
     else:
-        sense_related_items = Alignment.objects.filter(target_blocks__in=target_blocks).select_related('source').distinct()
+        # sense_related_items = Alignment.objects.filter(target_blocks__in=target_blocks).select_related('source').distinct()
+        sense_related_items = None
     sense_dict = {}
-    for itm in sense_related_items:
-        sense_dict[itm.source.strongs_no_prefix] = itm.source.lemma
+    # for itm in sense_related_items:
+    #     sense_dict[itm.source.strongs_no_prefix] = itm.source.lemma
 
     return render(request, 'lexicon/view_entry.html', 
         {'entry':entry_id,
