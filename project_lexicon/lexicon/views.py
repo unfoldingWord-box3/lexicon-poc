@@ -1,7 +1,8 @@
 import json
 import random
 from collections import OrderedDict
-
+from itertools import groupby
+import copy
 import pandas as pd
 
 from django.shortcuts import render
@@ -9,6 +10,8 @@ from django.db.models import Count
 
 from .models import Source, Target, Alignment, StrongsM2M, Notes, Words
 
+
+# UTILS 
 
 COLOR_SCALE = {1:'darken-4',
            2:'darken-3',
@@ -33,18 +36,19 @@ ICON_SCALE = {
 for i in range(7,5000): ICON_SCALE[i] = ''
 
 
-def demo_entry(request):
-    return render(request, 'lexicon/demo_entry.html')
+def get_font(entry_id):
+    if entry_id[0]=='A': 
+        font='hb'
+    elif entry_id[0]=='H': 
+        font='hb'
+    elif entry_id[0]=='G': 
+        font='gk'
+    else:
+        font=None
+    return font
 
 
-def list_entries(request):
-    sources = Source.objects.all()[:50].values('strongs_no_prefix', 'strongs_count', 'lemma')
-    strongs = {itm['strongs_no_prefix']:str(itm['strongs_count']) + 'x ({})'.format(itm['lemma']) for itm in sources if itm['strongs_count']}
-    all_numbers = None
-    return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'all_numbers':all_numbers})
-
-
-def get_concordance(alg_ids, idx, alignment_df, model, id_column, token_column, token_prefix_column=None, window=4):
+def get_concordance_old(alg_ids, idx, alignment_df, model, id_column, token_column, token_prefix_column=None, window=4):
     samples = []
     samples_ids = {}
     sample_highlights = []
@@ -69,82 +73,67 @@ def get_concordance(alg_ids, idx, alignment_df, model, id_column, token_column, 
         for key,val in samples_ids.items():
             samples.append(''.join(s.loc[s.id.isin(val)][token_column].fillna('').tolist()))
 
-        # output = ''
-        # for token in s:
-        #     if token_prefix_column:
-        #         pref = token[token_prefix_column]
-        #     else: 
-        #         pref = ''
-        #     try:
-        #         output += pref + token[token_column]
-        #     except:
-        #         pass
-        # samples.append(output)   
-        # print(samples)
-            
-
     return samples
-                
 
-def get_font(entry_id):
-    if entry_id[0]=='A': 
-        font='hb'
-    elif entry_id[0]=='H': 
-        font='hb'
-    elif entry_id[0]=='G': 
-        font='gk'
-    else:
-        font=None
-    return font
 
+def expand_window(li, window=5):
+    output = []
+    for itm in li:
+        for i in range(-window,window+1):
+            output.append(itm+i)
+    return set(output)
+
+
+def build_concordance(token_ids, window_tokens, window=5):
+    concordance = []  
+
+    for i in range(min(token_ids)-window, max(token_ids)+window+1):
+        try:
+            token = window_tokens[i]
+            if i in token_ids:
+                #TODO add prefix
+                token = '<span class="hl">' + token + '</span>'
+            if token:  # some cases are None
+                concordance.append(token)
+        except:
+            continue
+    return concordance
+
+
+# VIEWS 
+
+def demo_entry(request):
+    return render(request, 'lexicon/demo_entry.html')
+
+
+def list_entries(request):
+    sources = Source.objects.all()[:50].values('strongs_no_prefix', 'strongs_count', 'lemma')
+    strongs = {itm['strongs_no_prefix']:str(itm['strongs_count']) + 'x ({})'.format(itm['lemma']) for itm in sources if itm['strongs_count']}
+    all_numbers = None
+    return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'all_numbers':all_numbers})
 
 
 def alt_view_entry(request, entry_id):
-    #TODO now use regroup
-
     
-    from itertools import groupby
-    import copy
+    try:
+        lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
+    except:
+        lemma = None
+    font = get_font(entry_id)
 
-    number = 'H0430'
-    number = entry_id
-    result = Alignment.objects.filter(source__strongs_no_prefix=number).values('id', 'alg_id', 'source', 'source__token', 'source__morph', 'target', 'target__target_token', 'roots', 'source_blocks', 'target_blocks')
+    result = Alignment.objects.filter(source__strongs_no_prefix=entry_id).values('id', 'alg_id', 'source', 'source__token', 'source__morph', 'target', 'target__target_token', 'roots', 'source_blocks', 'target_blocks')
     source_ids = [itm['source'] for itm in result]
     target_ids = [itm['target'] for itm in result]
 
-
-    def expand_window(li, window=5):
-        output = []
-        for itm in li:
-            for i in range(-window,window):
-                output.append(itm+i)
-        return set(output)
-
     source_ids_w_window = expand_window(source_ids)
-    target_ids_w_window = expand_window(target_ids)
-
-
     source_window_tokens = dict(Source.objects.filter(id__in=source_ids_w_window).values_list('id', 'token'))
+
+    target_ids_w_window = expand_window(target_ids)
     target_window_tokens = dict(Target.objects.filter(id__in=target_ids_w_window).values_list('id', 'target_token'))
-
-
-    def build_concordance(token_ids, window_tokens, window=5):
-        concordance = []
-        for i in range(-window, window+1):
-            token_id = min(token_ids)
-            try:
-                idx = token_id+i
-                token = window_tokens[idx]
-                if idx in token_ids:
-                    token = '<highlight>' + token + '</highlight>'
-                if token:  # some cases are None
-                    concordance.append(token)
-            except:
-                continue
-        return concordance
 
     # goal: alg_id, source_id, source_blocks, [target_id1, target_id2], [target_blocks1, target_blocks2], source_concordance, target_concordance
     # this assumes only a single source_id, even if multiple source words are part of the alignment
+    # this is 'condensed' result as it merges multiple [target_ids, ...] into single lists
     condensed_result = []
 
     for idx,grp in groupby(result, lambda datum: datum['alg_id']):
@@ -160,27 +149,56 @@ def alt_view_entry(request, entry_id):
                 output['source_blocks'] = itm['source_blocks']
                 output['source__morph'] = itm['source__morph']
                 output['target'] = [itm['target']]
-                output['target__target_token'] = [itm['target__target_token']]
+                output['target__target_token'] = [itm['target__target_token']] # list
                 output['target_blocks'] = itm['target_blocks']
                 output['roots'] = itm['roots']
             else:
-                output['target'] = output['target'] + [itm['target']]
-                output['target__target_token'] = output['target__target_token'] + [itm['target__target_token']]
+                output['target'] = output['target'] + [itm['target']] # list
+                output['target__target_token'] = output['target__target_token'] + [itm['target__target_token']] # list
         condensed_result.append(output)
 
     # now add concordances
-    # in the concordance do highlighting
-
     algs_w_concordances = []
     for itm in condensed_result:
-        itm['source_concordance'] = ''.join(build_concordance(itm['source'], source_window_tokens))
-        itm['target_concordance'] = ''.join(build_concordance(itm['target'], target_window_tokens))
+        itm['source_concordance'] = ''.join(build_concordance(itm['source'], source_window_tokens, window=4))
+        itm['target_concordance'] = ''.join(build_concordance(itm['target'], target_window_tokens, window=8))
         algs_w_concordances.append(itm)
 
-
+    # quickfix to start working with the data
     df = pd.DataFrame(algs_w_concordances)
     table = df.to_html()
-    return render(request, 'lexicon/alt_view_entry.html', {'table':table})
+
+    # start splitting out the senses
+    COLUMN = 'target_blocks'
+    if request.GET.get('roots'):
+        COLUMN = 'roots'
+    
+    # now regroup per sense
+    frequencies = df.drop_duplicates('alg_id').groupby(COLUMN).size().sort_values(ascending=False)
+    print(frequencies)
+    senses = []
+    for idx,freq in enumerate(frequencies.items(), start=1):
+        # order, color, icon, frequency, 5 samples      
+        sense, frequency = freq[0].strip(), freq[1]
+
+        alg = df.loc[df[COLUMN]==freq[0]]
+        if alg.shape[0] > 5:
+            alg = alg.sample(5)
+
+        senses.append({'freq': frequency,
+                       'sense': sense,
+                       'color': COLOR_SCALE[idx],
+                       'order': idx,
+                       'icon': ICON_SCALE[idx],
+                       'source_samples': alg.source_concordance,
+                       'target_samples': alg.target_concordance,
+        })
+
+    return render(request, 'lexicon/view_entry.html', {'table':table,
+        'senses':senses,
+        'entry':entry_id,
+        'lemma': lemma,
+        'font': font,})
 
 
 def view_entry(request, entry_id):
@@ -213,8 +231,8 @@ def view_entry(request, entry_id):
         if len(alg_ids) > 5:
             alg_ids = random.sample(alg_ids, k=5)
 
-        target_samples = get_concordance(alg_ids, idx, alignments, Target, 'target_id', 'target_token', 'target_token_prefix', window=8)
-        source_samples = get_concordance(alg_ids, idx, alignments, Source, 'source_id', 'token')
+        target_samples = get_concordance_old(alg_ids, idx, alignments, Target, 'target_id', 'target_token', 'target_token_prefix', window=8)
+        source_samples = get_concordance_old(alg_ids, idx, alignments, Source, 'source_id', 'token')
 
         senses.append({'freq':frequency,
                        'sense':sense,
