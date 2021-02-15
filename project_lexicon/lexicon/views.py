@@ -7,6 +7,7 @@ import pandas as pd
 
 from django.shortcuts import render
 from django.db.models import Count
+from django.db.models.functions import Concat
 
 from .models import Source, Target, Alignment, StrongsM2M, Notes, Words
 
@@ -121,15 +122,15 @@ def alt_view_entry(request, entry_id):
         lemma = None
     font = get_font(entry_id)
 
-    result = Alignment.objects.filter(source__strongs_no_prefix=entry_id).values('id', 'alg_id', 'source', 'source__token', 'source__morph', 'target', 'target__target_token', 'roots', 'source_blocks', 'target_blocks')
+    result = Alignment.objects.filter(source__strongs_no_prefix=entry_id).values('id', 'alg_id', 'source__book', 'source__chapter', 'source__verse', 'source', 'source__token', 'source__morph', 'target', 'target__target_token', 'roots', 'source_blocks', 'target_blocks')
     source_ids = [itm['source'] for itm in result]
     target_ids = [itm['target'] for itm in result]
 
     source_ids_w_window = expand_window(source_ids)
-    source_window_tokens = dict(Source.objects.filter(id__in=source_ids_w_window).values_list('id', 'token'))
+    source_window_tokens = dict(Source.objects.filter(id__in=source_ids_w_window).annotate(full_token=Concat('token_prefix','token')).values_list('id', 'full_token'))
 
     target_ids_w_window = expand_window(target_ids)
-    target_window_tokens = dict(Target.objects.filter(id__in=target_ids_w_window).values_list('id', 'target_token'))
+    target_window_tokens = dict(Target.objects.filter(id__in=target_ids_w_window).annotate(full_token=Concat('target_token_prefix','target_token')).values_list('id', 'full_token'))
 
     # goal: alg_id, source_id, source_blocks, [target_id1, target_id2], [target_blocks1, target_blocks2], source_concordance, target_concordance
     # this assumes only a single source_id, even if multiple source words are part of the alignment
@@ -145,6 +146,10 @@ def alt_view_entry(request, entry_id):
                 # for the first item we do some extra's
                 output['id'] = itm['id']
                 output['alg_id'] = itm['alg_id']
+                #TODO add the reference
+                output['book'] = itm['source__book']
+                output['chapter'] = itm['source__chapter']
+                output['verse'] = itm['source__verse']
                 output['source'] = [itm['source']]  # list because build_concordance needs a list
                 output['source_blocks'] = itm['source_blocks']
                 output['source__morph'] = itm['source__morph']
@@ -175,7 +180,7 @@ def alt_view_entry(request, entry_id):
     
     # now regroup per sense
     frequencies = df.drop_duplicates('alg_id').groupby(COLUMN).size().sort_values(ascending=False)
-    print(frequencies)
+    # print(frequencies)
     senses = []
     for idx,freq in enumerate(frequencies.items(), start=1):
         # order, color, icon, frequency, 5 samples      
