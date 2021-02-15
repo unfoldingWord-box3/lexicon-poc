@@ -98,6 +98,91 @@ def get_font(entry_id):
     return font
 
 
+
+def alt_view_entry(request, entry_id):
+    #TODO now use regroup
+
+    
+    from itertools import groupby
+    import copy
+
+    number = 'H0430'
+    number = entry_id
+    result = Alignment.objects.filter(source__strongs_no_prefix=number).values('id', 'alg_id', 'source', 'source__token', 'source__morph', 'target', 'target__target_token', 'roots', 'source_blocks', 'target_blocks')
+    source_ids = [itm['source'] for itm in result]
+    target_ids = [itm['target'] for itm in result]
+
+
+    def expand_window(li, window=5):
+        output = []
+        for itm in li:
+            for i in range(-window,window):
+                output.append(itm+i)
+        return set(output)
+
+    source_ids_w_window = expand_window(source_ids)
+    target_ids_w_window = expand_window(target_ids)
+
+
+    source_window_tokens = dict(Source.objects.filter(id__in=source_ids_w_window).values_list('id', 'token'))
+    target_window_tokens = dict(Target.objects.filter(id__in=target_ids_w_window).values_list('id', 'target_token'))
+
+
+    def build_concordance(token_ids, window_tokens, window=5):
+        concordance = []
+        for i in range(-window, window+1):
+            token_id = min(token_ids)
+            try:
+                idx = token_id+i
+                token = window_tokens[idx]
+                if idx in token_ids:
+                    token = '<highlight>' + token + '</highlight>'
+                if token:  # some cases are None
+                    concordance.append(token)
+            except:
+                continue
+        return concordance
+
+    # goal: alg_id, source_id, source_blocks, [target_id1, target_id2], [target_blocks1, target_blocks2], source_concordance, target_concordance
+    # this assumes only a single source_id, even if multiple source words are part of the alignment
+    condensed_result = []
+
+    for idx,grp in groupby(result, lambda datum: datum['alg_id']):
+        output = {}
+        output['alg_id'] = idx
+
+        for idx,itm in enumerate(grp):
+            if idx == 0:
+                # for the first item we do some extra's
+                output['id'] = itm['id']
+                output['alg_id'] = itm['alg_id']
+                output['source'] = [itm['source']]  # list because build_concordance needs a list
+                output['source_blocks'] = itm['source_blocks']
+                output['source__morph'] = itm['source__morph']
+                output['target'] = [itm['target']]
+                output['target__target_token'] = [itm['target__target_token']]
+                output['target_blocks'] = itm['target_blocks']
+                output['roots'] = itm['roots']
+            else:
+                output['target'] = output['target'] + [itm['target']]
+                output['target__target_token'] = output['target__target_token'] + [itm['target__target_token']]
+        condensed_result.append(output)
+
+    # now add concordances
+    # in the concordance do highlighting
+
+    algs_w_concordances = []
+    for itm in condensed_result:
+        itm['source_concordance'] = ''.join(build_concordance(itm['source'], source_window_tokens))
+        itm['target_concordance'] = ''.join(build_concordance(itm['target'], target_window_tokens))
+        algs_w_concordances.append(itm)
+
+
+    df = pd.DataFrame(algs_w_concordances)
+    table = df.to_html()
+    return render(request, 'lexicon/alt_view_entry.html', {'table':table})
+
+
 def view_entry(request, entry_id):
     aligs = Alignment.objects.filter(source__strongs_no_prefix=entry_id).values()
     try:

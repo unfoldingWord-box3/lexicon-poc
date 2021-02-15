@@ -1,0 +1,16 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+
+{% block 'main' %}
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s8">
+                            {{ table|safe }}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock 'main' %}
+
