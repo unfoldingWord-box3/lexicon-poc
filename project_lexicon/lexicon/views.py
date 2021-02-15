@@ -114,7 +114,7 @@ def list_entries(request):
     return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'all_numbers':all_numbers})
 
 
-def alt_view_entry(request, entry_id):
+def view_entry(request, entry_id):
     
     try:
         lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
@@ -181,6 +181,7 @@ def alt_view_entry(request, entry_id):
     # now regroup per sense
     frequencies = df.drop_duplicates('alg_id').groupby(COLUMN).size().sort_values(ascending=False)
     # print(frequencies)
+    senses_text = df.groupby(COLUMN).size().sort_values(ascending=False).index.tolist()
     senses = []
     for idx,freq in enumerate(frequencies.items(), start=1):
         # order, color, icon, frequency, 5 samples      
@@ -199,14 +200,35 @@ def alt_view_entry(request, entry_id):
                        'target_samples': alg.target_concordance,
         })
 
+    # tw_related_items = StrongsM2M.objects.filter(number=entry_id).values_list('related_number')
+    # strongs = Source.objects.filter(strongs_no_prefix__in=tw_related_items).values_list('strongs_no_prefix', 'lemma').distinct()
+    # tw_related_items = dict(strongs)
+    
+    # target_blocks = frequencies.index.tolist()
+    # # .values('lemma', 'strongs')
+    # if COLUMN == 'roots':
+    #     sense_related_items = Alignment.objects.filter(roots__in=target_blocks).select_related('source').distinct()
+    # else:
+    #     sense_related_items = Alignment.objects.filter(target_blocks__in=target_blocks).select_related('source').distinct()
+    # sense_dict = {}
+    # for itm in sense_related_items:
+    #     sense_dict[itm.source.strongs_no_prefix] = itm.source.lemma
+
+    tw_related_items = {}
+    sense_dict = {}
+
     return render(request, 'lexicon/view_entry.html', {'table':table,
         'senses':senses,
+        'senses_text':senses_text,
         'entry':entry_id,
         'lemma': lemma,
-        'font': font,})
+        'font': font,
+        'tw_related_items': tw_related_items,
+        'sense_related_items': sense_dict,
+        })
 
 
-def view_entry(request, entry_id):
+def view_entry_old(request, entry_id):
     aligs = Alignment.objects.filter(source__strongs_no_prefix=entry_id).values()
     try:
         lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
