@@ -49,7 +49,7 @@ df.groupby('noteID').first().loc['scr8']
 
 engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 df.groupby('noteID').first().reset_index().to_sql('notes', con=engine, if_exists='replace')
-
+df.groupby('noteID').first().reset_index().to_csv('../data/csv/long_notes.csv')
 
 # Now link the notes and the source words
 # This needs to be a many2many relationship so that it is possible
