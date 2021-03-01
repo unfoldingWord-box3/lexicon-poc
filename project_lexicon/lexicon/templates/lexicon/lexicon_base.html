@@ -13,8 +13,8 @@
     </title>
 
     <!-- <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icon.css' %}">
     <link rel="stylesheet" href="{% static 'she_got_style.css' %}">
 
     <!-- sidenav https://materializecss.com/sidenav.html -->
@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
+                <h5 class="white-text">unfoldingWord</h5>
                 <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
             </div>
             <div class="col l4 offset-l2 s12">
@@ -68,7 +68,7 @@
 {% endblock 'footer' %}
 
 {% block 'scripts' %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{% static 'materialize.min.js' %}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.fixed-action-btn');
@@ -83,6 +83,10 @@
             var instances = M.Collapsible.init(elems);
         });
     </script>
+
+{% block 'extra_javascript' %} 
+{% endblock 'extra_javascript' %} 
+
 {% endblock 'scripts' %}
 
 </body>

@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
     '127.0.0.1',
@@ -62,8 +62,8 @@ MIDDLEWARE = [
 
 if DEBUG:
     MIDDLEWARE += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-        'django_cprofile_middleware.middleware.ProfilerMiddleware',
+        # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+        # 'django_cprofile_middleware.middleware.ProfilerMiddleware',
     ]
     # https://pypi.org/project/django-cprofile-middleware/
     # https://medium.com/kami-people/profiling-in-django-9f4d403a394f
@@ -156,6 +156,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+   BASE_DIR / "project_lexicon" / "static",
+]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
