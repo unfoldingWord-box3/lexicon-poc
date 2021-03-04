@@ -11,19 +11,21 @@
         </div> -->
         <div class="row">
             <div class="col s6">
-                <h3 class="{{ font }}">{{book}} {{chapter}}:{{verse}}</h3>
+                <h3>{{book}} {{chapter}}:{{verse}}</h3>
                 <div class="divider"></div>
                 <p>{% for token in source %}
-                    <span>
+                    <span class="{{ font }} tooltipped" data-position="top" data-tooltip="{{ token.lemma }} | {{token.morph}} | {{ token.strongs_no_prefix }}">
                         {{token.token }}
                     </span>
                     {% endfor %}
                 </p>
-                <p>{% for token in target %}{{token.target_token_prefix }}<span id="{{token.id}}">{{token.target_token }}</span>{% endfor %}
+                <p>{% for token in target %}{{token.target_token_prefix|default_if_none:"" }}<span id="{{token.id}}">{{token.target_token|default_if_none:"" }}</span>{% endfor %}
                 </p>
                 
                 {% for s in source %}
-                    {% if s.words %}<p>{{ s.words.name }} ({{ s.words.category}})</p>{% endif %}
+                    {% if s.words %}<p><b>{{ s.words.name }}</b> ({{ s.words.category}})
+                        {{ s.words.definition }}
+                    </p>{% endif %}
                 {% endfor %}
 
                 {% if notes %}
@@ -100,3 +102,12 @@
 </main>
 {% endblock 'main' %}
 
+
+{% block 'extra_javascript' %} 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.tooltipped');
+        var instances = M.Tooltip.init(elems);
+    });
+</script>
+{% endblock 'extra_javascript' %}

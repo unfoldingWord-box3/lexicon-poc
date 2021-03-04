@@ -11,7 +11,7 @@ class SourceViewSet(viewsets.ModelViewSet):
     """
     queryset = Source.objects.all() # filter(book='01-GEN', chapter=1, verse=1)
     serializer_class = SourceSerializer
-    filterset_fields = ['book', 'chapter', 'verse', 'strongs_no_prefix']
+    filterset_fields = ['book', 'chapter', 'verse', 'strongs_no_prefix', 'lemma']
     # search_fields = ['token',]
 
 
@@ -59,10 +59,14 @@ class StrongsM2MViewSet(viewsets.ModelViewSet):
 class NotesViewSet(viewsets.ModelViewSet):
     queryset = Notes.objects.all()
     serializer_class = NotesSerializer
-    filterset_fields = ['supportreference']
+    filterset_fields = ['book', 'chapter', 'verse', 'supportreference', 'source__strongs_no_prefix']
 
 
 class LexiconViewSet(viewsets.ModelViewSet):
     queryset = Lexicon.objects.all()
     serializer_class = LexiconSerializer
     filterset_fields = ['strongs']
+
+
+
+# Notes.objects.values('supportreference').annotate(count = Count('supportreference')).order_by('-count')
