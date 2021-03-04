@@ -111,8 +111,9 @@
                                     <p><i>
                                     {% for target in token.target_set.all %}
                                        {{target.target_token}}
+                                    </i></p>
                                     {% endfor %}
-                                {%endfor%}</i></p>
+                                {%endfor%}
 
                                 <p><b>{{ note.supportreference }}</b> {{ note.annotation}}</p>
                             </div>

@@ -12,6 +12,18 @@ class Collocations(models.Model):
         db_table = 'collocations'
 
 
+class Glosses(models.Model):
+    index = models.BigIntegerField(blank=True, null=True)
+    strongs = models.TextField(blank=True, primary_key=True)
+    brief = models.TextField(blank=True, null=True)
+    long = models.TextField(blank=True, null=True)
+    lemma = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'glosses'
+
+
 class Source(models.Model):
     id = models.BigIntegerField(blank=True, primary_key=True)
     level_0 = models.BigIntegerField(blank=True, null=True)

@@ -1,8 +1,25 @@
 from rest_framework import views, viewsets
 from rest_framework.response import Response
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
-from serializers import SourceSerializer, SimpleVerseSerializer, TargetSerializer, AlignmentSerializer, WordsSerializer, StrongsM2MSerializer, NotesSerializer, LexiconSerializer
-from lexicon.models import Source, Target, Alignment, Words, StrongsM2M, Notes, Lexicon
+from serializers import SourceSerializer, SimpleVerseSerializer, TargetSerializer, AlignmentSerializer, WordsSerializer, StrongsM2MSerializer, NotesSerializer, LexiconSerializer, GlossesSerializer
+from lexicon.models import Source, Target, Alignment, Words, StrongsM2M, Notes, Lexicon, Glosses
+
+
+class CustomSearchFilter(filters.SearchFilter):
+    def get_search_fields(self, view, request):
+        if request.query_params.get('long'):
+            return ['$long']
+        return super(CustomSearchFilter, self).get_search_fields(view, request)
+
+
+class GlossesViewSet(viewsets.ModelViewSet):
+    queryset = Glosses.objects.all()
+    serializer_class = GlossesSerializer
+    filter_backends = ( DjangoFilterBackend, CustomSearchFilter)
+    filterset_fields = ['strongs', 'lemma']
+    search_fields = ['$brief']  # add &long to the get params to search in the 'long' field
 
 
 class SourceViewSet(viewsets.ModelViewSet):
