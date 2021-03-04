@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # 'django_cprofile_middleware.middleware.ProfilerMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,7 +63,7 @@ MIDDLEWARE = [
 
 if DEBUG:
     MIDDLEWARE += [
-        # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
         # 'django_cprofile_middleware.middleware.ProfilerMiddleware',
     ]
     # https://pypi.org/project/django-cprofile-middleware/
