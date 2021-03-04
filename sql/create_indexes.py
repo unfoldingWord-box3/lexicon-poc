@@ -16,6 +16,10 @@ try:
 except:
     print('This index might already exist')
 try:
+    engine.execute('''CREATE INDEX ix_source_lemma ON source ("lemma")''')
+except:
+    print('This index might already exist')
+try:
     engine.execute('''CREATE INDEX ix_source_strongs_no_prefix ON source ("strongs_no_prefix")''')
 except:
     print('This index might already exist')
@@ -55,6 +59,10 @@ try:
     engine.execute('''CREATE INDEX ix_alignment_source ON alignment ("source_id")''')
 except:
     print('This index might already exist')
+try:
+    engine.execute('''CREATE INDEX ix_source_and_target ON target ("source_id", "target_id")''')
+except:
+    print('This index might already exist')
 
 
 
@@ -64,4 +72,15 @@ except:
     print('This index might already exist')
 
 
-
+try:
+    engine.execute('''CREATE INDEX ix_notes_noteID ON notes ("noteID")''')
+except:
+    print('This index might already exist')
+try:
+    engine.execute('''CREATE INDEX ix_notesM2M_notes ON notesM2M ("notes_id")''')
+except:
+    print('This index might already exist')
+try:
+    engine.execute('''CREATE INDEX ix_notesM2M_source ON notesM2M ("source_id")''')
+except:
+    print('This index might already exist')
