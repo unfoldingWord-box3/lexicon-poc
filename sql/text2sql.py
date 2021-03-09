@@ -4,7 +4,8 @@ import os
 import spacy
 import pandas as pd
 import spacy
-from sqlalchemy import create_engine
+
+from engine import engine
 
 COMPUTE_ROOTS = True
 
@@ -209,8 +210,6 @@ allinone.to_csv('../data/csv/dictionary.csv')
 counts = allinone.groupby(['strongs_no_prefix', 'target_blocks']).size()
 counts.to_csv('../data/csv/counts.csv')
 
-
-engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 
 target.to_sql('target', con=engine, if_exists='replace')
 alg.to_sql('alignment', con=engine, if_exists='replace')

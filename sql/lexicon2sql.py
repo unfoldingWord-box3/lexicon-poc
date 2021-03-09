@@ -2,9 +2,10 @@ import glob
 import re
 import os
 from itertools import chain
-from sqlalchemy import create_engine
 import numpy
 import pandas as pd
+
+from engine import engine
 
 # Read and transform the markdown files
 hebrew_files = glob.glob('../data/en_uhal/content/*.md')
@@ -163,5 +164,4 @@ lexdf['senses'] = lexdf['senses'].astype(str)
 
 lexdf.to_csv('../data/csv/lexicon.csv')
 
-engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 lexdf.to_sql('lexicon', con=engine, if_exists='replace')

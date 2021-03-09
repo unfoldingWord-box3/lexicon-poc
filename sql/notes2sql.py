@@ -11,7 +11,8 @@ This script
 import glob
 import os
 import pandas as pd
-from sqlalchemy import create_engine
+
+from engine import engine
 
 inputfiles = glob.glob('../proskomma/src/scripts/*Parsed.tsv')
 dataframes = []
@@ -47,7 +48,6 @@ df.groupby('noteID').first().reset_index()
 # sample query
 df.groupby('noteID').first().loc['scr8']
 
-engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 df.groupby('noteID').first().reset_index().to_sql('notes', con=engine, if_exists='replace')
 df.groupby('noteID').first().reset_index().to_csv('../data/csv/long_notes.csv')
 

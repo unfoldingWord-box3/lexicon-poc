@@ -4,7 +4,8 @@
 import glob
 import pandas as pd
 import os
-from sqlalchemy import create_engine
+
+from engine import engine
 
 inputfiles = glob.glob('../data/en_tq/*.tsv')
 
@@ -23,6 +24,4 @@ df = pd.concat(dataframes)
 df.reset_index(inplace=True, drop=True)
 
 df.to_csv('../data/csv/tq.csv')
-
-engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 df.to_sql('question', con=engine, if_exists='replace')

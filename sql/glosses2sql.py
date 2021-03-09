@@ -4,7 +4,8 @@
 import pandas as pd
 import glob
 import os
-from sqlalchemy import create_engine
+
+from engine import engine
 
 uhl_index = pd.read_json('../data/glosses/uhl/v0.1/index.json')
 uhl_index.index = range(1, uhl_index.shape[0]+1)
@@ -52,5 +53,4 @@ ugl.columns = 'brief long strongs'.split()
 
 df = pd.concat([uhl[['strongs', 'brief', 'long', 'lemma']], ugl[['strongs', 'brief', 'long']]]).reset_index(drop=True)
 
-engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
 df.to_sql('glosses', con=engine, if_exists='replace')

@@ -2,9 +2,9 @@ import glob
 import os
 import re
 from itertools import permutations
-
 import pandas as pd
-from sqlalchemy import create_engine
+
+from engine import engine
 
 files = glob.glob('../data/en_tw/bible/**/*.md', recursive=True)
 data = {}
@@ -82,12 +82,6 @@ df.to_csv('../data/csv/words.csv')
 source.to_csv('../data/csv/source.csv')
 strongs_m2m.to_csv('../data/csv/strongs_m2m.csv')
 
-engine = create_engine('sqlite:///../project_lexicon/alignment.db', echo=False)
-
 source.to_sql('source', con=engine, if_exists='replace')
 df.to_sql('tw', con=engine, if_exists='replace')
 strongs_m2m.to_sql('strongs_m2m', con=engine, if_exists='replace')
-
-engine.execute("SELECT * FROM tw LIMIT 10").fetchall()
-engine.execute("SELECT * FROM strongs_m2m LIMIT 10").fetchall()
-
