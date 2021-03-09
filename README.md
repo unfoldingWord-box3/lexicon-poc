@@ -27,6 +27,10 @@ This command will create a series of csv files in the data directory. It will al
 
 Move into the project_lexicon folder and run `python manage.py runserver` to start a local server and navigate to the url that is provided in the terminal when running that command.
 
+# Visualise the data model
+
+MOve into the projext_lexicon folder and run `python manage.py graph_models lexicon | dot -Tpng -o dataModel.png`. This command assumes you have dot up and running.
+
 # License
 
 MIT License
