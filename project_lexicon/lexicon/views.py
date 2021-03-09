@@ -196,9 +196,9 @@ def view_entry(request, entry_id):
 
     # quickfix to start working with the data
     df = pd.DataFrame(algs_w_concordances)
-    table = df.to_html()
 
     if request.GET.get('table'):
+        table = df.to_html()
         return render(request, 'lexicon/view_entry_table.html', {
             'table':table,
             'entry':entry_id,
@@ -250,10 +250,10 @@ def view_entry(request, entry_id):
     tw_related_items = {}
     sense_dict = {}
 
-    notes = Notes.objects.filter(source__strongs_no_prefix=entry_id)
+    # prefetch related is essential to keep the number of queries small
+    notes = Notes.objects.filter(source__strongs_no_prefix=entry_id).prefetch_related('source', 'source__target_set')
 
-    return render(request, 'lexicon/view_entry.html', {'table':table,
-        'senses':senses,
+    return render(request, 'lexicon/view_entry.html', {'senses':senses,
         'senses_text':senses_text,
         'entry':entry_id,
         'lemma': lemma,
