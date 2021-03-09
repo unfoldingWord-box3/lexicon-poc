@@ -3,8 +3,23 @@ from rest_framework.response import Response
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-from serializers import SourceSerializer, SimpleVerseSerializer, TargetSerializer, AlignmentSerializer, WordsSerializer, StrongsM2MSerializer, NotesSerializer, LexiconSerializer, GlossesSerializer
-from lexicon.models import Source, Target, Alignment, Words, StrongsM2M, Notes, Lexicon, Glosses
+from serializers import ( SourceSerializer, 
+    SimpleVerseSerializer, TargetSerializer, AlignmentSerializer, 
+    WordsSerializer, StrongsM2MSerializer, NotesSerializer, 
+    LexiconSerializer, GlossesSerializer, QuestionSerializer
+)
+from lexicon.models import ( Source, 
+    Target, Alignment, Words, 
+    StrongsM2M, Notes, Lexicon, 
+    Glosses, Question
+)
+
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    filterset_fields = ['book', 'chapter', 'verse']
 
 
 class CustomSearchFilter(filters.SearchFilter):

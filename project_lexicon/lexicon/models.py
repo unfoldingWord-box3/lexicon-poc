@@ -206,19 +206,19 @@ class Lexicon(models.Model):
         verbose_name_plural = 'Lexicon'
 
 
-# class Question(models.Model):
-#     index = models.BigIntegerField(blank=True, primary_key=True)
-#     reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
-#     id = models.TextField(db_column='ID', blank=True, null=True)  # Field name made lowercase.
-#     tags = models.TextField(db_column='Tags', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-#     supportreference = models.TextField(db_column='SupportReference', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-#     quote = models.TextField(db_column='Quote', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-#     occurrence = models.TextField(db_column='Occurrence', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-#     annotation = models.TextField(db_column='Annotation', blank=True, null=True)  # Field name made lowercase.
-#     book = models.TextField(blank=True, null=True)
-#     chapter = models.TextField(blank=True, null=True)
-#     verse = models.TextField(blank=True, null=True)
+class Question(models.Model):
+    index = models.BigIntegerField(blank=True, primary_key=True)
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    id = models.TextField(db_column='ID', blank=True, null=True)  # Field name made lowercase.
+    tags = models.TextField(db_column='Tags', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    supportreference = models.TextField(db_column='SupportReference', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    quote = models.TextField(db_column='Quote', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    occurrence = models.TextField(db_column='Occurrence', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    annotation = models.TextField(db_column='Annotation', blank=True, null=True)  # Field name made lowercase.
+    book = models.TextField(blank=True, null=True)
+    chapter = models.TextField(blank=True, null=True)
+    verse = models.TextField(blank=True, null=True)
     
-    # class Meta:
-    #     managed = False
-    #     db_table = 'question'
+    class Meta:
+        managed = False
+        db_table = 'question'
