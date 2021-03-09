@@ -19,7 +19,11 @@ from django.conf import settings
 from rest_framework import routers
 
 from lexicon.urls import urlpatterns as lexicon_urlpatterns
-from api import SourceViewSet, TargetViewSet, AlignmentViewSet, WordsViewSet, StrongsM2MViewSet, NotesViewSet, LexiconViewSet, GlossesViewSet
+from api import ( SourceViewSet, 
+    TargetViewSet, AlignmentViewSet, WordsViewSet, 
+    StrongsM2MViewSet, NotesViewSet, LexiconViewSet, 
+    GlossesViewSet, QuestionViewSet
+)
 # from api import SimpleVerse
 
 router = routers.DefaultRouter()
@@ -32,6 +36,8 @@ router.register(r'strongs', StrongsM2MViewSet)
 router.register(r'notes', NotesViewSet)
 router.register(r'lexicon', LexiconViewSet)
 router.register(r'glosses', GlossesViewSet)
+router.register(r'questions', QuestionViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

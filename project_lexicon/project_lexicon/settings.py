@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import environ
 
+import dj_database_url
+
+
 env = environ.Env()
 environ.Env.read_env()
 
@@ -63,12 +66,27 @@ MIDDLEWARE = [
 
 if DEBUG:
     MIDDLEWARE += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        # debugging performance issues?
+
+        ## option 1: check the number of queries and their speed
+        # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+        ## option 2
+        ## https://pypi.org/project/django-cprofile-middleware/
+        ## https://medium.com/kami-people/profiling-in-django-9f4d403a394f
+        ## for instance 127.0.0.1:8000/lexicon/H8064?&prof&download
         # 'django_cprofile_middleware.middleware.ProfilerMiddleware',
+
+        # option 3
+        # add ?profile to a view
+        # 'pyinstrument.middleware.ProfilerMiddleware',  # add ?profile to a view
+        
+        # option 3
+        # django extensions has a python manage.py runprofileserver --use-cprofile
+        # it stores the profiles in /tmp
+        # you can open them using snakeviz
+        # not explored yet: KCacheGrind
     ]
-    # https://pypi.org/project/django-cprofile-middleware/
-    # https://medium.com/kami-people/profiling-in-django-9f4d403a394f
-    # for instance 127.0.0.1:8000/lexicon/H8064?&prof&download
     DJANGO_CPROFILE_MIDDLEWARE_REQUIRE_STAFF = False
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.versions.VersionsPanel',
@@ -118,6 +136,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'alignment.db',
     }
 }
+
+# this needs you to define DATABASE_URL='postgres://username:password@localhost/databasename'
+try:
+    DATABASES['default'] = dj_database_url.config()
+except:
+    pass
 
 
 # Password validation
