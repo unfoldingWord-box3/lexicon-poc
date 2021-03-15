@@ -6,14 +6,21 @@ from django_filters.rest_framework import DjangoFilterBackend
 from serializers import ( SourceSerializer, 
     SimpleVerseSerializer, TargetSerializer, AlignmentSerializer, 
     WordsSerializer, StrongsM2MSerializer, NotesSerializer, 
-    LexiconSerializer, GlossesSerializer, QuestionSerializer
+    LexiconSerializer, GlossesSerializer, QuestionSerializer,
+    BDBSerializer, SimpleSourceSerializer
 )
 from lexicon.models import ( Source, 
     Target, Alignment, Words, 
     StrongsM2M, Notes, Lexicon, 
-    Glosses, Question
+    Glosses, Question, BDB
 )
 
+
+class BDBViewSet(viewsets.ModelViewSet):
+    queryset = BDB.objects.all()
+    serializer_class = BDBSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$main_gloss']    
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -32,9 +39,15 @@ class CustomSearchFilter(filters.SearchFilter):
 class GlossesViewSet(viewsets.ModelViewSet):
     queryset = Glosses.objects.all()
     serializer_class = GlossesSerializer
-    filter_backends = ( DjangoFilterBackend, CustomSearchFilter)
+    filter_backends = (DjangoFilterBackend, CustomSearchFilter)
     filterset_fields = ['strongs', 'lemma']
     search_fields = ['$brief']  # add &long to the get params to search in the 'long' field
+
+
+class SimpleSourceViewSet(viewsets.ModelViewSet):
+    queryset = Source.objects.all()
+    serializer_class = SimpleSourceSerializer
+    filterset_fields = ['book', 'chapter', 'verse', 'strongs_no_prefix', 'lemma']
 
 
 class SourceViewSet(viewsets.ModelViewSet):
@@ -98,7 +111,6 @@ class LexiconViewSet(viewsets.ModelViewSet):
     queryset = Lexicon.objects.all()
     serializer_class = LexiconSerializer
     filterset_fields = ['strongs']
-
 
 
 # Notes.objects.values('supportreference').annotate(count = Count('supportreference')).order_by('-count')

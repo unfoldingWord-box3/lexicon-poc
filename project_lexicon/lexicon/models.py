@@ -1,7 +1,46 @@
 from django.db import models
 
-#TODO update the nameing scheme: singular, abstract3
+#TODO update the nameing scheme: singular, abstract, identical
 #TODO create a real link between source words and the lexicon, and not just via the API
+
+
+class BDB(models.Model):
+    index = models.BigIntegerField(blank=True)
+    bdb = models.TextField(blank=True, primary_key=True)
+    pos = models.TextField(blank=True, null=True)
+    main_gloss = models.TextField(blank=True, null=True)
+    refs = models.TextField(blank=True, null=True)
+    full = models.TextField(blank=True, null=True)
+    text_only = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bdb'
+
+
+class BDB_senses(models.Model):
+    index = models.BigIntegerField(blank=True, primary_key=True)
+    bdb = models.ForeignKey(BDB, null=True, on_delete=models.SET_NULL, db_column='bdb')
+    idx = models.BigIntegerField(blank=True, null=True)
+    bold = models.TextField(blank=True, null=True)
+    gloss = models.TextField(blank=True, null=True)
+    refs = models.TextField(blank=True, null=True)
+    nr_of_refs = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bdb_senses'
+
+
+class BDB_strongs(models.Model):
+    index = models.BigIntegerField(blank=True, primary_key=True)
+    bdb = models.ForeignKey(BDB, db_column='bdb', on_delete=models.SET_NULL, null=True)
+    strongs = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bdb_strongs'
+
 
 class Collocations(models.Model):
     node = models.CharField(max_length=250, primary_key=True)

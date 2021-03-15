@@ -1,13 +1,25 @@
 from rest_framework import serializers
 from django_restql.mixins import DynamicFieldsMixin
 
-from lexicon.models import Source, Target, Alignment, Words, StrongsM2M, Notes, Lexicon, Glosses, Question
+from lexicon.models import (Source, 
+    Target, Alignment, Words, 
+    StrongsM2M, Notes, Lexicon, 
+    Glosses, Question, BDB, 
+    BDB_senses, BDB_strongs,
+)
+
 
 '''
 The DynamicFieldsMixin makes GraphQL queries possible. 
 
 /api/source/?book=06-JOS&chapter=&verse=&strongs_no_prefix=&query={book,chapter,verse,token,alignments{target{target_token,index}},words{category}}
 '''
+
+
+class BDBSerializer(DynamicFieldsMixin, serializers.HyperlinkedModelSerializer):
+    class Meta: 
+        model = BDB
+        fields = '__all__'
 
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
@@ -43,6 +55,14 @@ class AlignmentSerializer(DynamicFieldsMixin, serializers.HyperlinkedModelSerial
         model = Alignment
         fields = '__all__'
         # fields = ['id', ]
+
+
+class SimpleSourceSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model = Source
+        fields = "book chapter verse token id url morph lemma strongs".split()
+
 
 
 class SourceSerializer(DynamicFieldsMixin, serializers.HyperlinkedModelSerializer):
