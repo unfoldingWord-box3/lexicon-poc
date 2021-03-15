@@ -9,17 +9,22 @@
             <div class="indeterminate"></div>
         </div> -->
         <div class="row">
-            <div class="col s4">
-                <h3 class="{{ font }} hb" style="font-size:3em">{{ node.node }}</h3>
-                <div class="divider"></div>
-                {% for c in collocates %}
-                <p><a href="{% url 'query' node.node c.0 %}">{{c.0}} ({{c.1}})</a></p>
-                {% endfor %}
+            <div class="col">
+                {% include "lexicon/lexicon_menu.html" %}
             </div>
-            <div class="col s7 z-depth-2 offset-s1" style="margin-top: 40px; padding-bottom: 40px;">
+        <div class="row">
+            <div class="col s3">
+                <table>
+                {% for c in collocates %}
+                    <tr>
+                        <td><a class="collocate" href="{% url 'query' node.node c.0 %}">{{c.0}}</a></td><td>{{c.1|floatformat:3 }}</td></p>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+            <div class="col s8 z-depth-2 offset-s1" style="margin-top: 40px; padding-bottom: 40px;">
                 <h4>Co-occurrences</h4>
                 <div id="concordance"></div>
-              
             </div>
         </div>
     </div>
@@ -33,7 +38,7 @@
     <script>
     $( document ).ready(function() {
 
-        $( "a" ).click(function( event ) {
+        $( "a.collocate" ).click(function( event ) {
 
             let href = $(this).attr('href');
 

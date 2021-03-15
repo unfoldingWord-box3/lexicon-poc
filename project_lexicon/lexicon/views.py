@@ -10,7 +10,11 @@ from django.db.models import Count
 from django.db.models.functions import Concat
 from django.http import JsonResponse
 
-from .models import Source, Target, Alignment, StrongsM2M, Notes, Words, Collocations
+from .models import (Source, 
+    Target, Alignment, StrongsM2M, 
+    Notes, Words, Collocations,
+    BDB_strongs, BDB,
+)
 
 
 # UTILS 
@@ -94,8 +98,15 @@ def build_concordance(token_ids, window_tokens, highlights=[], window=5):
 
 def view_collocates(request, lemma):
     node = Collocations.objects.get(node=lemma)
+    lemma = node.node
     collocates = json.loads(node.context.replace("'", '"'))
-    return render(request, 'lexicon/view_collocates.html', {'node':node, 'collocates': collocates})
+    font = 'hb'
+    entry = Source.objects.filter(lemma=lemma).first().strongs_no_prefix
+    return render(request, 'lexicon/view_collocates.html', {'node':node, 
+                                                            'collocates': collocates, 
+                                                            'lemma':lemma,
+                                                            'font':font,
+                                                            'entry':entry,})
 
 
 def query(request, main_entry, sec_entry):
@@ -253,6 +264,11 @@ def view_entry(request, entry_id):
     # prefetch related is essential to keep the number of queries small
     notes = Notes.objects.filter(source__strongs_no_prefix=entry_id).prefetch_related('source', 'source__target_set')
 
+    # add BDB
+    
+    bdb_entries_ids = BDB_strongs.objects.filter(strongs=entry_id).values('bdb')
+    bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids)
+
     return render(request, 'lexicon/view_entry.html', {'senses':senses,
         'senses_text':senses_text,
         'entry':entry_id,
@@ -261,6 +277,7 @@ def view_entry(request, entry_id):
         'tw_related_items': tw_related_items,
         'sense_related_items': sense_dict,
         'notes': notes,
+        'bdb_entries': bdb_entries,
         })
 
 

@@ -8,19 +8,11 @@
         <!-- <div class="progress">
             <div class="indeterminate"></div>
         </div> -->
+        {% include "lexicon/lexicon_menu.html" %}
+
         <div class="row">
             <div class="col s8">
-                <h3 class="{{ font }}" style="font-size:3em">{{ lemma }}</h3>
-                <div class="divider"></div>
-                <p>{% for sense in senses_text %}{{ sense}}{% if not forloop.last %},{%endif%} {% endfor %}</p>
-                <p>
-                    <a class="waves-effect waves-light btn" href="{% url 'view_entry_alignment' entry %}">
-                        <i class="material-icons right">line_style</i>Alignment</a>
-
-                    <a class="waves-effect waves-light btn teal lighten-3" href="?roots=1">
-                        <i class="material-icons right">engineering</i>Parse</a>
-                </p>
-
+ 
                 <div class="card horizontal z-depth-2">
                     <div class="card-stacked">
                         <div class="card-content">
@@ -119,6 +111,23 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card horizontal z-depth-2">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <h5>BDB</h5>
+                            {% for entry in bdb_entries %}
+                                {{ entry.bdb }}
+                                {{ entry.full|safe }}
+                            {% endfor %}
+                        </div>
+                        <div class="card-action">
+                            <a href="#" class="right">Advanced</a>
+                        </div>
+                    </div>
+                </div>
+
+
                 {% comment %}
                 <ul class="collapsible">
                     <li>
@@ -136,7 +145,19 @@
                 </ul> {% endcomment %}
             </div>
 
+            <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">               
+               <p class="right-align">
+                    <a class="waves-effect waves-light btn" href="{% url 'view_entry_alignment' entry %}">
+                        <i class="material-icons right">line_style</i>Alignment</a>
+                </p>
+                <p class="right-align">
+                    <a class="waves-effect waves-light btn teal lighten-3" href="?roots=1">
+                    <i class="material-icons right">engineering</i>Parse</a>
+                </p>
+            </div>
+
             <div class="col s3 z-depth-2 offset-s1" style="margin-top: 40px">
+
                 <p>Find related terms</p>
                 {% comment %} {{ sense_related_items }} {% endcomment %} {% for number,lemma in sense_related_items.items %} {% if lemma %}
                 <a href="{% url 'view_entry' number %}" class="{% if number|first in 'AH' %}hb larger{%else%}gk{%endif%}">{{ lemma }}</a> {% endif %} {% endfor %}

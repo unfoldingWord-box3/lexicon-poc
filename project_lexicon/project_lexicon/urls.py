@@ -22,11 +22,13 @@ from lexicon.urls import urlpatterns as lexicon_urlpatterns
 from api import ( SourceViewSet, 
     TargetViewSet, AlignmentViewSet, WordsViewSet, 
     StrongsM2MViewSet, NotesViewSet, LexiconViewSet, 
-    GlossesViewSet, QuestionViewSet
+    GlossesViewSet, QuestionViewSet, BDBViewSet,
+    SimpleSourceViewSet,
 )
 # from api import SimpleVerse
 
 router = routers.DefaultRouter()
+router.register(r'simplesource', SimpleSourceViewSet, basename='simplesource')
 router.register(r'source', SourceViewSet)
 # router.register(r'simple_source', SimpleVerse, basename='verses')
 router.register(r'ult', TargetViewSet)
@@ -37,6 +39,7 @@ router.register(r'notes', NotesViewSet)
 router.register(r'lexicon', LexiconViewSet)
 router.register(r'glosses', GlossesViewSet)
 router.register(r'questions', QuestionViewSet)
+router.register(r'bdb', BDBViewSet)
 
 
 urlpatterns = [
