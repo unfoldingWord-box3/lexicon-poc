@@ -117,12 +117,16 @@ def query(request, main_entry, sec_entry):
     This is only the SOURCE, not the TARGET just yet.
     '''
     # main =  Source.objects.filter(strongs_no_prefix=main_entry)
-    main =  Source.objects.filter(lemma=main_entry)
+
+    def clean(input_string):
+        return input_string.replace('_', ' ')
+
+    main =  Source.objects.filter(lemma=clean(main_entry))
     main_ids = [i[0] for i in main.values_list('id')]
     main_w_context = expand_window(main_ids)
     
     # secondary =  Source.objects.filter(strongs_no_prefix=sec_entry)
-    secondary =  Source.objects.filter(lemma=sec_entry)
+    secondary =  Source.objects.filter(lemma=clean(sec_entry))
     sec_ids = [i[0] for i in secondary.values_list('id')]
     sec_w_context = expand_window(sec_ids)
 

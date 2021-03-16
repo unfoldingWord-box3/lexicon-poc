@@ -10,6 +10,10 @@
     /* font not included, presumed already installed for PoC */
 }
 
+.small {
+    font-size: 1.1em;
+}
+
 .hl {
     font-weight: bold;
 }

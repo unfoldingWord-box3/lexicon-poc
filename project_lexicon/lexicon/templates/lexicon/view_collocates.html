@@ -22,7 +22,7 @@
                 {% endfor %}
                 </table>
             </div>
-            <div class="col s8 z-depth-2 offset-s1" style="margin-top: 40px; padding-bottom: 40px;">
+            <div class="col s8 z-depth-2 offset-s1" style="margin-top: 14px; padding-bottom: 40px;">
                 <h4>Co-occurrences</h4>
                 <div id="concordance"></div>
             </div>
@@ -48,7 +48,7 @@
                 $( "#concordance" ).html('');
                 
                 $.each(response, function( idx, val ) {
-                    $( "#concordance" ).append( '<p class="" dir="rtl">' + val + '</p>');
+                    $( "#concordance" ).append( '<p class="hb small" dir="rtl">' + val + '</p>');
                 });
             });
 
