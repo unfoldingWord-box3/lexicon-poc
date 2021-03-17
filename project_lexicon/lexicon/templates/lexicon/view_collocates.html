@@ -8,22 +8,26 @@
         <!-- <div class="progress">
             <div class="indeterminate"></div>
         </div> -->
-        <div class="row">
-            <div class="col">
-                {% include "lexicon/lexicon_menu.html" %}
-            </div>
+        {% include "lexicon/lexicon_menu.html" %}
+
         <div class="row">
             <div class="col s3">
-                <table>
+                <table style="width:100%">
+                <tbody>
                 {% for c in collocates %}
                     <tr>
-                        <td><a class="collocate" href="{% url 'query' node.node c.0 %}">{{c.0}}</a></td><td>{{c.1|floatformat:3 }}</td></p>
+                        <td>
+                        <a class="collocate" href="{% url 'query' node.node c.0 %}">{{c.0}}</a>
+                        </td>
+                        <td>{{c.1|floatformat:3 }}</td>
                     </tr>
                 {% endfor %}
+                </tbody>
                 </table>
             </div>
             <div class="col s8 z-depth-2 offset-s1" style="margin-top: 14px; padding-bottom: 40px;">
                 <h4>Co-occurrences</h4>
+                <p id="glosses"></p>
                 <div id="concordance"></div>
             </div>
         </div>
@@ -41,6 +45,19 @@
         $( "a.collocate" ).click(function( event ) {
 
             let href = $(this).attr('href');
+            let lemma = $(this).text();
+            let gloss_href =  "/api/glosses/?strongs=&lemma=" + lemma
+
+            $.getJSON(gloss_href, function( response ) {
+
+                // remove the existing glosses
+                $( "#glosses" ).html('');
+                
+                $.each(response.results, function( idx, val ) {
+                    $( "#glosses" ).append(val.long + ', ');
+                });
+            });
+
 
             $.getJSON( href, function( response ) {
 

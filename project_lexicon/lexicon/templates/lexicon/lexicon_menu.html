@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col">
+    <div class="col s10">
         <h3 class="{{ font }}" style="font-size:3em">{{ lemma }}</h3>
         <div class="divider"></div>
 
@@ -12,24 +12,23 @@
             <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
                 <i class="material-icons left">engineering</i>Collocates</a>
 
-            {% url 'view_collocates' lemma as url %}
-            <a class="waves-effect waves-light btn teal {% if request.path == url %}active{% endif %}" href="{{ url }}">
-                <i class="material-icons left">engineering</i>Dictionary</a>
+            {% url 'view_dictionary' entry as url %}
+            <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
+                <i class="material-icons left">menu_book</i>Dictionary</a>
+
+            {% url 'view_resources' entry as url %}
+            <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
+                <i class="material-icons left">speaker_notes</i>tN tW</a>
+
+            {% comment %} {% url 'view_collocates' lemma as url %}
+            <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
+                <i class="material-icons left">engineering</i>Glosses</a> {% endcomment %}
 
             {% url 'view_collocates' lemma as url %}
-            <a class="waves-effect waves-light btn teal {% if request.path == url %}active{% endif %}" href="{{ url }}">
-                <i class="material-icons left">engineering</i>tN tW</a>
-
-            {% url 'view_collocates' lemma as url %}
-            <a class="waves-effect waves-light btn teal {% if request.path == url %}active{% endif %}" href="{{ url }}">
-                <i class="material-icons left">engineering</i>Glosses</a>
-
-            {% url 'view_collocates' lemma as url %}
-            <a class="waves-effect waves-light btn teal {% if request.path == url %}active{% endif %}" href="{{ url }}">
-                <i class="material-icons left">engineering</i>Forms</a>
+            <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
+                <i class="material-icons left">grid_view</i>Forms</a>
         </p>
 
         <p>{% for sense in senses_text %}{{ sense}}{% if not forloop.last %},{%endif%} {% endfor %}</p>
-
-        <div>
-            <div>
+    </div>
+</div>

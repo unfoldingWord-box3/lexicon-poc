@@ -96,6 +96,36 @@ def build_concordance(token_ids, window_tokens, highlights=[], window=5):
 
 # VIEWS 
 
+def view_resources(request, entry_id):
+    lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
+    words = Words.objects.filter(strongs=entry_id)
+    related_words = StrongsM2M.objects.filter(number=entry_id).values_list('related_number')
+    strongs = Source.objects.filter(strongs_no_prefix__in=related_words).values_list('strongs_no_prefix', 'lemma').distinct()
+    related_words = dict(strongs)
+    # prefetch related is essential to keep the number of queries small
+    notes = Notes.objects.filter(source__strongs_no_prefix=entry_id).prefetch_related('source', 'source__target_set')
+    font = 'hb'
+
+    return render(request, 'lexicon/view_resources.html', {'lemma':lemma,
+                                                            'words':words,
+                                                            'related_words':related_words,
+                                                            'notes':notes,
+                                                            'font':font,
+                                                            'entry':entry_id})   
+
+
+def view_dictionary(request, entry_id):
+    lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
+    font = 'hb'
+    if entry_id.startswith('H'):
+        bdb_entries_ids = BDB_strongs.objects.filter(strongs=entry_id).values('bdb')
+        bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids)  
+    return render(request, 'lexicon/view_dictionary.html', {'bdb_entries': bdb_entries, 
+                                                            'entry':entry_id, 
+                                                            'lemma':lemma,
+                                                            'font':font,})
+
+
 def view_collocates(request, lemma):
     node = Collocations.objects.get(node=lemma)
     lemma = node.node
@@ -268,11 +298,6 @@ def view_entry(request, entry_id):
     # prefetch related is essential to keep the number of queries small
     notes = Notes.objects.filter(source__strongs_no_prefix=entry_id).prefetch_related('source', 'source__target_set')
 
-    # add BDB
-    
-    bdb_entries_ids = BDB_strongs.objects.filter(strongs=entry_id).values('bdb')
-    bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids)
-
     return render(request, 'lexicon/view_entry.html', {'senses':senses,
         'senses_text':senses_text,
         'entry':entry_id,
@@ -281,7 +306,6 @@ def view_entry(request, entry_id):
         'tw_related_items': tw_related_items,
         'sense_related_items': sense_dict,
         'notes': notes,
-        'bdb_entries': bdb_entries,
         })
 
 
