@@ -1,6 +1,6 @@
 import json
 import random
-from collections import OrderedDict
+from collections import OrderedDict, Counter
 from itertools import groupby
 import copy
 import pandas as pd
@@ -95,6 +95,51 @@ def build_concordance(token_ids, window_tokens, highlights=[], window=5):
 
 
 # VIEWS 
+
+def discovery(request):
+    '''
+    Fake some vertical data
+    '''
+    pass
+
+
+def view_forms(request, entry_id):
+    source = Source.objects.filter(strongs_no_prefix=entry_id).prefetch_related('target_set')
+    lemma = source[0].lemma
+    font = 'hb'
+    # alternative: /api/source/?book=&chapter=&verse=&strongs_no_prefix=&lemma=%D7%99%D6%B8%D7%9C%D6%B7%D7%93&token=&query={token,alignments{target_blocks}}
+    # forms = source.values('morph', 'token').annotate(frequency=Count(['morph'])).order_by('-frequency')
+    forms = set(source.values_list('id', 'morph', 'token', 'alignment__target_blocks', named=True))
+
+    for row in forms:
+        try:
+            row.alignment__target_blocks = row.alignment__target_blocks.strip()
+        except:
+            pass
+        try:
+            row.token = row.token.strip()
+        except:
+            pass
+    
+    frequencies = Counter((row.morph, row.token) for row in forms)
+    output = {}
+    for itm,freq in frequencies.items():
+        morph, token = itm
+        algs = []
+        for row in forms:
+            if row.morph == morph and row.token == token and row.alignment__target_blocks:
+                algs.append(row.alignment__target_blocks)
+        output[(morph, token)] = (freq, ','.join(set(algs)))
+    
+    output = sorted(output.items(), key=lambda item: item[1], reverse=True)
+
+    return render(request, 'lexicon/view_forms.html', {'lemma':lemma,
+                                                       'entry':entry_id,
+                                                       'forms':output,
+                                                       'font':font,
+                                                    #    'target_blocks':target_blocks,
+                                                       })
+
 
 def view_resources(request, entry_id):
     lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma

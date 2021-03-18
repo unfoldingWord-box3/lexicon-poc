@@ -56,7 +56,7 @@ class SourceViewSet(viewsets.ModelViewSet):
     """
     queryset = Source.objects.all() # filter(book='01-GEN', chapter=1, verse=1)
     serializer_class = SourceSerializer
-    filterset_fields = ['book', 'chapter', 'verse', 'strongs_no_prefix', 'lemma']
+    filterset_fields = ['book', 'chapter', 'verse', 'strongs_no_prefix', 'lemma', 'token', 'morph']
     # search_fields = ['token',]
 
 

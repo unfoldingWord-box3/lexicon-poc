@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col s10">
+    <div class="col s11">
         <h3 class="{{ font }}" style="font-size:3em">{{ lemma }}</h3>
         <div class="divider"></div>
 
@@ -24,7 +24,7 @@
             <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
                 <i class="material-icons left">engineering</i>Glosses</a> {% endcomment %}
 
-            {% url 'view_collocates' lemma as url %}
+            {% url 'view_forms' entry as url %}
             <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
                 <i class="material-icons left">grid_view</i>Forms</a>
         </p>

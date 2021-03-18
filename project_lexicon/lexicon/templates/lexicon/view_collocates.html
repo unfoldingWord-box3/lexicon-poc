@@ -1,6 +1,4 @@
-{% extends "lexicon/lexicon_base.html" %}
-
-{% block 'main' %}
+{% extends "lexicon/lexicon_base.html" %} {% block 'main' %}
 
 <main>
     <div class="container">
@@ -13,16 +11,16 @@
         <div class="row">
             <div class="col s3">
                 <table style="width:100%">
-                <tbody>
-                {% for c in collocates %}
-                    <tr>
-                        <td>
-                        <a class="collocate" href="{% url 'query' node.node c.0 %}">{{c.0}}</a>
-                        </td>
-                        <td>{{c.1|floatformat:3 }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
+                    <tbody>
+                        {% for c in collocates %}
+                        <tr>
+                            <td>
+                                <a class="collocate {{font}} small" href="{% url 'query' node.node c.0 %}">{{c.0}}</a>
+                            </td>
+                            <td>{{c.1|floatformat:3 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
             <div class="col s8 z-depth-2 offset-s1" style="margin-top: 14px; padding-bottom: 40px;">
@@ -35,43 +33,40 @@
 
 
 </main>
-{% endblock 'main' %}
+{% endblock 'main' %} {% block 'scripts' %} {{ block.super }}
+<script>
+    $(document).ready(function() {
 
-{% block 'scripts' %}
-    {{ block.super }}
-    <script>
-    $( document ).ready(function() {
-
-        $( "a.collocate" ).click(function( event ) {
+        $("a.collocate").click(function(event) {
 
             let href = $(this).attr('href');
             let lemma = $(this).text();
-            let gloss_href =  "/api/glosses/?strongs=&lemma=" + lemma
+            let gloss_href = "/api/glosses/?strongs=&lemma=" + lemma
 
-            $.getJSON(gloss_href, function( response ) {
+            $.getJSON(gloss_href, function(response) {
 
                 // remove the existing glosses
-                $( "#glosses" ).html('');
-                
-                $.each(response.results, function( idx, val ) {
-                    $( "#glosses" ).append(val.long + ', ');
+                $("#glosses").html('');
+
+                $.each(response.results, function(idx, val) {
+                    $("#glosses").append(val.long + ', ');
                 });
             });
 
 
-            $.getJSON( href, function( response ) {
+            $.getJSON(href, function(response) {
 
                 // remove the existing co-occurrences
-                $( "#concordance" ).html('');
-                
-                $.each(response, function( idx, val ) {
-                    $( "#concordance" ).append( '<p class="hb small" dir="rtl">' + val + '</p>');
+                $("#concordance").html('');
+
+                $.each(response, function(idx, val) {
+                    $("#concordance").append('<p class="hb small" dir="rtl">' + val + '</p>');
                 });
             });
 
             event.preventDefault();
-        });    
+        });
     });
-    </script>
+</script>
 
 {% endblock 'scripts' %}
