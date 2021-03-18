@@ -19,6 +19,169 @@ from .models import (Source,
 
 # UTILS 
 
+HEBREW_ACCENTS = '''
+    \u0591
+    \u0592
+    \u0593
+    \u0594
+    \u0595
+    \u0596
+    \u0597
+    \u0598
+    \u0599
+    \u0592
+    \u059A
+    \u059B
+    \u059C
+    \u059D
+    \u059E
+    \u059F
+    \u05A0
+    \u05A1
+    \u05A2
+    \u05A3
+    \u05A4
+    \u05A5
+    \u05A6
+    \u05A7
+    \u05A8
+    \u05A9
+    \u05AA
+    \u05AB
+    \u05AC
+    \u05AD
+    \u05AE
+    \u05AF
+    '''.split()
+
+
+HEBREW_VOWELS = '''
+    \u05B0
+    \u05B1
+    \u05B2
+    \u05B3
+    \u05B4
+    \u05B5
+    \u05B6
+    \u05B7
+    \u05B8
+    \u05B9
+    \u05BA
+    \u05BB
+    \u05C7
+    '''.split()
+
+HEBREW_PUNKT = '''
+    \u05BC
+    \u05BD
+    \u05BF
+    \u05C0
+    \u05C3
+    \u05C4
+    \u05C5
+    \u05C6
+    \u05EF
+    \u05F3
+    \u05F4
+    '''.split()
+
+HEBREW_MAQEF = '''
+    \u05BE
+    '''.split()
+
+HEBREW_SIN_SHIN_DOTS = '''
+    \u05C1
+    \u05C2
+        '''.split()
+
+HEBREW_CONSONANTS = '''
+    \u05D0
+    \u05D1
+    \u05D2
+    \u05D4
+    \u05D5
+    \u05D6
+    \u05D7
+    \u05D8
+    \u05D9
+    \u05DA
+    \u05DB
+    \u05DC
+    \u05DD
+    \u05DE
+    \u05DF
+    \u05E0
+    \u05E1
+    \u05E2
+    \u05E3
+    \u05E4
+    \u05E5
+    \u05E6
+    \u05E7
+    \u05E8
+    \u05E9
+    \u05EA
+    '''.split()
+
+HEBREW_WITH_DAGESH_OR_DOT = '''
+    \uFB2A
+    \uFB2B
+    \uFB2C
+    \uFB2D
+    \uFB2E
+    \uFB32
+    \uFB2F
+    \uFB30
+    \uFB31
+    \uFB33
+    \uFB34
+    \uFB35
+    \uFB36
+    \uFB37
+    \uFB38
+    \uFB39
+    \uFB3A
+    \uFB3B
+    \uFB3C
+    \uFB3D
+    \uFB3E
+    \uFB3F
+    \uFB40
+    \uFB41
+    \uFB42
+    \uFB43
+    \uFB44
+    \uFB45
+    \uFB46
+    \uFB47
+    \uFB48
+    \uFB49
+    '''.split()
+
+
+HEBREW_ADVANCED = '''
+    \uFB1D
+    \uFB1E
+    \uFB1F
+    \uFB20
+    \uFB21
+    \uFB22
+    \uFB23
+    \uFB24
+    \uFB25
+    \uFB26
+    \uFB27
+    \uFB28
+    \uFB29
+    \uFB4A
+    \uFB4B
+    \uFB4C
+    \uFB4D
+    \uFB4E
+    \uFB4F
+    '''.split()
+
+
 COLOR_SCALE = {1:'darken-4',
            2:'darken-3',
            3:'darken-2',
@@ -94,6 +257,13 @@ def build_concordance(token_ids, window_tokens, highlights=[], window=5):
     return concordance
 
 
+def remove_accents(input_string):
+    # accents = [str(r'\u{}'.format(itm.lower())) for itm in HEBREW_ACCENTS]
+    for char in HEBREW_ACCENTS:
+        input_string = input_string.replace(char, '')
+    return input_string
+    
+
 # VIEWS 
 
 def discovery(request):
@@ -104,33 +274,47 @@ def discovery(request):
 
 
 def view_forms(request, entry_id):
+    '''
+    The current solution is suboptimal. What is needed instead is an SQL
+    query that gets the frequency of each morph+token combination
+    as well as a list of its alignments.
+    '''
     source = Source.objects.filter(strongs_no_prefix=entry_id).prefetch_related('target_set')
     lemma = source[0].lemma
     font = 'hb'
     # alternative: /api/source/?book=&chapter=&verse=&strongs_no_prefix=&lemma=%D7%99%D6%B8%D7%9C%D6%B7%D7%93&token=&query={token,alignments{target_blocks}}
     # forms = source.values('morph', 'token').annotate(frequency=Count(['morph'])).order_by('-frequency')
-    forms = set(source.values_list('id', 'morph', 'token', 'alignment__target_blocks', named=True))
+    forms = set(source.values_list('id', 'morph', 'token', 'alignment__target_blocks'))
 
+    # Create a form because namedtuples are immutable
+    class Form():
+        def __init__(self, id, morph, token, alg):
+            self.id = id
+            self.morph = morph
+            self.token = token
+            self.alg = alg
+
+    forms = [Form(*itm) for itm in forms]
+    # change the formatting per instance
     for row in forms:
         try:
-            row.alignment__target_blocks = row.alignment__target_blocks.strip()
+            row.alg = row.alg.strip()
         except:
             pass
-        try:
-            row.token = row.token.strip()
-        except:
-            pass
+        row.token = remove_accents(row.token.strip())
     
+    # compute the frequencies
     frequencies = Counter((row.morph, row.token) for row in forms)
+    # add the alignments
     output = {}
     for itm,freq in frequencies.items():
         morph, token = itm
         algs = []
         for row in forms:
-            if row.morph == morph and row.token == token and row.alignment__target_blocks:
-                algs.append(row.alignment__target_blocks)
-        output[(morph, token)] = (freq, ','.join(set(algs)))
-    
+            if row.morph == morph and row.token == token and row.alg:
+                algs.append(row.alg)
+        output[(morph, token)] = (freq, ', '.join(set(algs)))
+    # sort the output
     output = sorted(output.items(), key=lambda item: item[1], reverse=True)
 
     return render(request, 'lexicon/view_forms.html', {'lemma':lemma,
