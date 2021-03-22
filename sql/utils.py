@@ -72,9 +72,16 @@ OPEN_CLOSING = [
  ('\\fqa ', '\\fqa* '), # Footnote translation quotation alternative
 ]
 
+OPEN_CLOSING_TO_REMOVE = [
+ (r'\\f ', r'\\f\* '),
+ (r'\\ca ', r'\\ca\*'),
+ (r'\\va ', r'\\va\*'),
+]
+
 SWITCHES = [
  '\\p ',
  '\\s5 ',
+ '\\s5',
  '\\q ',  # quotes end at the end of the sentence, this is implicit
  '\\q2 ',
  '\\ft ', # "essential (explanatory) text of the footnote", also implicitly closed
@@ -111,6 +118,10 @@ def parse_usfm(contents):
         for switch in SWITCHES:
             chapter = chapter.replace(switch, '')
             chapter = ' '.join(chapter.split())  # remove left-over linebreaks
+
+        for pair in OPEN_CLOSING_TO_REMOVE:
+            # remove footnotes and alternative versification, don't need it no more?
+            chapter = re.sub(r'{}.*?{}'.format(pair[0], pair[1]), '', chapter)
 
         verses = chapter.split('\\v ')
         # remove the part before the first verse
