@@ -1,7 +1,11 @@
+import json
+from django.http import JsonResponse
+
 from rest_framework import views, viewsets
 from rest_framework.response import Response
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+
 
 from serializers import ( SourceSerializer, 
     SimpleVerseSerializer, TargetSerializer, AlignmentSerializer, 
@@ -14,6 +18,44 @@ from lexicon.models import ( Source,
     StrongsM2M, Notes, Lexicon, 
     Glosses, Question, BDB
 )
+
+def source_to_verse(request):
+    '''
+    This is a hack.
+
+    Takes an id of a source word,
+    for instance 321, then searches for that source word,
+    gets it book, chapter, and verse,
+    to then return either in source or target the entire verse
+    '''
+    if request.method == 'GET':
+        pks = request.GET.getlist('pk')
+        pks = [int(pk) for pk in pks]
+        source = Source.objects.get(pk=pks[0])
+        target = request.GET.get('target', None)
+        if target:
+            qs = Target.objects.filter(book=source.book, chapter=source.chapter, verse=source.verse)
+            output = qs.values_list('target_token')
+            # there are not target tokens (only normal tokens)
+            if {(None,)} == set(output):
+                output = Target.objects.filter(book=source.book, chapter=source.chapter, verse=source.verse).values_list('token')
+                output = ' '.join([itm[0] for itm in output if itm[0]])
+            else:
+                aligned = qs.filter(source__in=pks).values_list('id')
+                if aligned: 
+                    aligned = [itm[0] for itm in aligned]
+                output = []
+                for itm in qs.values('target_token', 'id'):
+                    if itm['id'] in aligned:
+                        output.append('<span class="hl">' + itm['target_token'] + '</span>')
+                    else:
+                        output.append(itm['target_token'])              
+                output = ''.join([itm for itm in output if itm])
+        else:
+            output = Source.objects.filter(book=source.book, chapter=source.chapter, verse=source.verse).values_list('token')
+            output = ''.join([itm[0] for itm in output if itm[0]])
+       
+        return JsonResponse(json.dumps(output, ensure_ascii=False), safe=False)
 
 
 class BDBViewSet(viewsets.ModelViewSet):
