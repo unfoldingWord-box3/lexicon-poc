@@ -58,12 +58,11 @@
 
 <script>
     $(document).ready(function() {
-        { % comment %
-        }
+        {% comment %}
         $('.tabs').tabs(options = {
             'swipeable': true
-        }); { % endcomment %
-        }
+        }); 
+        {% endcomment %}
         $('.tabs').tabs();
     });
 </script>

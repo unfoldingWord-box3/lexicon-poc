@@ -37,17 +37,39 @@
 <script>
     $(document).ready(function() {
 
+        function getVerse(item) {
+            let allIds = [];
+            $('.hl',item).each(function () {
+                allIds.push($(this).attr('id')); // ids.push(this.id) would work as well.
+            });
+            let idString = '?pk=' + allIds.join('&pk=');
+
+            // const ids = $(".hl", item).attr('id');
+            // gloss_href = `/api/sourcetoverse/?pk=${ids}&target=true`
+            gloss_href = `/api/sourcetoverse/${idString}&target=true`;
+
+            $.getJSON(gloss_href, function(response) {
+                // remove the existing glosses
+                $("#verse", item).html('');
+                $("#verse", item).append(JSON.parse( response));
+            });
+
+        };
+
+
         $("a.collocate").click(function(event) {
 
             let href = $(this).attr('href');
             let lemma = $(this).text();
             let gloss_href = "/api/glosses/?strongs=&lemma=" + lemma
 
+            // remove the existing glosses
+            $("#glosses").html('');
+            // remove the existing co-occurrences
+            $("#concordance").html('');
+
+
             $.getJSON(gloss_href, function(response) {
-
-                // remove the existing glosses
-                $("#glosses").html('');
-
                 $.each(response.results, function(idx, val) {
                     $("#glosses").append(val.long + ', ');
                 });
@@ -55,18 +77,32 @@
 
 
             $.getJSON(href, function(response) {
+                // $.each(response, function(idx, val) {
+                //     $("#concordance").append('<p class="hb small" dir="rtl">' + val + ' <i class="material-icons left" style="color:grey">read_more</i>' + '</p>');
+                // });
 
-                // remove the existing co-occurrences
-                $("#concordance").html('');
-
+                $("#concordance").append('<ul id="lines" class="collapsible clearCollapsible"></ul>');
+                    
                 $.each(response, function(idx, val) {
-                    $("#concordance").append('<p class="hb small" dir="rtl">' + val + '</p>');
+                    $("#lines").append('<li>' +
+                '<div class="collapsible-header hb small" style="display:-webkit-box !important;" {% if font == 'hb' %}dir="rtl"{% endif %}>' + val + '</div>' +
+                '<div class="collapsible-body"><span id="verse"><span style="color:grey">Loading the verse</span></span></div>' +
+                '</li>')
                 });
+
+                $('.collapsible').collapsible({'onOpenEnd':getVerse});
+
             });
 
             event.preventDefault();
         });
     });
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
 </script>
 
 {% endblock 'scripts' %}

@@ -23,7 +23,7 @@ from api import ( SourceViewSet,
     TargetViewSet, AlignmentViewSet, WordsViewSet, 
     StrongsM2MViewSet, NotesViewSet, LexiconViewSet, 
     GlossesViewSet, QuestionViewSet, BDBViewSet,
-    SimpleSourceViewSet,
+    SimpleSourceViewSet, source_to_verse
 )
 # from api import SimpleVerse
 
@@ -45,6 +45,7 @@ router.register(r'bdb', BDBViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls), name="api"),
+    path('api/sourcetoverse/', source_to_verse),
 ]
 urlpatterns += lexicon_urlpatterns
 

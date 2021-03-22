@@ -249,7 +249,7 @@ def build_concordance(token_ids, window_tokens, highlights=[], window=5):
         try:
             token = window_tokens[i]
             if i in token_ids or i in highlights:
-                token = '<span class="hl">' + token + '</span>'
+                token = '<span id="' + str(i) + '" class="hl">' + token + '</span>'
             if token:  # some cases are None
                 concordance.append(token)
         except:
@@ -258,7 +258,6 @@ def build_concordance(token_ids, window_tokens, highlights=[], window=5):
 
 
 def remove_accents(input_string):
-    # accents = [str(r'\u{}'.format(itm.lower())) for itm in HEBREW_ACCENTS]
     for char in HEBREW_ACCENTS:
         input_string = input_string.replace(char, '')
     return input_string
@@ -269,6 +268,13 @@ def remove_accents(input_string):
 def discovery(request):
     '''
     Fake some vertical data
+    '''
+    pass
+
+
+def verticalize(request):
+    '''
+    Add a vertical annotation
     '''
     pass
 

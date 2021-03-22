@@ -21,3 +21,8 @@
 .larger {
     font-size: 1.4em;
 }
+
+.clearCollapsible {
+    border: none;
+    box-shadow: none;
+}

@@ -128,7 +128,6 @@ WSGI_APPLICATION = 'project_lexicon.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -139,7 +138,7 @@ DATABASES = {
 
 # this needs you to define DATABASE_URL='postgres://username:password@localhost/databasename'
 try:
-    DATABASES['default'] = dj_database_url.config()
+    DATABASES['default'] = dj_database_url.config(default=None)
 except:
     pass
 
