@@ -18,9 +18,9 @@ df = pd.read_csv('../data/csv/ult.csv')
 df = df.loc[df.token != '',:]
 df = df.loc[-df.token.isnull(),:]
 
-# discard rows *without* alignment, this is a choice,
-# one could also keep the entire target language text
-df = df.loc[-df.alg.isnull(),:]
+## discard rows *without* alignment, this is a choice,
+## one could also keep the entire target language text
+#df = df.loc[-df.alg.isnull(),:]
 
 # The aligment is a list, but when it is written to csv or pickle it is coerced to a string.
 # We need it to be a list.
@@ -172,6 +172,7 @@ source['strongs_count'] = source.strongs_no_prefix.map(counts).fillna(0).astype(
 
 # compute roots (experimental) for the target blocks
 if COMPUTE_ROOTS:
+    print('Computing the roots')
     nlp = spacy.load("en_core_web_sm")
 
     def parse(input_string):
@@ -194,6 +195,7 @@ if COMPUTE_ROOTS:
     alg['roots'] = alg.target_blocks.map(roots)
 
 # store the data
+print('Storing the CSV files')
 target.to_csv('../data/csv/target.csv') 
 alg.to_csv('../data/csv/alignment.csv')
 source.to_csv('../data/csv/source.csv')
@@ -210,10 +212,10 @@ allinone.to_csv('../data/csv/dictionary.csv')
 counts = allinone.groupby(['strongs_no_prefix', 'target_blocks']).size()
 counts.to_csv('../data/csv/counts.csv')
 
-
-target.to_sql('target', con=engine, if_exists='replace')
-alg.to_sql('alignment', con=engine, if_exists='replace')
-source.to_sql('source', con=engine, if_exists='replace')
+print('Writing to the database')
+target.to_sql('target', con=engine, if_exists='replace', chunksize=10000)
+alg.to_sql('alignment', con=engine, if_exists='replace', chunksize=10000)
+source.to_sql('source', con=engine, if_exists='replace', chunksize=10000)
 
 # example queries
 engine.execute("SELECT * FROM target LIMIT 10").fetchall()
