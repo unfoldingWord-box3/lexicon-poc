@@ -10,7 +10,7 @@ from django.db.models import Count
 from django.db.models.functions import Concat
 from django.http import JsonResponse
 
-from .models import (Source, 
+from .models import (BDB_senses, Source, 
     Target, Alignment, StrongsM2M, 
     Notes, Words, Collocations,
     BDB_strongs, BDB,
@@ -354,11 +354,24 @@ def view_dictionary(request, entry_id):
     font = 'hb'
     if entry_id.startswith('H'):
         bdb_entries_ids = BDB_strongs.objects.filter(strongs=entry_id).values('bdb')
-        bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids)  
+        bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids)
     return render(request, 'lexicon/view_dictionary.html', {'bdb_entries': bdb_entries, 
                                                             'entry':entry_id, 
                                                             'lemma':lemma,
                                                             'font':font,})
+
+
+def view_parsed_dictionary(request, entry_id):
+    lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
+    font = 'hb'
+    if entry_id.startswith('H'):
+        bdb_entries_ids = BDB_strongs.objects.filter(strongs=entry_id).values('bdb')
+        bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids).prefetch_related('bdbsensetosource_set', 'bdbsensetosource_set__source')
+    return render(request, 'lexicon/view_parsed_dictionary.html', {'bdb_entries': bdb_entries, 
+                                                            'entry':entry_id, 
+                                                            'lemma':lemma,
+                                                            'font':font,})
+
 
 
 def view_collocates(request, lemma):
@@ -374,7 +387,7 @@ def view_collocates(request, lemma):
                                                             'entry':entry,})
 
 
-def query(request, main_entry, sec_entry):
+def view_cooccurrences(request, main_entry, sec_entry):
     '''
     Search for a strongs number AND another strongs number in its immediate vicinity
 

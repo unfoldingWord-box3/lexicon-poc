@@ -13,7 +13,7 @@
                 <i class="material-icons left">engineering</i>Collocates</a>
 
             {% url 'view_dictionary' entry as url %}
-            <a class="waves-effect waves-light btn teal {% if request.path|iriencode == url %}green{% endif %}" href="{{ url }}">
+            <a class="waves-effect waves-light btn teal {% if url in request.path|iriencode %}green{% endif %}" href="{{ url }}">
                 <i class="material-icons left">menu_book</i>Dictionary</a>
 
             {% url 'view_resources' entry as url %}

@@ -1,0 +1,74 @@
+{% extends "lexicon/lexicon_base.html" %} 
+{% block 'main' %}
+
+<main>
+    <div class="container">
+
+        <!-- <div class="progress">
+            <div class="indeterminate"></div>
+        </div> -->
+        {% include "lexicon/lexicon_menu.html" %}
+
+        <div class="row">
+            <div class="col s10">
+                <div class="card horizontal z-depth-2">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <ul class="tabs">
+                                {% for entry in bdb_entries %}
+                                <li class="tab col s3"><a href="#{{ entry.bdb }}">{{ entry.bdb }}</a></li>
+                                {% endfor %}
+                            </ul>
+
+                                {% for entry in bdb_entries %} 
+                                <div style="padding-top: 14px" id="{{ entry.bdb }}">
+                                    <p><b>{{ entry.main_gloss|default_if_none:"" }}</b> | {{ entry.pos }} | 
+                                        {% for strongs in entry.bdb_strongs_set.all %}
+                                            {% if strongs %}
+                                                {{ strongs.strongs }} 
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+
+                                    {% for sense in entry.bdb_senses_set.all %}
+                                        <p style="margin-top: 15px"><b>{{ sense.bold }}</b> {{ sense.gloss|default_if_none:"?" }}</p>
+                                        
+                                        {% for reference in sense.bdbsensetosource_set.all %} 
+                                            {% with source=reference.source %}
+                                            <p><span dir='ltr'>{{ source.token }}</span> <span>({{ source.book}} {{ source.chapter}}:{{source.verse}})</span> 
+                                            {% with target=source.target_set.all %}
+                                                {% if target %}
+                                                    {% for t in target %}
+                                                        <i>{{ t.target_token }}</i>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endwith %}
+                                            </p>
+                                            {% endwith %} 
+                                        {% endfor %} 
+
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s2 z-depth-2" style="margin-top: 10px">
+                <p class="right-align">
+                    <a class="waves-effect waves-light btn teal" href="{% url 'view_dictionary' entry %}">
+                        <i class="material-icons right">engineering</i>Main</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock 'main' %} {% block 'scripts' %} {{ block.super }}
+
+<script>
+    $(document).ready(function() {
+        $('.tabs').tabs();
+    });
+</script>
+{% endblock 'scripts' %}

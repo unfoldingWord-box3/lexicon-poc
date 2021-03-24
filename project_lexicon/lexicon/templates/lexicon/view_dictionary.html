@@ -1,7 +1,4 @@
-{% extends "lexicon/lexicon_base.html" %} 
-
-
-{% block 'main' %}
+{% extends "lexicon/lexicon_base.html" %} {% block 'main' %}
 <main>
     <div class="container">
 
@@ -16,33 +13,31 @@
                     <div class="card-stacked">
                         <div class="card-content">
                             <ul class="tabs">
-                                {% for entry in bdb_entries %} 
-                                    <li class="tab col s3"><a href="#{{ entry.bdb }}">{{ entry.bdb }}</a></li>
+                                {% for entry in bdb_entries %}
+                                <li class="tab col s3"><a href="#{{ entry.bdb }}">{{ entry.bdb }}</a></li>
                                 {% endfor %}
                             </ul>
-                            {% for entry in bdb_entries %} 
-                                <div style="padding-top: 14px" id="{{ entry.bdb }}" class="col s12">{{ entry.full|safe }}</div>
+                            {% for entry in bdb_entries %}
+                            <div style="padding-top: 14px" id="{{ entry.bdb }}" class="col s12">{{ entry.full|safe }}</div>
+                            <h3>{{ bdb_entries.bdb_senses }} </h3>
                             {% endfor %}
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="right">Advanced</a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col s2 z-depth-2" style="margin-top: 10px">
+                <p class="right-align">
+                    <a class="waves-effect waves-light btn teal" href="{% url 'view_parsed_dictionary' entry %}">
+                        <i class="material-icons right">engineering</i>Parse</a>
+                </p>
+            </div>
         </div>
 </main>
 
-{% endblock 'main' %} 
-
-{% block 'scripts' %}
-{{ block.super }}
+{% endblock 'main' %} {% block 'scripts' %} {{ block.super }}
 
 <script>
-    
-
     $(document).ready(function() {
-        {% comment %} $('.tabs').tabs(options={'swipeable':true}); {% endcomment %}
         $('.tabs').tabs();
     });
 </script>

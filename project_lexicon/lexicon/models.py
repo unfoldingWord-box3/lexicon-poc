@@ -1,3 +1,4 @@
+import json
 from django.db import models
 
 #TODO update the nameing scheme: singular, abstract, identical
@@ -27,9 +28,37 @@ class BDB_senses(models.Model):
     refs = models.TextField(blank=True, null=True)
     nr_of_refs = models.BigIntegerField(blank=True, null=True)
 
+    @property
+    def parsed_refs(self):
+        if not self.refs:
+            return None
+        refs = json.loads(json.loads(self.refs))
+
+        # source = Source.objects.filter(strongs_no_prefix__isin=)
+
+        output = []
+        for ref in refs:
+            number,text = ref
+            output.append(number)
+        return output
+
+
     class Meta:
         managed = False
         db_table = 'bdb_senses'
+        ordering = ['idx']
+
+
+class BdbSenseToSource(models.Model):
+    index = models.BigIntegerField(blank=True, primary_key=True)
+    sense = models.ForeignKey(BDB_senses, blank=True, null=True, on_delete=models.SET_NULL, db_column='sense')
+    bdb = models.ForeignKey(BDB, blank=True, null=True, on_delete=models.SET_NULL, db_column='bdb')
+    source = models.ForeignKey('Source', blank=True, null=True, on_delete=models.SET_NULL, db_column='source')
+    simple_refs = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bdb_sense_to_source'
 
 
 class BDB_strongs(models.Model):
@@ -49,6 +78,19 @@ class Collocations(models.Model):
     class Meta:
         managed = False
         db_table = 'collocations'
+
+
+class Dodson(models.Model):
+    index = models.BigIntegerField(blank=True, primary_key=True)
+    strongs = models.TextField(blank=True, null=True)
+    goodrick_kohlenberger = models.TextField(db_column='Goodrick-Kohlenberger', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    lemma = models.TextField(blank=True, null=True)
+    brief = models.TextField(blank=True, null=True)
+    long = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'dodson'
 
 
 class Glosses(models.Model):
