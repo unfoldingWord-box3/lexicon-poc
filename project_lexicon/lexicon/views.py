@@ -332,8 +332,10 @@ def view_forms(request, entry_id):
 
 
 def view_resources(request, entry_id):
-    lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
-    words = Words.objects.filter(strongs=entry_id)
+    source = Source.objects.filter(strongs_no_prefix=entry_id)
+    lemma = source[0].lemma
+    words_ids = source.filter(words__isnull=False).distinct().values('words__id')
+    words = Words.objects.filter(pk__in=words_ids)
     related_words = StrongsM2M.objects.filter(number=entry_id).values_list('related_number')
     strongs = Source.objects.filter(strongs_no_prefix__in=related_words).values_list('strongs_no_prefix', 'lemma').distinct()
     related_words = dict(strongs)

@@ -72,6 +72,8 @@
             $.getJSON(gloss_href, function(response) {
                 $.each(response.results, function(idx, val) {
                     $("#glosses").append(val.long + ', ');
+                    var url_mask = "{% url 'view_collocates' 12345 %}".replace(/12345/, lemma);
+                    $("#glosses").append(`<p><a href="${url_mask}">${lemma}</a></p>`);
                 });
             });
 

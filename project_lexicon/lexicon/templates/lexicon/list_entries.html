@@ -1,28 +1,23 @@
-{% extends 'lexicon/lexicon_base.html' %}
-{% load static %}
+{% extends 'lexicon/lexicon_base.html' %} {% load static %} {% block 'header' %}
 
-{% block 'header' %}
-
-  <nav>
+<nav>
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo" style="margin-left: 10px">Gateway</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-            <a href="{% url 'view_verse' '06-JOS' 1 1 %}">Verse</a>
-        </li> 
-        <li>
-            <a href="/api">API</a>
-        </li>
-        <li>
-            <a href="{% url 'admin:index' %}">Admin</a>
-        </li>        
-      </ul>
+        <a href="/" class="brand-logo" style="margin-left: 10px">Gateway</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a href="{% url 'view_verse' '06-JOS' 1 1 %}">Verse</a>
+            </li>
+            <li>
+                <a href="/api">API</a>
+            </li>
+            <li>
+                <a href="{% url 'admin:index' %}">Edit</a>
+            </li>
+        </ul>
     </div>
-  </nav>
+</nav>
 
-{% endblock 'header' %}
-
-{% block 'main' %}
+{% endblock 'header' %} {% block 'main' %}
 
 <main>
     <div class="container">
@@ -32,18 +27,18 @@
                 <div class="divider"></div>
                 <div class="row">
                     <div class="col s12">
-                    <div class="row">
-                        <div class="input-field col s12">
-                        <i class="material-icons prefix">text_snippet</i>
-                        <input type="text" id="autocomplete-input" class="autocomplete">
-                        <label for="autocomplete-input">Search for a strongs number</label>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">text_snippet</i>
+                                <input type="text" id="autocomplete-input" class="autocomplete">
+                                <label for="autocomplete-input">Search for a strongs number</label>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
 
 
-            <h4>Recently viewed</h4>
+                <h4>Recently viewed</h4>
                 <div class="card horizontal z-depth-2">
                     <div class="card-stacked">
                         <div class="card-content">
@@ -56,7 +51,7 @@
                                 </li>
                                 <li class="collection-item">
                                     <a href="{% url 'view_entry' 'G00110' %}">G00110 (Ἀβραάμ)</a>
-                                </li>                                    
+                                </li>
                                 <li class="collection-item">
                                     <a href="{% url 'view_entry' 'H7223' %}">H7223 (רִאשׁוֹן)</a>
                                 </li>
@@ -86,17 +81,21 @@
         </div>
     </div>
 </main>
-{% endblock 'main' %}
+{% endblock 'main' %} {% block 'scripts' %} {{ block.super }}
 
-{% block 'scripts' %}
-{{ block.super }}
-
-  <script>  
-  {% comment %} FIXME {% endcomment %}
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.autocomplete');
-    var data = {{ all_numbers|safe }};
-    var instances = M.Autocomplete.init(elems, data = data);
-  });
-  </script>
+<script>
+    { % comment %
+    }
+    FIXME { % endcomment %
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.autocomplete');
+        var data = {
+            {
+                all_numbers | safe
+            }
+        };
+        var instances = M.Autocomplete.init(elems, data = data);
+    });
+</script>
 {% endblock 'scripts' %}
