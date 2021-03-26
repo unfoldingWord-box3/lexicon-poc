@@ -1,4 +1,7 @@
-{% extends "lexicon/lexicon_base.html" %} {% block 'main' %}
+{% extends "lexicon/lexicon_base.html" %} 
+{% load md2 %}
+
+{% block 'main' %}
 <main>
     <div class="container">
 
@@ -23,12 +26,16 @@
                                 <div id="words" class="col s12">
                                 {% if words %}
                                     {% for word in words %}
-                                        <h5>{{ word.category }}: {{ word.name }}</h5>
-                                        <p>{{ word.header }}</p>
-                                        <p>{{ word.definition }}</p>
-                                        <p>{{ word.suggestions }}</p>
-                                        <p>{{ word.refs }}</p>
-                                        <p>{{ word.strongs }}</p>                                   
+                                        <h4>{{ word.category|title }}: {{ word.name|title }}</h4>
+                                            <p>{{ word.header }}</p>
+                                        <h5>Definition</h5>
+                                            <p>{{ word.definition|markdown }}</p>
+                                        <h5>Suggestions</h5>
+                                            <p>{{ word.suggestions|markdown }}</p>
+                                        <h5>References</h5>
+                                            <p>{{ word.refs|markdown }}</p>
+                                        <h5>Strongs</h5>
+                                            <p>{{ word.strongs|markdown }}</p>                                   
                                     {% endfor %}
                                 {% endif %}
                                 </div>
@@ -50,7 +57,7 @@
                                         {% endfor %} 
 
                                         
-                                        <p><b>{{ note.supportreference }}</b> {{ note.annotation}}</p>
+                                        <p><b>{{ note.supportreference }}</b> {{ note.annotation|markdown }}</p>
                                     {% endfor %}
                                 {% endif %}                                  
                                 </div>
