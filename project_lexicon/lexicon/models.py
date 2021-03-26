@@ -14,9 +14,14 @@ class BDB(models.Model):
     full = models.TextField(blank=True, null=True)
     text_only = models.TextField(blank=True, null=True)
 
+    def __str__(self) -> str:
+        return self.bdb
+
     class Meta:
         managed = False
         db_table = 'bdb'
+        verbose_name = 'BDB'
+        verbose_name_plural = 'BDB'
 
 
 class BDB_senses(models.Model):
@@ -42,11 +47,16 @@ class BDB_senses(models.Model):
             output.append(number)
         return output
 
+    def __str__(self) -> str:
+        return '{}: {}'.format(self.bdb, self.bold)
+
 
     class Meta:
         managed = False
         db_table = 'bdb_senses'
         ordering = ['idx']
+        verbose_name = 'BDB senses'
+        verbose_name_plural = 'BDB senses'
 
 
 class BdbSenseToSource(models.Model):
@@ -56,9 +66,14 @@ class BdbSenseToSource(models.Model):
     source = models.ForeignKey('Source', blank=True, null=True, on_delete=models.SET_NULL, db_column='source')
     simple_refs = models.TextField(blank=True, null=True)
 
+    def __str__(self) -> str:
+        return 'BDB {} sense {} link: {}'.format(self.bdb, self.sense, self.index)
+
     class Meta:
         managed = False
         db_table = 'bdb_sense_to_source'
+        verbose_name = 'BDB links with source'
+        verbose_name_plural = 'BDB links with source'
 
 
 class BDB_strongs(models.Model):
@@ -69,6 +84,8 @@ class BDB_strongs(models.Model):
     class Meta:
         managed = False
         db_table = 'bdb_strongs'
+        verbose_name = 'BDB to strongs'
+        verbose_name_plural = 'BDB to strongs'
 
 
 class Collocations(models.Model):
@@ -78,6 +95,8 @@ class Collocations(models.Model):
     class Meta:
         managed = False
         db_table = 'collocations'
+        verbose_name = 'Collocation'
+        verbose_name_plural = 'Collocations'
 
 
 class Dodson(models.Model):
@@ -91,6 +110,8 @@ class Dodson(models.Model):
     class Meta:
         managed = False
         db_table = 'dodson'
+        verbose_name = 'Dodson'
+        verbose_name_plural = 'Dodson'        
 
 
 class Glosses(models.Model):
@@ -103,6 +124,8 @@ class Glosses(models.Model):
     class Meta:
         managed = False
         db_table = 'glosses'
+        verbose_name = 'Gloss'
+        verbose_name_plural = 'Glosses'        
 
 
 class Source(models.Model):
@@ -129,6 +152,9 @@ class Source(models.Model):
     # tw_id = models.TextField(blank=True, null=True)  # This field type is a guess.
     words = models.ForeignKey('Words', blank=True, null=True, on_delete=models.SET_NULL, db_column='tw_id')  #FIXME in data creation script
     strongs_count = models.BigIntegerField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return '{}'.format(self.id)
 
 
     class Meta:
@@ -168,6 +194,9 @@ class Target(models.Model):
         managed = False
         db_table = 'target'
         verbose_name_plural = 'Target'
+
+    def __str__(self) -> str:
+        return '{}'.format(self.id)
 
     def __repr__(self):
         return f'{self.id}: {self.target_token}'
@@ -224,6 +253,8 @@ class StrongsM2M(models.Model):
     class Meta:
         managed = False
         db_table = 'strongs_m2m'
+        verbose_name = 'Strongs internal links'
+        verbose_name_plural = 'Strongs internal links'
 
 
 class Notes(models.Model):  #TODO rename to singular
@@ -263,6 +294,8 @@ class NotesM2M(models.Model):
     class Meta:
         managed = False
         db_table = 'notesM2M'
+        verbose_name = 'Notes link with source'
+        verbose_name_plural = 'Notes link with source'
 
 
 class Lexicon(models.Model):
