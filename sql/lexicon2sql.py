@@ -80,71 +80,78 @@ headings = ['#### Definition', '#### Glosses', '#### Explanation', '#### Citatio
 for key,val in data.items():
     if key in ERRORS:
         continue 
+
+    try:        
+        output = {}
+
         
-    output = {}
+        # I end the file with a # so that a single regex can go all the way to the end
+        # without shenanigans for the citations at the end of the file
+        raw_text = val['raw'] + '#'
+        
+        # some of the Greek entries have internal references in the form of
+        # (sense-10)
+        # these anchors hamper the text extraction and hence I replace the # character
+        # on the assumption that the - indicates that it is not a heading
+        raw_text = raw_text.replace('#sense-', '->sense-')
+        # ah, more human errors, great
+        raw_text = raw_text.replace('#sense–', '->sense-')
+        
+        try: 
+            # certain Greek entries miss the lemma / header
+            lemma = re.findall(r'^# (.*?)\s+', raw_text, re.DOTALL)[0]
+            lemma = clean(lemma)
+        except:
+            lemma = None
+        try:
+            meta = re.findall(r'<!--(.*?)-->', raw_text, re.DOTALL)
+            meta = '\n'.join([clean(itm) for itm in meta])
+        except:
+            meta = None
+        try:
+            word_data = re.findall(r'Word data(.*?)##', raw_text, re.DOTALL)[0]
+            word_data = clean(word_data)
+        except:
+            word_data = None
+        etymology = re.findall(r'Etymology(.*?)##', raw_text, re.DOTALL)[0]
+        etymology = clean(etymology)
+        senses = re.findall(r'Senses(.*?)$', raw_text, re.DOTALL)[0]
+        senses = clean(senses)
+        split_senses = re.split(r'\s###\s', senses, re.DOTALL)
+        split_senses = [clean(itm) for itm in split_senses]
 
+        headings = ['#### Definition', '#### Glosses', '#### Explanation', '#### Citations']
+
+        sense_output = {}
+        for sense in split_senses:
+            # I end the str with a # so that a single regex can go all the way to the end
+            sense = sense + '#'
+            sense_header = re.findall(r'Sense(.*?)#', sense, re.DOTALL)[0]
+            sense_data_for_output = {}
+            for heading in headings: 
+
+                try:
+                    tmp = re.findall(r'{}(.*?)#'.format(heading), sense, re.DOTALL)[0]
+                    tmp = clean(tmp)
+                except:
+                    tmp = None
+                sense_data_for_output[heading.strip('# \n:')] = tmp
+
+            sense_output[sense_header.strip('# \n:')] = sense_data_for_output
     
-    # I end the file with a # so that a single regex can go all the way to the end
-    # without shenanigans for the citations at the end of the file
-    raw_text = val['raw'] + '#'
+        output['lemma'] = lemma
+        output['meta'] = meta
+        output['word_data'] = word_data
+        output['etymology'] = etymology
+        output['senses'] = sense_output
     
-    # some of the Greek entries have internal references in the form of
-    # (sense-10)
-    # these anchors hamper the text extraction and hence I replace the # character
-    # on the assumption that the - indicates that it is not a heading
-    raw_text = raw_text.replace('#sense-', '->sense-')
-    # ah, more human errors, great
-    raw_text = raw_text.replace('#sense–', '->sense-')
-    
-    try: 
-        # certain Greek entries miss the lemma / header
-        lemma = re.findall(r'^# (.*?)\s+', raw_text, re.DOTALL)[0]
-        lemma = clean(lemma)
+        lexicon[key] = output
     except:
-        lemma = None
-    try:
-        meta = re.findall(r'<!--(.*?)-->', raw_text, re.DOTALL)
-        meta = '\n'.join([clean(itm) for itm in meta])
-    except:
-        meta = None
-    try:
-        word_data = re.findall(r'Word data(.*?)##', raw_text, re.DOTALL)[0]
-        word_data = clean(word_data)
-    except:
-        word_data = None
-    etymology = re.findall(r'Etymology(.*?)##', raw_text, re.DOTALL)[0]
-    etymology = clean(etymology)
-    senses = re.findall(r'Senses(.*?)$', raw_text, re.DOTALL)[0]
-    senses = clean(senses)
-    split_senses = re.split(r'\s###\s', senses, re.DOTALL)
-    split_senses = [clean(itm) for itm in split_senses]
+        ERRORS.append(key)
 
-    headings = ['#### Definition', '#### Glosses', '#### Explanation', '#### Citations']
-
-    sense_output = {}
-    for sense in split_senses:
-        # I end the str with a # so that a single regex can go all the way to the end
-        sense = sense + '#'
-        sense_header = re.findall(r'Sense(.*?)#', sense, re.DOTALL)[0]
-        sense_data_for_output = {}
-        for heading in headings: 
-
-            try:
-                tmp = re.findall(r'{}(.*?)#'.format(heading), sense, re.DOTALL)[0]
-                tmp = clean(tmp)
-            except:
-                tmp = None
-            sense_data_for_output[heading.strip('# \n:')] = tmp
-
-        sense_output[sense_header.strip('# \n:')] = sense_data_for_output
-  
-    output['lemma'] = lemma
-    output['meta'] = meta
-    output['word_data'] = word_data
-    output['etymology'] = etymology
-    output['senses'] = sense_output
-   
-    lexicon[key] = output
+print('Errors in the lexicon')
+print(ERRORS)
+print()
 
 len(data) - len(lexicon)
 
@@ -163,5 +170,4 @@ lexdf['strongs'] = lexdf.index.tolist()
 lexdf['senses'] = lexdf['senses'].astype(str)
 
 lexdf.to_csv('../data/csv/lexicon.csv')
-
 lexdf.to_sql('lexicon', con=engine, if_exists='replace')
