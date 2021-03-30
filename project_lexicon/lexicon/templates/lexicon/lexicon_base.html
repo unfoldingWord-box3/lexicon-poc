@@ -34,10 +34,62 @@
 
 {% block 'body' %}
 
-<body>
+{% block 'sidenav' %}
+    <a href="#" data-target="slide-out" class="sidenav-trigger" style="padding:15px; margin-top: 15px; font-size:32px"><i class="material-icons">menu</i></a>
+{% endblock 'sidenav' %}
 
+
+<body>
+    <ul id="slide-out" class="sidenav">
+      <li><div class="user-view">
+        <div class="background">
+          <img style="width:100%" src="{% static 'mick-haupt-eQ2Z9ay9Wws-unsplash.jpg' %}">
+        </div>
+        <a href="/"><img class="circle" src="{% static 'avatar.jpeg' %}"></a>
+        <a href="/"><span class="white-text name">J. de J.</span></a>
+        <a href="/"><span class="white-text email">johnny@dontspamme.net</span></a>
+      </div></li>
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H0894' %}">H0894 (בָּבֶל)</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H7225' %}">H7225 (רֵאשִׁית)</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H8064' %}">H8064 (שָׁמַיִם)</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H2896a' %}">H7225 (טוֹב)</a>
+        </li>                                
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H0430' %}">H0430 (אֱלֹהִים)</a>
+        </li>  
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H0216' %}">H0216 (אוֹר)</a>
+        </li>  
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H0776' %}">H0776 (אֶרֶץ)</a>
+        </li>                                                                  
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'G52070' %}">G52070 (υἱός)</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="{% url 'view_entry' 'H3205' %}">H3205 (יָלַד)</a>
+        </li>
+
+      
+      <li><div class="divider"></div></li>
+      <li><a href="/api"><i class="material-icons">cloud</i>API</a></li>
+      <li><a href="{% url 'admin:index' %}"><i class="material-icons">mode_edit</i>Edit</a></li>
+      <li><a href="{% url 'view_verse' '06-JOS' 1 1 %}"><i class="material-icons">menu_book</i>Text</a></li>
+    </ul>
+
+  
     {% block 'header' %} 
     {% endblock 'header' %} 
+
+
+    
     {% block 'main' %} 
     {% endblock 'main' %} 
     
@@ -68,7 +120,9 @@
         </div>
     </footer>
 
-    {% endblock 'footer' %} {% block 'scripts' %}
+    {% endblock 'footer' %} 
+    
+    {% block 'scripts' %}
     <script src="{% static 'jquery.min.js' %}"></script>
     <script src="{% static 'materialize.min.js' %}"></script>
     <script>
@@ -85,8 +139,15 @@
             var instances = M.Collapsible.init(elems);
         });
     </script>
-
-    {% block 'extra_javascript' %} {% endblock 'extra_javascript' %} {% endblock 'scripts' %}
+    <script>
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+    </script>
+    {% block 'extra_javascript' %}
+     {% endblock 'extra_javascript' %} 
+     
+     {% endblock 'scripts' %}
 
 </body>
 {% endblock 'body' %}

@@ -13,7 +13,7 @@
             <div class="col s6">
                 <h3>{{book}} {{chapter}}:{{verse}}</h3>
                 <div class="divider"></div>
-                <p>{% for token in source %}
+                <p {% if font == "hb"%}dir="rtl"{% endif %}>{% for token in source %}
                     <span class="{{ font }} tooltipped" data-position="top" data-tooltip="{{ token.lemma }} | {{token.morph}} | {{ token.strongs_no_prefix }}">
                         {{token.token }}
                     </span>

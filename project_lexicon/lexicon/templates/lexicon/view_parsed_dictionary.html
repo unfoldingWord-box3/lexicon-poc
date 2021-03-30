@@ -35,7 +35,7 @@
                                         
                                         {% for reference in sense.bdbsensetosource_set.all %} 
                                             {% with source=reference.source %}
-                                            <p><span dir='ltr'>{{ source.token }}</span> <span>({{ source.book}} {{ source.chapter}}:{{source.verse}})</span> 
+                                            <p><span dir='ltr'>{{ source.token }}</span> <a href="{% url 'view_verse' source.book source.chapter source.verse %}"><span>({{ source.book}} {{ source.chapter}}:{{source.verse}})</span></a> 
                                             {% with target=source.target_set.all %}
                                                 {% if target %}
                                                     {% for t in target %}

@@ -15,11 +15,17 @@
                             <ul class="tabs">
                                 {% for entry in bdb_entries %}
                                 <li class="tab col s3"><a href="#{{ entry.bdb }}">{{ entry.bdb }}</a></li>
+                                {% endfor %} 
+                                {% for entry in dodson %}
+                                <li class="tab col s3"><a href="#{{ entry.strongs }}">{{ entry.strongs }}</a></li>
                                 {% endfor %}
                             </ul>
                             {% for entry in bdb_entries %}
                             <div style="padding-top: 14px" id="{{ entry.bdb }}" class="col s12">{{ entry.full|safe }}</div>
                             <h3>{{ bdb_entries.bdb_senses }} </h3>
+                            {% endfor %}
+                            {% for entry in dodson %}
+                            <div style="padding-top: 14px" id="{{ entry.strongs }}" class="col s12">{{ entry.long|safe }}</div>
                             {% endfor %}
                         </div>
                     </div>
