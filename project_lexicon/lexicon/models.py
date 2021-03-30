@@ -161,6 +161,7 @@ class Source(models.Model):
         managed = False
         db_table = 'source'
         verbose_name_plural = 'Source'
+        ordering = ['id']
         # indexes = [
         #     models.Index(fields=['id',]),
         #     models.Index(fields=['strongs',]),
@@ -194,6 +195,8 @@ class Target(models.Model):
         managed = False
         db_table = 'target'
         verbose_name_plural = 'Target'
+        ordering = ['id']
+
 
     def __str__(self) -> str:
         return '{}'.format(self.id)
@@ -219,6 +222,7 @@ class Alignment(models.Model):
     class Meta:
         managed = False
         db_table = 'alignment'
+        ordering = ['id']
 
     def __repr__(self):
         return f'{self.id}: {self.source} -> {self.target}'
