@@ -9,11 +9,12 @@ from django.shortcuts import render
 from django.db.models import Count
 from django.db.models.functions import Concat
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import (BDB_senses, Source, 
     Target, Alignment, StrongsM2M, 
     Notes, Words, Collocations,
-    BDB_strongs, BDB,
+    BDB_strongs, BDB, Dodson
 )
 
 
@@ -287,7 +288,7 @@ def view_forms(request, entry_id):
     '''
     source = Source.objects.filter(strongs_no_prefix=entry_id).prefetch_related('target_set')
     lemma = source[0].lemma
-    font = 'hb'
+    font = get_font(entry_id)
     # alternative: /api/source/?book=&chapter=&verse=&strongs_no_prefix=&lemma=%D7%99%D6%B8%D7%9C%D6%B7%D7%93&token=&query={token,alignments{target_blocks}}
     # forms = source.values('morph', 'token').annotate(frequency=Count(['morph'])).order_by('-frequency')
     forms = set(source.values_list('id', 'morph', 'token', 'alignment__target_blocks'))
@@ -341,7 +342,7 @@ def view_resources(request, entry_id):
     related_words = dict(strongs)
     # prefetch related is essential to keep the number of queries small
     notes = Notes.objects.filter(source__strongs_no_prefix=entry_id).prefetch_related('source', 'source__target_set')
-    font = 'hb'
+    font = get_font(entry_id)
 
     return render(request, 'lexicon/view_resources.html', {'lemma':lemma,
                                                             'words':words,
@@ -353,11 +354,17 @@ def view_resources(request, entry_id):
 
 def view_dictionary(request, entry_id):
     lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
-    font = 'hb'
+    font = get_font(entry_id)
     if entry_id.startswith('H'):
         bdb_entries_ids = BDB_strongs.objects.filter(strongs=entry_id).values('bdb')
         bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids)
-    return render(request, 'lexicon/view_dictionary.html', {'bdb_entries': bdb_entries, 
+        return render(request, 'lexicon/view_dictionary.html', {'bdb_entries': bdb_entries, 
+                                                            'entry':entry_id, 
+                                                            'lemma':lemma,
+                                                            'font':font,})
+    if entry_id.startswith('G'):
+        dodson = Dodson.objects.filter(strongs=entry_id)
+        return render(request, 'lexicon/view_dictionary.html', {'dodson': dodson, 
                                                             'entry':entry_id, 
                                                             'lemma':lemma,
                                                             'font':font,})
@@ -369,6 +376,8 @@ def view_parsed_dictionary(request, entry_id):
     if entry_id.startswith('H'):
         bdb_entries_ids = BDB_strongs.objects.filter(strongs=entry_id).values('bdb')
         bdb_entries = BDB.objects.filter(bdb__in=bdb_entries_ids).prefetch_related('bdbsensetosource_set', 'bdbsensetosource_set__source')
+    else: 
+        bdb_entries = ''
     return render(request, 'lexicon/view_parsed_dictionary.html', {'bdb_entries': bdb_entries, 
                                                             'entry':entry_id, 
                                                             'lemma':lemma,
@@ -377,11 +386,15 @@ def view_parsed_dictionary(request, entry_id):
 
 
 def view_collocates(request, lemma):
-    node = Collocations.objects.get(node=lemma)
-    lemma = node.node
-    collocates = json.loads(node.context.replace("'", '"'))
-    font = 'hb'
+    try:
+        node = Collocations.objects.get(node=lemma)
+        lemma = node.node
+        collocates = json.loads(node.context.replace("'", '"'))
+    except ObjectDoesNotExist:
+        node = ''   
+        collocates = ''
     entry = Source.objects.filter(lemma=lemma).first().strongs_no_prefix
+    font = get_font(entry)
     return render(request, 'lexicon/view_collocates.html', {'node':node, 
                                                             'collocates': collocates, 
                                                             'lemma':lemma,
@@ -568,8 +581,9 @@ def view_entry_alignment(request, entry_id):
 def list_entries(request):
     sources = Source.objects.all()[:50].values('strongs_no_prefix', 'strongs_count', 'lemma')
     strongs = {itm['strongs_no_prefix']:str(itm['strongs_count']) + 'x ({})'.format(itm['lemma']) for itm in sources if itm['strongs_count']}
-    all_numbers = None
-    return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'all_numbers':all_numbers})
+    greek = Source.objects.filter(strongs_no_prefix__startswith='G')[:50].values('strongs_no_prefix', 'strongs_count', 'lemma')
+    greek = {itm['strongs_no_prefix']:str(itm['strongs_count']) + 'x ({})'.format(itm['lemma']) for itm in greek if itm['strongs_count']}
+    return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'greek':greek})
 
 
 def view_verse(request, book, chapter, verse):
