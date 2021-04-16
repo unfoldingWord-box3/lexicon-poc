@@ -21,7 +21,7 @@
                 </p>
                 <p>{% for token in target %}{{token.target_token_prefix|default_if_none:"" }}<span id="{{token.id}}">{{token.target_token|default_if_none:"" }}</span>{% endfor %}
                 </p>
-                
+{% comment %}                 
                 {% for s in source %}
                     {% if s.words %}<p><b>{{ s.words.name }}</b> ({{ s.words.category}})
                         {{ s.words.definition }}
@@ -35,7 +35,7 @@
                         <p>{{ note.annotation }}</p>
                     </div>
                 {% endfor %}
-                {% endif %}
+                {% endif %} {% endcomment %}
 
             </div>
 

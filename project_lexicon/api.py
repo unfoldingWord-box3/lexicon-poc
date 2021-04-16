@@ -122,7 +122,9 @@ class SourceViewSet(viewsets.ModelViewSet):
 class TargetViewSet(viewsets.ModelViewSet):
     queryset = Target.objects.all()
     serializer_class = TargetSerializer
-    filterset_fields = ['book', 'chapter', 'verse']
+    filterset_fields = ['book', 'chapter', 'verse', 'token']
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend)
+    search_fields = ['$token']
 
 
 class AlignmentViewSet(viewsets.ModelViewSet):
