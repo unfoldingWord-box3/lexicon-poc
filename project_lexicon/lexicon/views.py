@@ -557,6 +557,11 @@ def view_entry(request, entry_id):
 
     tw_related_items = {}
     sense_dict = {}
+    
+    sense_word_list = []
+    for sense in senses:
+        sense_word_list.extend(sense['sense'].upper().split())
+    sense_word_list = list(set([itm for itm in sense_word_list if not itm == "…"]))
 
     # prefetch related is essential to keep the number of queries small
     notes = Notes.objects.filter(source__strongs_no_prefix=entry_id).prefetch_related('source', 'source__target_set')
@@ -568,6 +573,7 @@ def view_entry(request, entry_id):
         'font': font,
         'tw_related_items': tw_related_items,
         'sense_related_items': sense_dict,
+        'sense_word_list':sense_word_list,
         'notes': notes,
         })
 
