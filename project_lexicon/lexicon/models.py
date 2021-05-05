@@ -262,8 +262,8 @@ class StrongsM2M(models.Model):
 
 
 class Notes(models.Model):  #TODO rename to singular
-    index = models.BigIntegerField(blank=True, null=True)
-    noteid = models.TextField(db_column='noteID', blank=True, primary_key=True)  # Field name made lowercase.
+    index = models.BigIntegerField(blank=True, primary_key=True)   #FIXME naming in data script
+    noteid = models.TextField(db_column='noteID', blank=True, unique=True)  # Field name made lowercase.   #FIXME naming in data script
     book = models.TextField(blank=True, null=True)
     chapter = models.BigIntegerField(blank=True, null=True)
     verse = models.BigIntegerField(blank=True, null=True)
@@ -285,7 +285,7 @@ class Notes(models.Model):  #TODO rename to singular
 
 class NotesM2M(models.Model):
     index = models.BigIntegerField(blank=True, primary_key=True)
-    notes = models.ForeignKey(Notes, blank=True, null=True, on_delete=models.SET_NULL)
+    notes = models.ForeignKey(Notes, blank=True, null=True, on_delete=models.SET_NULL, to_field='noteid')
     source_word = models.TextField(blank=True, null=True)
     book = models.TextField(blank=True, null=True)
     chapter = models.BigIntegerField(blank=True, null=True)

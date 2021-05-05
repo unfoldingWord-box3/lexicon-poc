@@ -1,0 +1,112 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+{% load md2 %}
+
+
+{% block 'main' %}
+
+<main>
+    <div class="container">
+
+        <!-- <div class="progress">
+            <div class="indeterminate"></div>
+        </div> -->
+        <div class="row">
+            <div class="col s6">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ note.supportreference }}</span>
+                        <p>{{ note.annotation|markdown }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" style="text-transform:none;">{{ note.noteid }}</a>
+                        <a href="#">{{ note.index }}</a>
+                        <a href="#" class="btn-floating right waves-effect waves-light" style="margin:-10px"><i class="material-icons">edit</i></a>
+                    </div>
+                  </div>
+           
+            </div>
+            <div class="col s6">
+                <p style="text-align: right;">{{ note.book }}
+                    {{ note.chapter }}:{{ note.verse }}
+                </p>
+                
+                <p class="{{ font }}" {% if font == 'hb' %}dir="rtl"{% endif %}>
+                {% for token in source %}
+                {% if token in note.source.all %}
+                    <span id="{{ token.id }}" class="hl" style="background-color: lavender;">{{ token.token }}</span>
+                {% else %}
+                    <span id="{{ token.id }}">{{ token.token }}</span>
+                {% endif %}
+                {% endfor %}
+                </p>
+
+                <p>
+                    {% for token in target %}
+                        {{ token.target_token_prefix }}
+                        <span id="{{ token.id }}"
+                            {% for itm in token.source.all %}
+                                {% if itm in note.source.all %}
+                                    class="hl" style="background-color: lavender;"
+                                {% else %}
+                                    
+                                {% endif %}
+                                {% endfor %}
+                            >{{ token.target_token }}
+                        </span>
+                    {% endfor %}
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <!-- 
+<div class="container">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+                <div class="elevation-demo-surface mdc-elevation--z8">
+                    <p>And yet another one</p>
+
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <div class="elevation-demo-surface mdc-elevation--z8">
+                    <p>And yet another one</p>
+
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <div class="elevation-demo-surface mdc-elevation--z8">
+                    <p>And yet another one</p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating blue"><i class="material-icons">report</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">subtitles</i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="material-icons">list_alt</i></a></li>
+            <li><a class="btn-floating red"><i class="material-icons">shuffle</i></a></li>
+            {% comment %} <li><a class="btn-floating yellow darken-1"><i class="material-icons">done_all</i></a></li> {% endcomment %}
+        </ul>
+    </div>
+    <!-- <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script> -->
+</main>
+{% endblock 'main' %}
+
+{% block 'footer' %} 
+{% endblock 'footer' %}
+
+
+{% block 'extra_javascript' %} 
+{% endblock 'extra_javascript' %}
