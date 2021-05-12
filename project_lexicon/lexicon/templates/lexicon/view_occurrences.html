@@ -1,0 +1,27 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+
+{% block 'main' %}
+
+<main>
+    <div class="container">
+
+        <!-- <div class="progress">
+            <div class="indeterminate"></div>
+        </div> -->
+        {% include "lexicon/lexicon_menu.html" %}
+
+        {% for token in tokens %}
+        <p>
+            {{ token.id }}
+            <span class="{{font}}" {% if font == 'hb'%}dir="rtl"{%endif%}>{{ token.token }}</span>
+            <span><a href="{% url 'view_verse' token.book token.chapter token.verse %}">{{ token.book }} {{ token.chapter }} {{ token.verse }}</a></span>
+            {{ token.morph }}
+            {{ token.strongs }} {{ token.strongs_no_prefix }}
+
+        </p>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock 'main' %}
