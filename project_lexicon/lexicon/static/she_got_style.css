@@ -26,3 +26,7 @@
     border: none;
     box-shadow: none;
 }
+
+.selected {
+    color: #ca6165;
+}

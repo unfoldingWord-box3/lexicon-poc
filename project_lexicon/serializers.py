@@ -72,6 +72,7 @@ class SourceSerializer(DynamicFieldsMixin, serializers.HyperlinkedModelSerialize
     #TODO replace this by an actual ForeignKey in the models field
     lexicon = serializers.HyperlinkedRelatedField(source='strongs_no_prefix', read_only=True, view_name="lexicon-detail")
     alignments = AlignmentSerializer(many=True, source='alignment_set')
+    # bdb = BDBSerializer()
 
     class Meta:
         model = Source

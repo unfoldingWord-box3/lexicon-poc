@@ -274,10 +274,13 @@ class Notes(models.Model):  #TODO rename to singular
     sourcewordoccurrence = models.BigIntegerField(db_column='sourceWordOccurrence', blank=True, null=True)  # Field name made lowercase.
     source = models.ManyToManyField(Source, through='NotesM2M')
 
+
     class Meta:
         managed = False
         db_table = 'notes'
         verbose_name_plural = 'Notes'
+        ordering = ('index',)
+
 
     def __repr__(self) -> str:
         return f'{self.noteid}: {self.supportreference}'

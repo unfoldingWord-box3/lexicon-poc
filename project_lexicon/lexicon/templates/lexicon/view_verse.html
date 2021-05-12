@@ -14,46 +14,33 @@
                 <h3>{{book}} {{chapter}}:{{verse}}</h3>
                 <div class="divider"></div>
                 <p {% if font == "hb"%}dir="rtl"{% endif %}>{% for token in source %}
-                    <span class="{{ font }} tooltipped" data-position="top" data-tooltip="{{ token.lemma }} | {{token.morph}} | {{ token.strongs_no_prefix }}">
+                    <span class="{{ font }} tooltipped" data-position="top" data-tooltip="
+                        {% for sense in token.bdbsensetosource_set.all %}
+                            {{sense.sense.gloss}}
+                        {% empty %}
+                            {{ sense.bdb.main_gloss }}
+                        {% endfor %}
+                        {{ token.lemma }} | {{token.morph}} | {{ token.strongs_no_prefix }}">
                         {{token.token }}
                     </span>
                     {% endfor %}
                 </p>
-                <p>{% for token in target %}{{token.target_token_prefix|default_if_none:"" }}<span id="{{token.id}}">{{token.target_token|default_if_none:"" }}</span>{% endfor %}
-                </p>
-{% comment %}                 
-                {% for s in source %}
-                    {% if s.words %}<p><b>{{ s.words.name }}</b> ({{ s.words.category}})
-                        {{ s.words.definition }}
-                    </p>{% endif %}
+                <p>
+                {% for token in target %}
+                    {{token.target_token_prefix|default_if_none:"" }}
+                    <span id="{{token.id}}">
+                        {% if not token.target_token %}
+                            {{token.token|default_if_none:"" }}
+                        {% else %}
+                            {{token.target_token|default_if_none:"" }}
+                        {% endif %}
+                    </span>
                 {% endfor %}
-
-                {% if notes %}
-                {% for note in notes %}
-                    <div class="col s4 z-depth-2" style="margin-top: 40px; margin-right:10px">
-                        <h4>{{note.supportreference}}</h4>
-                        <p>{{ note.annotation }}</p>
-                    </div>
-                {% endfor %}
-                {% endif %} {% endcomment %}
-
+                </p>              
             </div>
-
-            <div class="col s5 z-depth-2 offset-s1" style="margin-top: 40px">
-                <p>Find related terms</p>
-                {% comment %} {{ sense_related_items }} {% endcomment %}
-                {% for number,lemma in sense_related_items.items %}
-                    {% if lemma %}
-                    <a href="{% url 'view_entry' number %}" class="{% if number|first in 'AH' %}hb larger{%else%}gk{%endif%}">{{ lemma }}</a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-
-            <div class="col s5 z-depth-2 offset-s1" style="margin-top: 40px">
-                <p>Find related translationWords</p>
-                {% for number,lemma in tw_related_items.items %}
-                   <a href="{% url 'view_entry' number %}" class="{{font}} larger">{{ lemma }}</a>
-                {% endfor %}
+            <div class="col s6">
+                <div id="analysis">
+                </div>
             </div>
 
         </div>
@@ -110,4 +97,9 @@
         var instances = M.Tooltip.init(elems);
     });
 </script>
+<script>
+    console.log('hi');
+    $('#analysis').html('HI THHERE'); 
+</script>
+
 {% endblock 'extra_javascript' %}

@@ -1,0 +1,80 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+{% load md2 %}
+
+
+{% block 'main' %}
+
+<main>
+
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col s9">
+                <table>
+                    {% for note in notes %}
+                    
+                    <tr>
+                        <td>
+                            <a href="{% url 'navigate_notes' %}?{{request.GET.urlencode}}&page={{forloop.counter}}
+                            ">{{ note.index }}</a>
+                        </td>
+                        <td>
+                            {{ note.noteid }}
+                        </td>
+                        <td>
+                            {{ note.quote }}
+                        </td>
+                        <td>
+                            {{ note.book }}
+                        </td>
+                        <td>
+                            {{ note.chapter }}:{{ note.verse }}
+                        </td>
+                        <td>
+                            {{ note.annotation|truncatechars:17 }}
+                        </td>
+                        <td>
+                            {{ note.supportreference }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+
+            <div class="col s3">
+                <form method="get">
+                    {{ filter.form.as_p }}
+                    <input type="submit" />
+                </form>
+            </div>  
+
+        </div>
+
+    </div>
+</main>
+{% endblock 'main' %}
+
+{% block 'footer' %} 
+{% endblock 'footer' %}
+
+
+{% block 'extra_javascript' %} 
+<script>
+    document.onkeydown = function(e) {
+        switch (e.keyCode) {
+            case 39:
+                // alert('{{next_note}}');
+                {% if next_page %}
+                window.location.assign("{{ url }}&page={{ next_page }}");
+                {% else %}
+                window.location.assign("{{ base_page }}");                
+                {% endif %}
+                break;
+        }
+    };
+</script>
+{% endblock 'extra_javascript' %}

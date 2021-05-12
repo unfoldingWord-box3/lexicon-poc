@@ -88,7 +88,7 @@ SWITCHES = [
 ]
 
 
-def parse_usfm(contents):
+def parse_usfm(contents, printing=False):
     chapters = contents.split('\c ')
     header = chapters[0]
     header = ' '.join(header.split())  # remove linebreaks because they are untrustworthy
@@ -102,8 +102,11 @@ def parse_usfm(contents):
         try: 
             HEADER[key.strip().strip('\\')] = value[0].strip().lstrip(key)
         except IndexError:
-            print(f'For {key} there is no value')
-    print(HEADER)
+            if printing:
+                print(f'For {key} there is no value')
+            else:
+                pass
+    if printing: print(HEADER)
 
     # parse the remainder of the chapters, 
     # extract the words, and their alignment data

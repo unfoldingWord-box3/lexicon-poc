@@ -5,6 +5,8 @@
 
 {% block 'main' %}
 
+{% with notes.first as note %}
+
 <main>
     <div class="container">
 
@@ -27,8 +29,11 @@
            
             </div>
             <div class="col s6">
-                <p style="text-align: right;">{{ note.book }}
-                    {{ note.chapter }}:{{ note.verse }}
+                <p style="text-align: right;">
+                    <a href="{% url 'view_verse' note.book note.chapter note.verse %}">
+                        {{ note.book }}
+                        {{ note.chapter }}:{{ note.verse }}
+                    </a>
                 </p>
                 
                 <p class="{{ font }}" {% if font == 'hb' %}dir="rtl"{% endif %}>
@@ -60,48 +65,10 @@
 
         </div>
     </div>
-    <!-- 
-<div class="container">
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell">
-                <div class="elevation-demo-surface mdc-elevation--z8">
-                    <p>And yet another one</p>
 
-                </div>
-            </div>
-            <div class="mdc-layout-grid__cell">
-                <div class="elevation-demo-surface mdc-elevation--z8">
-                    <p>And yet another one</p>
-
-                </div>
-            </div>
-            <div class="mdc-layout-grid__cell">
-                <div class="elevation-demo-surface mdc-elevation--z8">
-                    <p>And yet another one</p>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</div> -->
-
-    <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating blue"><i class="material-icons">report</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">subtitles</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">list_alt</i></a></li>
-            <li><a class="btn-floating red"><i class="material-icons">shuffle</i></a></li>
-            {% comment %} <li><a class="btn-floating yellow darken-1"><i class="material-icons">done_all</i></a></li> {% endcomment %}
-        </ul>
-    </div>
-    <!-- <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script> -->
 </main>
+
+{% endwith %}
 {% endblock 'main' %}
 
 {% block 'footer' %} 
@@ -114,16 +81,25 @@
         switch (e.keyCode) {
             case 37:
                 // alert('{{previous_note}}');
-                {% if previous_note %}
-                window.location.assign("{% url 'view_note' previous_note.index %}");
+                {% if previous_page %}
+                window.location.assign("{{ url }}&page={{ previous_page }}");
+                {% else %}
+                window.location.assign("{{ base_page }}");                
                 {% endif %}
+
                 break;
             case 39:
                 // alert('{{next_note}}');
-                {% if next_note %}
-                window.location.assign("{% url 'view_note' next_note.index %}");
+                {% if next_page %}
+                window.location.assign("{{ url }}&page={{ next_page }}");
+                {% else %}
+                window.location.assign("{{ base_page }}");                
                 {% endif %}
                 break;
+            case 38: // up
+                // alert('{{previous_note}}');
+                window.location.assign("{{ base_page }}");                
+                break;                
         }
     };
 </script>

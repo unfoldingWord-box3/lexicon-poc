@@ -4,6 +4,9 @@
         <div class="divider"></div>
 
         <p>
+            {% url 'view_occurrences' entry as url %}
+            <a class="waves-effect waves-light btn teal {% if request.path == url %}green{% endif %}" href="{{ url }}">
+                <i class="material-icons left">line_style</i>Occurrences</a>
 
             {% url 'view_entry' entry as url %}
             <a class="waves-effect waves-light btn teal {% if request.path == url %}green{% endif %}" href="{{ url }}">

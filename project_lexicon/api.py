@@ -19,6 +19,7 @@ from lexicon.models import ( Source,
     Glosses, Question, BDB
 )
 
+
 def source_to_verse(request):
     '''
     This is a hack.
@@ -51,6 +52,7 @@ def source_to_verse(request):
                     else:
                         output.append(itm['target_token'])              
                 output = ''.join([itm for itm in output if itm])
+            output += f' {source.book} {source.chapter}:{source.verse}'
         else:
             output = Source.objects.filter(book=source.book, chapter=source.chapter, verse=source.verse).values_list('token')
             output = ''.join([itm[0] for itm in output if itm[0]])
@@ -148,7 +150,7 @@ class StrongsM2MViewSet(viewsets.ModelViewSet):
 class NotesViewSet(viewsets.ModelViewSet):
     queryset = Notes.objects.all()
     serializer_class = NotesSerializer
-    filterset_fields = ['book', 'chapter', 'verse', 'supportreference', 'source__strongs_no_prefix']
+    filterset_fields = ['book', 'chapter', 'verse', 'supportreference', 'source__strongs_no_prefix', 'noteid']
 
 
 class LexiconViewSet(viewsets.ModelViewSet):

@@ -448,6 +448,22 @@ def demo_entry(request):
     return render(request, 'lexicon/demo_entry.html')
 
 
+
+def view_occurrences(request, entry_id):
+    try:
+        lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
+    except:
+        lemma = None
+    font = get_font(entry_id)
+    tokens = Source.objects.filter(strongs_no_prefix=entry_id)
+    return render(request, 'lexicon/view_occurrences.html', {
+        'entry':entry_id,
+        'lemma': lemma,
+        'font': font,
+        'tokens': tokens,
+        })
+
+
 def view_entry(request, entry_id):
     try:
         lemma = Source.objects.filter(strongs_no_prefix=entry_id)[0].lemma
