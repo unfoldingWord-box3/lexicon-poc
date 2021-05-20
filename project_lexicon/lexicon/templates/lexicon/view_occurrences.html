@@ -11,16 +11,23 @@
         </div> -->
         {% include "lexicon/lexicon_menu.html" %}
 
-        {% for token in tokens %}
-        <p>
-            {{ token.id }}
-            <span class="{{font}}" {% if font == 'hb'%}dir="rtl"{%endif%}>{{ token.token }}</span>
-            <span><a href="{% url 'view_verse' token.book token.chapter token.verse %}">{{ token.book }} {{ token.chapter }} {{ token.verse }}</a></span>
-            {{ token.morph }}
-            {{ token.strongs }} {{ token.strongs_no_prefix }}
+        <div class="row">
+            <div class="col s12">
 
-        </p>
-        {% endfor %}
+                
+                {% for token in tokens %}
+                <p>
+                    {{ token.id }}
+                    <span class="{{font}}" {% if font == 'hb'%}dir="rtl"{%endif%}>{{ token.token }}</span>
+                    <span><a href="{% url 'view_verse' token.book token.chapter token.verse %}">{{ token.book }} {{ token.chapter }} {{ token.verse }}</a></span>
+                    {{ token.morph }}
+                    {{ token.strongs }} {{ token.strongs_no_prefix }}
+                    
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 </main>
 

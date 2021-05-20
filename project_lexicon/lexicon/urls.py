@@ -7,8 +7,8 @@ from .views import (view_entry,
     view_resources, view_forms, view_occurrences,
     )
 
-from .notes import ( NotesListView, NotesDetailView, NotesUpdateView,
-    NotesDetailViewPerSearch )
+from .notes import ( NavigateSource, NotesListView, NotesDetailView, NotesUpdateView,
+    NavigateNotes, SourceListView )
 
 urlpatterns = [
     path('', list_entries, name='list_entries'),
@@ -25,6 +25,9 @@ urlpatterns = [
     path('verse/<str:book>/<int:chapter>/<int:verse>/', view_verse, name='view_verse'),
     path('notes/<int:index>/', NotesDetailView.as_view(), name='view_note'),
     path('notes/<int:index>/update', NotesUpdateView.as_view(), name='update_note'),
-    path('notes/nav/', NotesDetailViewPerSearch.as_view(), name='navigate_notes'),
-    path('notes/', NotesListView.as_view(), name='list_notes'),
+    path('notes/nav/', NavigateNotes.as_view(), name='navigate_notes'),
+    path('annotate/notes/', NotesListView.as_view(), name='list_notes'),
+    path('annotate/source/', SourceListView.as_view(), name='list_source'),
+    path('annotate/source/nav/', NavigateSource.as_view(), name='navigate_source'),
+
 ]

@@ -10,38 +10,36 @@
     <div class="container">
 
         <div class="row">
-            <a class="waves-effect waves-light btn" href="{% url 'navigate_notes' %}?{{request.GET.urlencode}}"><i class="material-icons left">double_arrow</i>Navigate</a>
+            <a class="waves-effect waves-light btn" href="{% url 'navigate_source' %}?{{request.GET.urlencode}}"><i class="material-icons left">double_arrow</i>Navigate</a>
+
         </div>
         <div class="row">
 
-
-            
             <div class="col s9">
                 <table>
-                    {% for note in notes %}
+                    {% for token in source %}
                     
                     <tr>
                         <td>
-                            <a href="{% url 'navigate_notes' %}?{{request.GET.urlencode}}&page={{forloop.counter}}
-                            ">{{ note.index }}</a>
+                            <a href="{% url 'navigate_source' %}?{{request.GET.urlencode}}&page={{forloop.counter}}">{{ token.id }}</a>
                         </td>
                         <td>
-                            {{ note.noteid }}
+                            {{ token.token }}
                         </td>
                         <td>
-                            {{ note.quote }}
+                            {{ token.lemma }}
                         </td>
                         <td>
-                            {{ note.book }}
+                            {{ token.morph }}
+                        </td>                        
+                        <td>
+                            {{ token.strongs_no_prefix }}
                         </td>
                         <td>
-                            {{ note.chapter }}:{{ note.verse }}
+                            {{ token.book }}
                         </td>
                         <td>
-                            {{ note.annotation|truncatechars:17 }}
-                        </td>
-                        <td>
-                            {{ note.supportreference }}
+                            <a href="{% url 'view_verse' token.book token.chapter token.verse %}">{{ token.chapter }}:{{ token.verse }}</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -67,18 +65,4 @@
 
 
 {% block 'extra_javascript' %} 
-<script>
-    document.onkeydown = function(e) {
-        switch (e.keyCode) {
-            case 39:
-                // alert('{{next_note}}');
-                {% if next_page %}
-                window.location.assign("{{ url }}&page={{ next_page }}");
-                {% else %}
-                window.location.assign("{{ base_page }}");                
-                {% endif %}
-                break;
-        }
-    };
-</script>
 {% endblock 'extra_javascript' %}
