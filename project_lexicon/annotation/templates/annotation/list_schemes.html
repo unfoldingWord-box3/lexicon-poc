@@ -1,0 +1,24 @@
+{% extends "lexicon/lexicon_base.html" %}
+
+{% block 'main' %}
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <div class="row"><a href="{% url 'create_scheme' %}" class="waves-effect waves-light btn">Create scheme</a></div>
+
+      <div class="row">
+
+        {% for scheme in schemes %} 
+        <div class="card">
+          <div class="card-content">
+            <a href="{% url 'view_scheme' scheme.id %}">
+            <span class="card-title activator grey-text text-darken-4">
+              {{ scheme.name|title }}</span></a>
+              <p>{{ scheme.aim|title }}</p>
+              <a href="{% url 'annotate_list_source' scheme.id %}">Annotate</a></p>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</div>
+{% endblock 'main' %}

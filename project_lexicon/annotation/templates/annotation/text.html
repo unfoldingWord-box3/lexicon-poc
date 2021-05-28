@@ -1,0 +1,180 @@
+{% load static %}
+
+<html dir="rtl">
+	<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="{% static "css/jquery.contextMenu.min.css" %}" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+	.active {
+	  color: red;
+	  border-bottom-right-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	  -webkit-border-bottom-right-radius: 5px;
+	  /* user-agent specific */
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-radius-bottomright: 5px;
+	  -moz-border-radius-bottomleft: 5px;
+	  border-bottom-right-radius: 5px;
+	  /* etc... */
+	}
+
+	.annotated {
+		color: green;	
+		}
+
+	.annotate {
+		color: blue;	
+		}
+
+	.dropbtn {
+	  background-color: #4CAF50;
+	  color: white;
+	  padding: 16px;
+	  font-size: 16px;
+	  border: none;
+	  cursor: pointer;
+	}
+
+	.dropbtn:hover,
+	.dropbtn:focus {
+	  background-color: #3e8e41;
+	}
+
+#myInput {
+	  border-box: box-sizing;
+	  background-position: 14px 12px;
+	  background-repeat: no-repeat;
+	  font-size: 16px;
+	  padding: 14px 20px 12px 45px;
+	  border: none;
+	}
+
+	.dropdown {
+	  position: relative;
+	  display: inline-block;
+	}
+
+	.dropdown-content {
+	  display: none;
+	  position: absolute;
+	  background-color: #f6f6f6;
+	  min-width: 230px;
+	  overflow: auto;
+	  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	  z-index: 1;
+	}
+
+	.dropdown-content a {
+	  color: black;
+	  padding: 12px 16px;
+	  text-decoration: none;
+	  display: block;
+	}
+
+	.dropdown a:hover {
+	  background-color: #ddd
+	}
+
+	.show {
+	  display: block;
+	}
+
+	body span {
+	  font-size:2em;
+	  font-family:SBL Hebrew;
+	}
+
+	.context-menu-list span {
+	  font-size: 1em;
+	  font-family: Arial;
+	}
+	</style>
+</head>	
+
+<body>
+
+{% for token in tokens %}<span id={{token.oid}} class="menu">{{token.token}}</span>{% endfor %}
+
+<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.contextMenu.min.js" %}" ></script>
+<script type="text/javascript" src="{% static "js/jquery.ui.position.min.js" %}"></script>
+ 
+<script type="text/javascript" >
+ var li = []
+
+ $("span").click(function() {
+ 
+   $(this).toggleClass('active');   
+   var clicked_id = $(this).attr('id')
+
+   if ( $.inArray(clicked_id, li) !== -1 ) {
+   		console.log(clicked_id)
+   		console.log('Remove this from list');
+   		li.splice($.inArray(clicked_id, li),1);  		
+   }
+   else {
+   	  li.push(clicked_id);
+   	  console.log(clicked_id)
+   	  console.log('Added to the list')
+   }
+   });
+   
+</script>	
+<script type="text/javascript" >
+$(function(){
+    $.contextMenu({
+        selector: '.menu', 
+        trigger: 'right',
+        hideOnSecondTrigger: true,
+        callback: function(key, options) {
+            var m = "clicked: " + key;
+            window.console && console.log(m); 
+        },
+        items: {
+            "paste": 
+            	{name: "Label1", 
+            	 icon: "paste",
+            	 callback: function(key, opt){
+						$.ajax({
+						  method: "POST",
+						  url: "/ajax/newannotation/",
+						  data: { "oid": window.li, 
+                                  label: "Label1",
+                                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                            } 
+						})
+						  .done(function( msg ) {
+						    alert( "Data Saved: " + msg );
+						  });               	 
+               	window.li = []
+            	 	console.log(li)
+            	 	$(".active").addClass('annotated').removeClass('active');
+            		}
+               },
+            copy: {
+            	name: "Label2",
+            	icon: "Copy",
+            	callback: function(key, opt){
+						$.ajax({
+						  method: "POST",
+						  url: "/ajax/newannotation/",
+						  data: { "oid": window.li, 
+                                  label: "Label2",
+                                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                            } 
+						})
+						  .done(function( msg ) {
+						    alert( "Data Saved: " + msg );
+						  });               	 
+               	window.li = []
+            	 	console.log(li)
+            	 	$(".active").addClass('annotated').removeClass('active');
+            		}
+        		},
+            "delete": {name: "Delete", icon: "delete"},
+            "sep1": "---------",
+            "quit": {name: "Quit", icon: function($element, key, item){ return 'context-menu-icon context-menu-icon-quit'; }}
+        }
+    });
+});</script>
+</body>
+</html>

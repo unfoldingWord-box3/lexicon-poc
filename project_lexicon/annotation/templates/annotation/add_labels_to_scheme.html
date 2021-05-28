@@ -1,0 +1,81 @@
+{% extends "lexicon/lexicon_base.html" %}
+
+{% block 'main' %}
+
+<style>
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: absolute;
+    opacity: 1;
+    pointer-events: auto !important;; 
+}
+</style>
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+		<div class="row">
+            <div class="card">
+                <div class="card-content">
+                  <a href="{% url 'view_scheme' object.id %}">
+                  <span class="card-title activator grey-text text-darken-4">
+                    {{ object.name|title }}</span></a>
+                    <p>{{ object.aim|title }}</p>
+                </div>
+            </div>
+            {% if object.labels.count %}
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Labels</span>
+                    <ul class="collection"> 
+                        {% for label in object.labels.all %}
+                        <li class="collection-item">
+                            {{ label.name }} 
+                            {{ label.description }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            <form action="" method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+                {% for form in formset %}
+                <div class="card">
+                    <div class="card-content">
+
+                        {{ form }}
+
+
+                        {% comment %}
+                        {{ form.non_field_errors }}
+
+                        {% for field in form %}
+                            {% if field.is_hidden %}
+                            {% else %}
+
+                                {% if 'Delete' in field.label_tag %}
+                                <label>
+                                    {{ field }}
+                                    <span>{{ field.label_tag }}</span>
+                                </label>
+                                {% else %}
+                                <label>
+                                    <span>{{ field.label_tag }}</span>
+                                    {{ field }}
+                                </label>
+                                {% endif %}
+                            {% endif %}
+
+                        {% endfor %}
+                        {% endcomment %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <button type="submit" name="Submit" class="waves-effect waves-light btn" style="color:white">Submit</button>
+                <a href="{% url 'list_schemes' %}"><button name="Submit" class="waves-effect waves-light btn" style="color:white">Cancel</button></a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock 'main' %}

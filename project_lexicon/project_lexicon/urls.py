@@ -19,6 +19,8 @@ from django.conf import settings
 from rest_framework import routers
 
 from lexicon.urls import urlpatterns as lexicon_urlpatterns
+from annotation.urls import urlpatterns as annotation_urlpatterns
+
 from api import ( SourceViewSet, 
     TargetViewSet, AlignmentViewSet, WordsViewSet, 
     StrongsM2MViewSet, NotesViewSet, LexiconViewSet, 
@@ -48,6 +50,7 @@ urlpatterns = [
     path('api/sourcetoverse/', source_to_verse),
 ]
 urlpatterns += lexicon_urlpatterns
+urlpatterns += annotation_urlpatterns
 
 if settings.DEBUG:
     import debug_toolbar

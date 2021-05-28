@@ -1,0 +1,54 @@
+{% extends "lexicon/lexicon_base.html" %}
+
+{% block 'main' %}
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+		<div class="row">
+            <div class="card">
+                <div class="card-content">
+                  <a href="{% url 'view_scheme' object.id %}">
+                  <span class="card-title activator grey-text text-darken-4">
+                    {{ object.name|title }}</span></a>
+                    <p>{{ object.aim|title }}</p>
+                </div>
+            </div>
+            {% if object.labels.count %}
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Labels</span>
+                    <ul class="collection"> 
+                        {% for label in object.labels.all %}
+                        <li class="collection-item">
+                            {{ label.name }} 
+                            {{ label.description }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <a href="{% url 'list_schemes' %}" class="waves-effect waves-light btn">View schemes</a>
+                <a href="{% url 'add_labels_to_scheme' object.id %}" class="waves-effect waves-light btn">Edit labels</a>
+                <a href="{% url 'annotate_list_source' object.id %}" class="waves-effect waves-light btn">Annotate</a>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <table>
+                            <thead>
+                                <tr><td>Id</td> <td>Source</td> <td>Annotation</td></tr>
+                            </thead>
+                            <tbody>
+                                {% for annotation in object.annotation_set.all %}
+                                <tr><td>{{annotation.pk}}</td><td>{% for token in annotation.source_tokens.all %}{{token.token}} ({{token.book}} {{token.chapter}}:{{token.verse }}) {%endfor%}</td><td>{{annotation.label}}</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock 'main' %}

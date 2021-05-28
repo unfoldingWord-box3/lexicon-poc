@@ -1,0 +1,68 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+{% load md2 %}
+
+
+{% block 'main' %}
+
+<main>
+
+    <div class="container">
+
+        <div class="row">
+            <a class="waves-effect waves-light btn" href="{% url 'annotate_nav_source' scheme.id %}?{{request.GET.urlencode}}"><i class="material-icons left">double_arrow</i>Annotate</a>
+
+        </div>
+        <div class="row">
+
+            <div class="col s9">
+                <table>
+                    {% for token in source %}
+                    
+                    <tr>
+                        <td>
+                            <a href="{% url 'annotate_nav_source' scheme.id %}?{{request.GET.urlencode}}&page={{forloop.counter}}">{{ token.id }}</a>
+                        </td>
+                        <td>
+                            {{ token.token }}
+                        </td>
+                        <td>
+                            {{ token.lemma }}
+                        </td>
+                        <td>
+                            {{ token.morph }}
+                        </td>                        
+                        <td>
+                            {{ token.strongs_no_prefix }}
+                        </td>
+                        <td>
+                            {{ token.book }}
+                        </td>
+                        <td>
+                            <a href="{% url 'view_verse' token.book token.chapter token.verse %}">{{ token.chapter }}:{{ token.verse }}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+
+            <div class="col s3">
+                <form method="get">
+                    {{ filter.form.as_p }}
+                    <input class="waves-effect waves-light btn" type="submit" />
+                </form>
+            </div>  
+
+        </div>
+
+    </div>
+</main>
+{% endblock 'main' %}
+
+{% block 'footer' %} 
+{% endblock 'footer' %}
+
+
+{% block 'extra_javascript' %} 
+{% endblock 'extra_javascript' %}

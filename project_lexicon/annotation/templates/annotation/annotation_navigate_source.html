@@ -1,0 +1,141 @@
+{% extends 'lexicon/lexicon_base.html' %}
+{% load static %}
+{% load md2 %}
+
+
+{% block 'main' %}
+
+<main>
+    <div class="container">
+
+        <!-- <div class="progress">
+            <div class="indeterminate"></div>
+        </div> -->
+
+        <div class="row">
+            {% comment %}<a class="waves-effect waves-light btn" href="{% url 'list_source' %}?{{request.GET.urlencode}}">Back</a>{% endcomment %}
+            
+            <a class="waves-effect waves-light btn" href="{{base_page}}">Back</a>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <p style="text-align: right;">
+                    <a href="{% url 'view_verse' occurrence.book occurrence.chapter occurrence.verse %}">
+                        {{ occurrence.book }}
+                        {{ occurrence.chapter }}:{{ occurrence.verse }}
+                    </a>
+                </p>
+                
+                <p class="{{ font }}" {% if font == 'hb' %}dir="rtl"{% endif %}>
+                {% for token in source %}
+                {% if token.id == occurrence.id %}
+                    <span id="{{ token.id }}" class="hl" style="background-color: lavender;">{{ token.token }}</span>
+                {% else %}
+                    <span id="{{ token.id }}">{{ token.token }}</span>
+                {% endif %}
+                {% endfor %}
+                </p>
+
+                <p>
+                    
+                    {% for token in target %}
+                        {{ token.target_token_prefix|default_if_none:"" }}
+                        <span id="{{ token.id }}"
+                            {% for itm in token.source.all %}
+                                {% if itm.id == occurrence.id %}
+                                    class="hl" style="background-color: lavender;"
+                                {% endif %}
+                                {% endfor %}
+                            >{% if token.target_token %}{{ token.target_token|default_if_none:"" }}{%else%}{{ token.token }}{%endif%}
+                        </span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="col s6">
+                <h5>
+                    <a href="{% url 'add_labels_to_scheme' scheme.pk %}">
+                        Annotation scheme: {{ scheme }}
+                    </a>
+
+                </h5>
+                {% for label in scheme.labels.all %}
+                    <button 
+                        class="annotation-label waves-effect waves-green btn btn-large" 
+                        style="margin:10px" 
+                        data-label-number="{{ label.pk }}"
+                        data-occurrence-number="{{ occurrence.pk }}"
+                    >{{ label.name }}</button>
+                {% endfor %}
+           
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+{% endblock 'main' %}
+
+{% block 'footer' %} 
+{% endblock 'footer' %}
+
+
+{% block 'extra_javascript' %} 
+<script>
+    document.onkeydown = function(e) {
+        switch (e.keyCode) {
+            case 37:
+                // alert('{{previous_note}}');
+                {% if previous_page %}
+                window.location.assign("{{ url }}&page={{ previous_page }}");
+                {% else %}
+                window.location.assign("{{ base_page }}");                
+                {% endif %}
+
+                break;
+            case 39:
+                // alert('{{next_note}}');
+                {% if next_page %}
+                window.location.assign("{{ url }}&page={{ next_page }}");
+                {% else %}
+                window.location.assign("{{ base_page }}");                
+                {% endif %}
+                break;
+            case 38: // up
+                // alert('{{previous_note}}');
+                window.location.assign("{{ base_page }}");                
+                break;                
+        }
+    };
+</script>
+
+<script>
+    $('.annotation-label').click(function (){ 
+        const labelNumber = $(this).data('labelNumber')
+        const occurrenceNumber = $(this).data('occurrenceNumber')
+        console.log( labelNumber );
+        console.log( occurrenceNumber );
+
+        $.ajax({
+        url: '/ajax/newannotation',
+        data: {
+          'label': labelNumber,
+          'occurrence': occurrenceNumber
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.response !== true ) {
+              alert('There was an issue, the annotation has not been saved.')
+          }
+          else {
+            {% if next_page %}
+            window.location.assign("{{ url }}&page={{ next_page }}");
+            {% else %}
+            window.location.assign("{{ base_page }}");                
+            {% endif %}
+          }
+        }
+      });
+    });
+</script>
+{% endblock 'extra_javascript' %}

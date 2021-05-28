@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_markdown2',
     'lexicon',
+    'annotation',
 ]
 
 MIDDLEWARE = [
