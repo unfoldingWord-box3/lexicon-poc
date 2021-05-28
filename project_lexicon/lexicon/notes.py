@@ -23,7 +23,7 @@ class SourceListView(ListView):
     def get_queryset(self):
         qs = super().get_queryset() # .values('id', 'token', 'lemma', 'morph', 'strongs_no_prefix', 'book', 'chapter', 'verse', 'notes')
         filtered = SourceFilter(self.request.GET, queryset=qs)
-        return filtered.qs.distinct()
+        return filtered.qs.distinct()[:100]
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -41,6 +41,7 @@ class SourceListView(ListView):
             if val and key != 'page':
                 query_dict[key] = val
         
+        context['query_dict'] = query_dict
         context['base_page'] = reverse('navigate_source') + '?' + query_dict.urlencode()
 
         return context
@@ -80,6 +81,7 @@ class NavigateSource(SourceListView):
             if val and key != 'page':
                 query_dict[key] = val
 
+        context['query_dict'] = query_dict
         context['url'] = reverse('navigate_source') + '?' + query_dict.urlencode()
         context['base_page'] = reverse('list_source') + '?' + query_dict.urlencode()
 

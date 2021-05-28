@@ -26,8 +26,7 @@ urlpatterns = [
     path('notes/<int:index>/', NotesDetailView.as_view(), name='view_note'),
     path('notes/<int:index>/update', NotesUpdateView.as_view(), name='update_note'),
     path('notes/nav/', NavigateNotes.as_view(), name='navigate_notes'),
-    path('annotate/notes/', NotesListView.as_view(), name='list_notes'),
-    path('annotate/source/', SourceListView.as_view(), name='list_source'),
-    path('annotate/source/nav/', NavigateSource.as_view(), name='navigate_source'),
-
+    path('annotation/notes/', NotesListView.as_view(), name='list_notes'),
+    path('annotation/source/', SourceListView.as_view(), name='list_source'),
+    path('annotation/source/nav/', NavigateSource.as_view(), name='navigate_source'),
 ]

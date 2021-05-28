@@ -47,19 +47,7 @@
                 {% endfor %}
                 </p>
 
-                <p>
-                    {% for token in target %}
-                        {{ token.target_token_prefix|default_if_none:"" }}
-                        <span id="{{ token.id }}"
-                            {% for itm in token.source.all %}
-                                {% if itm in note.source.all %}
-                                    class="hl" style="background-color: lavender;"
-                                {% endif %}
-                                {% endfor %}
-                            >{{ token.target_token|default_if_none:"" }}
-                        </span>
-                    {% endfor %}
-                </p>
+                <p>{% for token in target %}{{ token.target_token_prefix|default_if_none:"" }}<span id="{{ token.id }}"{% for itm in token.source.all %}{% if itm in note.source.all %}class="hl" style="background-color: lavender;"{% endif %}{% endfor %}>{{ token.target_token|default_if_none:"" }}</span>{% endfor %}</p>
             </div>
 
         </div>
