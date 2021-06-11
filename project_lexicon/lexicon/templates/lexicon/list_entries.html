@@ -10,12 +10,17 @@
         <a href="/" class="brand-logo" style="margin-left: 10px">Gateway</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
+                <a href="{% url 'list_schemes' %}">
+                    Annotation
+                </a>
+            </li>
+            <li>
                 <a href="{% url 'list_notes' %}">
                     Notes
                 </a>
             </li>
             <li>
-                <a href="{% url 'view_verse' '06-JOS' 1 1 %}">Verse</a>
+                <a href="{% url 'view_verse' '06-JOS' 1 1 %}">Verses</a>
             </li>
             <li>
                 <a href="/api">API</a>
@@ -36,20 +41,40 @@
             <div class="col s10">
                 <h3>Lexicon entries</h3>
                 <div class="divider"></div>
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
                                 <form action="/" method="POST">
+                                    {% csrf_token %}
                                     <i class="material-icons prefix">text_snippet</i>
-                                    <input type="text" id="autocomplete-input" class="autocomplete">
-                                    <label for="autocomplete-input">Search for a strongs number</label>                                   
+                                    <input type="text" id="input"  name="input" class="autocomplete">
+                                    <label for="input">Search for a strongs number, a lemma, or an alignment</label>                                   
                                 </form>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
+                {% if results %}
+                <h4>Results</h4>
+                <div class="card horizontal z-depth-2">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <ul class="collection">
+                                {% for result in results %}
+                                
+                                <li class="collection-item">
+                                    <a href="{% url 'view_entry' result.strongs_no_prefix %}">
+                                        {{ result.strongs_no_prefix}} ({{ result.lemma }})</a> {% if result.hit_count %}x {{result.hit_count}}{%endif%}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
                 <h4>Examples</h4>
                 <div class="card horizontal z-depth-2">
                     <div class="card-stacked">
@@ -65,7 +90,7 @@
                                     <a href="{% url 'view_entry' 'H8064' %}">H8064 (שָׁמַיִם)</a>
                                 </li>
                                 <li class="collection-item">
-                                    <a href="{% url 'view_entry' 'H2896a' %}">H7225 (טוֹב)</a>
+                                    <a href="{% url 'view_entry' 'H2896a' %}">H2896a (טוֹב)</a>
                                 </li>                                
                                 <li class="collection-item">
                                     <a href="{% url 'view_entry' 'H0430' %}">H0430 (אֱלֹהִים)</a>
@@ -86,9 +111,11 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
         <div class="row">
+            {% if entries %}
             <div class="col s5">
                 <h4>Hebrew</h4>
                 <div class="card horizontal z-depth-2">
@@ -107,6 +134,8 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
+            {% if greek%}
             <div class="col s5">
                 <h4>Greek</h4>
 
@@ -125,7 +154,8 @@
                         </div>
                     </div>
                 </div>
-            </div>                
+            </div>   
+            {% endif %}             
             </div>
         </div>
     </div>

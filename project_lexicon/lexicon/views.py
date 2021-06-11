@@ -601,10 +601,25 @@ def view_entry_alignment(request, entry_id):
 
 
 def list_entries(request):
+    if request.POST:
+        #TODO needs form validation
+        search = request.POST.get('input')
+        if search.startswith('H') or search.startswith('G') or search.startswith('A'):
+            results = Source.objects.filter(strongs_no_prefix=search).values('lemma', 'strongs_no_prefix').distinct('strongs_no_prefix').order_by('strongs_no_prefix')
+        else:
+            results = Source.objects.filter(lemma=search).distinct('lemma').order_by('lemma')
+        if results.count() == 0:
+            #NOTE actually this is a search engine for alignments
+            results = Source.objects.filter(target__target_token__icontains=search).values('strongs_no_prefix', 'lemma', 'strongs_count').annotate(hit_count=Count('strongs_no_prefix')).order_by('-hit_count', '-strongs_count') #.distinct('strongs_no_prefix')
+        return render(request, 'lexicon/list_entries.html', {'results': results })
+    
+    
     sources = Source.objects.all()[:50].values('strongs_no_prefix', 'strongs_count', 'lemma')
     strongs = {itm['strongs_no_prefix']:str(itm['strongs_count']) + 'x ({})'.format(itm['lemma']) for itm in sources if itm['strongs_count']}
     greek = Source.objects.filter(strongs_no_prefix__startswith='G')[:50].values('strongs_no_prefix', 'strongs_count', 'lemma')
     greek = {itm['strongs_no_prefix']:str(itm['strongs_count']) + 'x ({})'.format(itm['lemma']) for itm in greek if itm['strongs_count']}
+
+        
     return render(request, 'lexicon/list_entries.html', {'entries': strongs, 'greek':greek})
 
 
